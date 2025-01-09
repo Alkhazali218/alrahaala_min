@@ -1,3 +1,4 @@
+import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/features/login/Presentation/login_view.dart';
 import 'package:alrahaala/features/splash/Presentation/on_boarding_model.dart';
 import 'package:alrahaala/features/splash/Presentation/splash_view.dart';
@@ -53,9 +54,10 @@ class _plashViewBodyState extends State<plashViewBody> {
                           children: [
                           
                              Text(items.title,
-                            style: const TextStyle(fontWeight: FontWeight.bold,
+                            style: const TextStyle(
+                            fontWeight: FontWeight.bold,
                             fontSize: 30,
-                            color: Colors.black,
+                            color: kcolor,
                             ),
                             ),
                           const  SizedBox(height: 50),
@@ -63,7 +65,7 @@ class _plashViewBodyState extends State<plashViewBody> {
                               items.subtitle,
                             textAlign: TextAlign.center,
                             style: const TextStyle(fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                            fontSize: 17,
                             color: Colors.black45,
                             ),
                             ),
@@ -100,7 +102,12 @@ class _plashViewBodyState extends State<plashViewBody> {
     },
     elevation: 0,
     backgroundColor:const Color(0xffFAF7F0),
-    child:const Icon(Icons.arrow_forward_ios,color: Colors.black),
+    child:const Text('تخطي',
+    style: TextStyle(
+      color: kcolor,
+      fontSize: 18,
+    ),
+    )
     ),
    );
   }

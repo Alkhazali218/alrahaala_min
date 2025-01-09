@@ -1,3 +1,4 @@
+import 'package:alrahaala/core/Notification/notification_messages.dart';
 import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/core/utils/helper/thems.dart';
 import 'package:alrahaala/cubit/Auth%20cubit/Auth_cubit.dart';
@@ -33,6 +34,7 @@ class LoginViewBody extends StatelessWidget {
         }
         if (state is AuthSucess) {
           BlocProvider.of<ChatCubit>(context).getMessage();
+          NotificationMessages.getToken();
           Navigator.pushNamed(context, homeView.id);
           isLoading = false;
         }

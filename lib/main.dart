@@ -1,6 +1,7 @@
 import 'package:alrahaala/core/Notification/notification_messages.dart';
 import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/core/utils/helper/routes.dart';
+import 'package:alrahaala/core/utils/local%20NetWork/local_netWork.dart';
 import 'package:alrahaala/cubit/Auth%20cubit/Auth_cubit.dart';
 import 'package:alrahaala/cubit/chat%20cubit/chat_cubit.dart';
 import 'package:alrahaala/features/login/Presentation/login_view.dart';
@@ -9,7 +10,6 @@ import 'package:alrahaala/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,20 +17,12 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   NotificationMessages.requestPermission();
-  bool isFirstLaunch = await checkFirstLaunch();
+
+  await CacheNetWork.cacheInitialization();
+
+  bool isFirstLaunch = await CacheNetWork.checkFirstLaunch();
 
   runApp(MyApp(isFirstLaunch: isFirstLaunch));
-}
-
-Future<bool> checkFirstLaunch() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  bool isFirstLaunch = prefs.getBool('first_launch') ?? true;
-
-  if (isFirstLaunch) {
-    await prefs.setBool('first_launch', false);
-  }
-
-  return isFirstLaunch;
 }
 
 class MyApp extends StatelessWidget {

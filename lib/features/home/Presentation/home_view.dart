@@ -1,5 +1,4 @@
 import 'package:alrahaala/core/utils/helper/constant.dart';
-import 'package:alrahaala/core/utils/helper/thems.dart';
 import 'package:alrahaala/features/screen/Presentation/screen_view.dart';
 import 'package:alrahaala/features/support/Presentation/support_view.dart';
 import 'package:alrahaala/features/user/Presentation/user_view.dart';
@@ -33,9 +32,13 @@ final screen = const [
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: kcolor,
-        title: Text(
-          'شُرٍڪة الُِرٍحٍالُِة الُِاوُلُِى الُِقٌابَضة',
-          style: googleFont30.copyWith(fontSize: 16, color: kprimaryColor,fontWeight: FontWeight.bold),
+        title:const Text(
+          'شركة الرحالة القابضة',
+          style: TextStyle(
+            color: kprimaryColor,
+            fontSize: 30,
+            fontFamily: 'decotype',
+          )
         ),
         centerTitle: true,
       ),

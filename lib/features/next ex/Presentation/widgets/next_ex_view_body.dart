@@ -1,3 +1,4 @@
+import 'package:alrahaala/features/home/Presentation/home_view.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/text_from_filed_item.dart';
 import 'package:alrahaala/features/next/Presentation/widgets/check_item.dart';
 import 'package:alrahaala/features/stack%20user%20basic/Presentation/stack_user_view_basic.dart';
@@ -85,7 +86,7 @@ const NextExViewBody({super.key});
               ),
               const SizedBox(width: 10),
               CheckItem(
-                onTap: () => Navigator.pushNamed(context,StackUserViewBasic.id),
+                onTap: () => Navigator.pushNamed(context,homeView.id),
                 textCheckItem: 'الغاء الامر',
               ),
             ],

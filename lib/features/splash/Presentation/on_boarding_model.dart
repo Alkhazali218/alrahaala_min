@@ -9,17 +9,17 @@ class OnBoardingModel {
 List<OnBoardingModel> onboardintItems = [
   OnBoardingModel(
     'https://lottie.host/c9ad816a-74f2-4c99-8ebb-d9657925db77/M2Cm2vjH3O.json',
-     'start Journey',
-      'when you make a journey, \nyou travel from one place to another n place to enjoy',
-      ),
-       OnBoardingModel(
+    'ابدأ رحلتك المالية',
+    'مع تطبيق الرحالة في إرسال واستقبال الحوالات بكل سهولة وأمان',
+  ),
+  OnBoardingModel(
     'https://lottie.host/013978f8-566f-475a-912d-495e542a26ff/BrfhtgwWTa.json',
-     'Continue',
-      'we make it simple to find the \nbast way to travel. Every journey \nis not easy',
-      ),
-        OnBoardingModel(
+    'استمر بالتحويلات',
+    'نحن نقدم لك أفضل الحلول للتحويلات المالية بأسعار تنافسية في أي وقت',
+  ),
+  OnBoardingModel(
     'https://lottie.host/0a007d8f-bf1c-4cf3-8c2e-c0e73b02d447/mpDBLYkM2J.json',
-     'Final Point',
-      'Dream point every rider, \n during the journey of every place and poinl',
-      ),
+    'النقطة النهائية',
+    'سواء كنت ترسل أو تستقبل الأموال إلى هدفك المالي أصبح أسهل وأسرع',
+  ),
 ];

@@ -39,9 +39,6 @@ class bodyCustomChat extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: TextField(
-            keyboardType: TextInputType.multiline,
-            minLines: 1,
-            maxLines: 5,
             controller: controller,
             decoration: InputDecoration(
               hintText: 'Send Message',
