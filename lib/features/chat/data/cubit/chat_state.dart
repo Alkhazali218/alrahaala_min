@@ -1,4 +1,4 @@
-import 'package:alrahaala/core/utils/model/messages/message_model.dart';
+import 'package:alrahaala/features/chat/data/models/message_model.dart';
 
 abstract  class ChatState {}
 

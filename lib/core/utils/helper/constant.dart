@@ -12,4 +12,5 @@ const kMessage = 'message';
 const kCreatedAt = 'createdAt';
 // ignore: constant_identifier_names
 const KUserId = 'UserId';
+const kTopic = 'alrahaala';
 

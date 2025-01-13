@@ -1,18 +1,13 @@
-import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
 import 'package:googleapis_auth/auth_io.dart' as auth;
 
-class NotificationMessages {
-// ignore: prefer_final_fields, non_constant_identifier_names
-  static FirebaseMessaging _FirebaseMessaging = FirebaseMessaging.instance;
+class InitNotification {
+  static final FirebaseMessaging _firebaseMessaging =
+      FirebaseMessaging.instance;
 
   static void requestPermission() async {
-// ignore: unused_local_variable
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
-
-    // ignore: unused_local_variable
-    NotificationSettings settings = await messaging.requestPermission(
+    await _firebaseMessaging.requestPermission(
       alert: true,
       announcement: false,
       badge: true,
@@ -21,15 +16,6 @@ class NotificationMessages {
       provisional: false,
       sound: true,
     );
-  }
-
-  static void getToken() async {
-    String? token = await _FirebaseMessaging.getToken();
-    String? accessToken = await getAccessToken();
-    print('==================================================================');
-    print('Token = $token');
-    print('Access Token = $accessToken');
-    print('==================================================================');
   }
 
   static Future<String> getAccessToken() async {
@@ -67,40 +53,5 @@ class NotificationMessages {
     );
     client.close();
     return credentials.accessToken.data;
-  }
-
-  Future<void> sendNotification(
-      {required String bodyNotifiacation, required String title}) async {
-    String? accessToken = await getAccessToken();
-    final url = Uri.parse(
-        'https://fcm.googleapis.com/v1/projects/alrahaala-f36e1/messages:send');
-    final headers = {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer $accessToken',
-    };
-
-    final body = json.encode(
-      {
-        'message': {
-          "topic": "alrahaala",
-          'notification': {
-            'body': bodyNotifiacation,
-            'title': title,
-          }
-        }
-      },
-    );
-    // إرسال الطلب باستخدام POST
-    final response = await http.post(
-      url,
-      headers: headers,
-      body: body,
-    );
-
-    if (response.statusCode == 200) {
-      print('Request was successful');
-    } else {
-      print('Request failed with status: ${response.statusCode}');
-    }
   }
 }

@@ -1,9 +1,11 @@
-import 'package:alrahaala/core/Notification/notification_messages.dart';
+import 'package:alrahaala/core/Notification/init%20Notifications/init_Notification.dart';
+import 'package:alrahaala/core/Notification/models/repo/notification_impl_repo.dart';
+import 'package:alrahaala/core/utils/cubit/auth_cubit.dart';
 import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/core/utils/helper/routes.dart';
+import 'package:alrahaala/core/utils/helper/server_local.dart';
 import 'package:alrahaala/core/utils/local%20NetWork/local_netWork.dart';
-import 'package:alrahaala/cubit/Auth%20cubit/Auth_cubit.dart';
-import 'package:alrahaala/cubit/chat%20cubit/chat_cubit.dart';
+import 'package:alrahaala/features/chat/data/cubit/chat_cubit.dart';
 import 'package:alrahaala/features/login/Presentation/login_view.dart';
 import 'package:alrahaala/features/splash/Presentation/splash_view.dart';
 import 'package:alrahaala/firebase_options.dart';
@@ -16,11 +18,10 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  NotificationMessages.requestPermission();
-
+  InitNotification.requestPermission();
   await CacheNetWork.cacheInitialization();
-
   bool isFirstLaunch = await CacheNetWork.checkFirstLaunch();
+  gettItSetup();
 
   runApp(MyApp(isFirstLaunch: isFirstLaunch));
 }
@@ -34,7 +35,11 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => AuthCubit()),
-        BlocProvider(create: (context) => ChatCubit()),
+        BlocProvider(
+          create: (context) => ChatCubit(
+            getIt.get<NotificationImplRepo>(),
+          ),
+        ),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,

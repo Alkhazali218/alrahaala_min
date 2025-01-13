@@ -1,7 +1,7 @@
-import 'package:alrahaala/cubit/chat%20cubit/chat_cubit.dart';
-import 'package:alrahaala/cubit/chat%20cubit/chat_state.dart';
 import 'package:alrahaala/features/chat/Presentation/widgets/chat_buble_for_friend_item.dart';
 import 'package:alrahaala/features/chat/Presentation/widgets/chat_buble_item.dart';
+import 'package:alrahaala/features/chat/data/cubit/chat_cubit.dart';
+import 'package:alrahaala/features/chat/data/cubit/chat_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

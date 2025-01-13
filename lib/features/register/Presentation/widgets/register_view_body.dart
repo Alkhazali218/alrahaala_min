@@ -1,7 +1,6 @@
+import 'package:alrahaala/core/utils/cubit/auth_cubit.dart';
 import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/core/utils/helper/thems.dart';
-import 'package:alrahaala/cubit/Auth%20cubit/Auth_cubit.dart';
-import 'package:alrahaala/cubit/Auth%20cubit/Auth_state.dart';
 import 'package:alrahaala/features/chat/Presentation/chat_view.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/button_item.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/button_text_item.dart';
@@ -27,7 +26,7 @@ class registerViewBody extends StatelessWidget {
         if (state is AuthLoading) {
           isLoading = true;
         }
-        if (state is AuthSucess) {
+        if (state is AuthSuccess) {
           Navigator.pushNamed(context, chatView.id);
           isLoading = false;
         }
@@ -62,7 +61,7 @@ class registerViewBody extends StatelessWidget {
                   ),
                   const SizedBox(height: 50),
                   textFromFiledItem(
-                     onChanged: (data) => userName = data,
+                    onChanged: (data) => userName = data,
                     hintText: 'اسم المستخدم',
                     prefixIcon: FontAwesomeIcons.user,
                     pass: false,
@@ -70,7 +69,7 @@ class registerViewBody extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   textFromFiledItem(
-                     onChanged: (data) => email = data,
+                    onChanged: (data) => email = data,
                     hintText: 'البريد الالكتروني',
                     prefixIcon: FontAwesomeIcons.envelope,
                     pass: false,
@@ -78,7 +77,7 @@ class registerViewBody extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   textFromFiledItem(
-                     onChanged: (data) => password = data,
+                    onChanged: (data) => password = data,
                     hintText: 'كلمة السر',
                     prefixIcon: Icons.password,
                     pass: true,
@@ -88,10 +87,10 @@ class registerViewBody extends StatelessWidget {
                   ButtonItem(
                     textButton: 'انشاء حساب',
                     onTap: () {
-                    if (formKey.currentState!.validate()) {
-                          BlocProvider.of<AuthCubit>(context)
-                              .register(email: email, password: password);
-                        }
+                      if (formKey.currentState!.validate()) {
+                        BlocProvider.of<AuthCubit>(context)
+                            .registerUser(email: email, password: password);
+                      }
                     },
                   ),
                   const SizedBox(height: 20),

@@ -1,17 +1,16 @@
-import 'package:alrahaala/core/Notification/notification_messages.dart';
+import 'package:alrahaala/core/Notification/models/repo/notification_repo.dart';
 import 'package:alrahaala/core/utils/helper/constant.dart';
-import 'package:alrahaala/core/utils/model/messages/message_model.dart';
-import 'package:alrahaala/cubit/chat%20cubit/chat_state.dart';
+import 'package:alrahaala/features/chat/data/cubit/chat_state.dart';
+import 'package:alrahaala/features/chat/data/models/message_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatCubit extends Cubit<ChatState> {
-  ChatCubit() : super(chatInitial());
-
+  ChatCubit(this.notificationRepo) : super(chatInitial());
+  final NotificationRepo notificationRepo;
   CollectionReference message =
       FirebaseFirestore.instance.collection(kMessagesCollections);
   List<MessageModel> messageList = [];
-
   void sendMessage({
     required String data,
     required String email,
@@ -22,12 +21,9 @@ class ChatCubit extends Cubit<ChatState> {
         kMessage: data,
         kCreatedAt: DateTime.now(),
         KUserId: email,
-      }).then((_) {
-        // إرسال إشعار عند إضافة رسالة جديدة
-        NotificationMessages().sendNotification(
-          bodyNotifiacation: data,
-          title: 'دردشة جماعية',
-        );
+      }).then((_) async {
+        notificationRepo.fetchNotificationMessage(
+            body: data, title: 'دردشة المستخدمين', topic: kTopic);
       });
     } on Exception catch (e) {
       print("Error sending message: $e");

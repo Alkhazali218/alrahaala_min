@@ -1,9 +1,7 @@
-import 'package:alrahaala/core/Notification/notification_messages.dart';
+import 'package:alrahaala/core/utils/cubit/auth_cubit.dart';
 import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/core/utils/helper/thems.dart';
-import 'package:alrahaala/cubit/Auth%20cubit/Auth_cubit.dart';
-import 'package:alrahaala/cubit/Auth%20cubit/Auth_state.dart';
-import 'package:alrahaala/cubit/chat%20cubit/chat_cubit.dart';
+import 'package:alrahaala/features/chat/data/cubit/chat_cubit.dart';
 import 'package:alrahaala/features/home/Presentation/home_view.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/button_item.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/button_text_item.dart';
@@ -32,15 +30,12 @@ class LoginViewBody extends StatelessWidget {
         if (state is AuthLoading) {
           isLoading = true;
         }
-        if (state is AuthSucess) {
+        if (state is AuthSuccess) {
           BlocProvider.of<ChatCubit>(context).getMessage();
-          NotificationMessages.getToken();
           Navigator.pushNamed(context, homeView.id);
-          isLoading = false;
         }
         if (state is AuthError) {
           showSnackBar(context, state.message, Colors.red);
-          isLoading = false;
         }
       },
       builder: (context, state) {
@@ -89,11 +84,10 @@ class LoginViewBody extends StatelessWidget {
                     onTap: () async {
                       if (formKey.currentState!.validate()) {
                         BlocProvider.of<AuthCubit>(context)
-                            .login(email: email, password: password);
+                            .loginUser(email: email, password: password);
                       }
-                      // subscribe to topic on each app start-up
-                      await FirebaseMessaging.instance
-                          .subscribeToTopic('alrahaala');
+                        await FirebaseMessaging.instance
+                            .subscribeToTopic(kTopic);
                     },
                   ),
                   const SizedBox(height: 20),

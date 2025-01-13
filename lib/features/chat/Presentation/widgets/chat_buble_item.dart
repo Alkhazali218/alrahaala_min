@@ -1,5 +1,5 @@
 import 'package:alrahaala/core/utils/helper/constant.dart';
-import 'package:alrahaala/core/utils/model/messages/message_model.dart';
+import 'package:alrahaala/features/chat/data/models/message_model.dart';
 import 'package:flutter/material.dart';
 
 // ignore: camel_case_types

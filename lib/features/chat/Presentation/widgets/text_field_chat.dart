@@ -1,8 +1,8 @@
 import 'package:alrahaala/core/utils/helper/constant.dart';
-import 'package:alrahaala/cubit/chat%20cubit/chat_cubit.dart';
-import 'package:alrahaala/cubit/chat%20cubit/chat_state.dart';
 import 'package:alrahaala/features/chat/Presentation/widgets/chat_buble_for_friend_item.dart';
 import 'package:alrahaala/features/chat/Presentation/widgets/chat_buble_item.dart';
+import 'package:alrahaala/features/chat/data/cubit/chat_cubit.dart';
+import 'package:alrahaala/features/chat/data/cubit/chat_state.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +13,7 @@ class bodyCustomChat extends StatelessWidget {
 
   TextEditingController controller = TextEditingController();
   final _controller = ScrollController();
+  // ignore: prefer_final_fields, non_constant_identifier_names
   FirebaseMessaging _FirebaseMessaging = FirebaseMessaging.instance;
   String email;
   @override
@@ -71,6 +72,7 @@ class bodyCustomChat extends StatelessWidget {
       required String email,
       required BuildContext context}) async {
         String? token = await _FirebaseMessaging.getToken();
+    // ignore: use_build_context_synchronously
     BlocProvider.of<ChatCubit>(context)
         .sendMessage(data: controller.text, email: email,token: token!);
     controller.clear();
