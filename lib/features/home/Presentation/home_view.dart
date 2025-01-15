@@ -29,36 +29,35 @@ final screen = const [
        Icon(Icons.home, size: 30),
     ];
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: kcolor,
-        title:const Text(
-          'شركة الرحالة القابضة',
-          style: TextStyle(
-            color: kprimaryColor,
-            fontSize: 30,
-            fontFamily: 'decotype',
-          )
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: kcolor,
+          title:const Text(
+            'شركة الرحالة القابضة',
+            style: TextStyle(
+              color: kprimaryColor,
+              fontSize: 30,
+              fontFamily: 'decotype',
+            )
+          ),
+          centerTitle: true,
         ),
-        centerTitle: true,
-      ),
-      bottomNavigationBar: Theme(
-        data: Theme.of(context)
-            .copyWith(iconTheme: const IconThemeData(color: kpColor)),
-        child: CurvedNavigationBar(
-         
-          index: index,
-          color: kcolor,
-          buttonBackgroundColor: kprimaryColor,
-         onTap: (index) => setState(
-           () => this.index = index
-         ),
-         backgroundColor: kprimaryColor,
-          animationDuration: const Duration(milliseconds: 300),
-          items: items,
+        bottomNavigationBar: Theme(
+          data: Theme.of(context)
+              .copyWith(iconTheme: const IconThemeData(color: kpColor)),
+          child: CurvedNavigationBar(
+            index: index,
+            color: kcolor,
+            buttonBackgroundColor: kprimaryColor,
+           onTap: (index) => setState(
+             () => this.index = index
+           ),
+           backgroundColor: kprimaryColor,
+            animationDuration: const Duration(milliseconds: 300),
+            items: items,
+          ),
         ),
-      ),
-      body: screen[index],
-    );
+        body: screen[index],
+      );
   }
 }

@@ -1,12 +1,13 @@
 import 'package:alrahaala/core/Notification/init%20Notifications/init_Notification.dart';
 import 'package:alrahaala/core/Notification/models/repo/notification_impl_repo.dart';
-import 'package:alrahaala/core/utils/cubit/auth_cubit.dart';
 import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/core/utils/helper/routes.dart';
 import 'package:alrahaala/core/utils/helper/server_local.dart';
 import 'package:alrahaala/core/utils/local%20NetWork/local_netWork.dart';
 import 'package:alrahaala/features/chat/data/cubit/chat_cubit.dart';
 import 'package:alrahaala/features/login/Presentation/login_view.dart';
+import 'package:alrahaala/features/login/data/cubit/cubit/login_cubit.dart';
+import 'package:alrahaala/features/register/data/cubit/register_cubit.dart';
 import 'package:alrahaala/features/splash/Presentation/splash_view.dart';
 import 'package:alrahaala/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -34,7 +35,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => AuthCubit()),
+        BlocProvider(create: (context) => SingInCubit()),
+        BlocProvider(create: (context) => RegisterCubit()),
         BlocProvider(
           create: (context) => ChatCubit(
             getIt.get<NotificationImplRepo>(),

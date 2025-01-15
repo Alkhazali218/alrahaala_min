@@ -1,4 +1,3 @@
-import 'package:alrahaala/core/utils/cubit/auth_cubit.dart';
 import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/core/utils/helper/thems.dart';
 import 'package:alrahaala/features/chat/data/cubit/chat_cubit.dart';
@@ -6,8 +5,10 @@ import 'package:alrahaala/features/home/Presentation/home_view.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/button_item.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/button_text_item.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/text_from_filed_item.dart';
+import 'package:alrahaala/features/login/data/cubit/cubit/login_cubit.dart';
 import 'package:alrahaala/features/password/Presentation/password_view.dart';
 import 'package:alrahaala/features/register/Presentation/register_view.dart';
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,27 +16,39 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 // ignore: must_be_immutable
-class LoginViewBody extends StatelessWidget {
+class LoginViewBody extends StatefulWidget {
   LoginViewBody({super.key});
 
-  bool isLoading = false;
+  @override
+  _LoginViewBodyState createState() => _LoginViewBodyState();
+}
+
+class _LoginViewBodyState extends State<LoginViewBody> {
   late String email;
   late String password;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthCubit, AuthState>(
+    return BlocConsumer<SingInCubit, SingInState>(
       listener: (context, state) {
-        if (state is AuthLoading) {
-          isLoading = true;
-        }
-        if (state is AuthSuccess) {
+        if (state is SingInLoading) {
+          setState(() {
+            isLoading = true;
+          });
+        } else if (state is SingInSuccess) {
           BlocProvider.of<ChatCubit>(context).getMessage();
           Navigator.pushNamed(context, homeView.id);
-        }
-        if (state is AuthError) {
+          AnimatedSnackBar.material(state.message, type: AnimatedSnackBarType.success).show(context);
+          setState(() {
+            isLoading = false;
+          });
+        } else if (state is SingInFailures) {
           showSnackBar(context, state.message, Colors.red);
+          setState(() {
+            isLoading = false;
+          });
         }
       },
       builder: (context, state) {
@@ -83,11 +96,10 @@ class LoginViewBody extends StatelessWidget {
                     textButton: 'تسجيل الدخول',
                     onTap: () async {
                       if (formKey.currentState!.validate()) {
-                        BlocProvider.of<AuthCubit>(context)
+                        BlocProvider.of<SingInCubit>(context)
                             .loginUser(email: email, password: password);
                       }
-                        await FirebaseMessaging.instance
-                            .subscribeToTopic(kTopic);
+                      await FirebaseMessaging.instance.subscribeToTopic(kTopic);
                     },
                   ),
                   const SizedBox(height: 20),

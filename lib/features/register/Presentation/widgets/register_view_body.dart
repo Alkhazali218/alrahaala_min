@@ -1,10 +1,11 @@
-import 'package:alrahaala/core/utils/cubit/auth_cubit.dart';
 import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/core/utils/helper/thems.dart';
-import 'package:alrahaala/features/chat/Presentation/chat_view.dart';
+import 'package:alrahaala/features/login/Presentation/login_view.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/button_item.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/button_text_item.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/text_from_filed_item.dart';
+import 'package:alrahaala/features/register/data/cubit/register_cubit.dart';
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -18,26 +19,29 @@ class registerViewBody extends StatelessWidget {
   late String password;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthCubit, AuthState>(
+    return BlocConsumer<RegisterCubit, RegisterState>(
       listener: (context, state) {
-        if (state is AuthLoading) {
-          isLoading = true;
+        if (state is RegisterSuccess) {
+          AnimatedSnackBar.material(
+            state.message,
+            type: AnimatedSnackBarType.success,
+          ).show(context);
+          Navigator.pushNamed(context, loginView.id);
         }
-        if (state is AuthSuccess) {
-          Navigator.pushNamed(context, chatView.id);
-          isLoading = false;
-        }
-        if (state is AuthError) {
+        if (state is RegisterFailures) {
           showSnackBar(context, state.message, Colors.red);
-          isLoading = false;
         }
       },
       builder: (context, state) {
+        // تحديد حالة التحميل بناءً على حالة الـ Bloc
+        bool isLoading = state is RegisterLoading;
+
         return ModalProgressHUD(
-          inAsyncCall: isLoading,
+          inAsyncCall:
+              isLoading, // إظهار الـ loading بناءً على حالة الـ isLoading
           progressIndicator: const CircularProgressIndicator(
             valueColor: AlwaysStoppedAnimation(kpColor),
           ),
@@ -88,8 +92,10 @@ class registerViewBody extends StatelessWidget {
                     textButton: 'انشاء حساب',
                     onTap: () {
                       if (formKey.currentState!.validate()) {
-                        BlocProvider.of<AuthCubit>(context)
-                            .registerUser(email: email, password: password);
+                        BlocProvider.of<RegisterCubit>(context).registerUser(
+                          email: email,
+                          password: password,
+                        );
                       }
                     },
                   ),

@@ -1,28 +1,45 @@
 import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/core/utils/helper/thems.dart';
+import 'package:alrahaala/features/login/Presentation/login_view.dart';
 import 'package:alrahaala/features/user/Presentation/widgets/stack_item_user.dart';
+import 'package:animated_snack_bar/animated_snack_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-// ignore: camel_case_types
+// ignore: must_be_immutable, camel_case_types
 class userViewBody extends StatelessWidget {
-  const userViewBody({super.key});
+ userViewBody({super.key});
 
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        const SizedBox(height: 40),
-        const stackItemUser(),
-        const SizedBox(height: 20),
-        GestureDetector(
-          onTap: () {},
-          child: Text(
-            'تسجيل الخروج',
-            style: googleFont30.copyWith(color: kpColor, fontSize: 16),
-            textAlign: TextAlign.center,
-          ),
+    return ModalProgressHUD(
+        inAsyncCall: isLoading,
+        child: ListView(
+          children: [
+            const SizedBox(height: 40),
+            const stackItemUser(),
+            const SizedBox(height: 20),
+            GestureDetector(
+              onTap: () async {
+                await LogOut(context);
+              },
+              child: Text(
+                'تسجيل الخروج',
+                style: googleFont30.copyWith(color: kpColor, fontSize: 16),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
         ),
-      ],
-    );
+      );
+  }
+
+  Future<void> LogOut(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    // ignore: use_build_context_synchronously
+    Navigator.pushNamed(context, loginView.id);
+    AnimatedSnackBar.material('Success', type: AnimatedSnackBarType.success);
   }
 }

@@ -21,4 +21,10 @@ class ApiServer {
     );
     return response.data;
   }
+
+  Future<Map<String,dynamic>> get() async {
+    // ignore: unnecessary_string_interpolations
+    var response = await _dio.get('$_baseUrl');
+    return response.data;
+  }
 }

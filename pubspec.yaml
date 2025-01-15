@@ -43,7 +43,7 @@ dependencies:
   curved_navigation_bar: ^1.0.6
   shared_preferences: ^2.3.3
   http: ^1.2.2
-  flutter_bloc: ^8.1.6
+  flutter_bloc: ^9.0.0
   modal_progress_hud_nsn: ^0.5.1
   cloud_firestore: ^5.6.0
   firebase_messaging: ^15.1.6
@@ -53,6 +53,7 @@ dependencies:
   dartz: ^0.10.1
   dio: ^5.7.0
   get_it: ^8.0.3
+  animated_snack_bar: ^0.4.0
 
 dev_dependencies:
   flutter_test:
