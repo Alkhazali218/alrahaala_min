@@ -3,6 +3,7 @@ import 'package:alrahaala/features/chat/Presentation/chat_view.dart';
 import 'package:alrahaala/features/home/Presentation/home_view.dart';
 import 'package:alrahaala/features/login/Presentation/login_view.dart';
 import 'package:alrahaala/features/money%20transfer/Presentation/money_transfer_view.dart';
+import 'package:alrahaala/features/money%20transfer/Presentation/widgets/user_money_transfer.dart';
 import 'package:alrahaala/features/next%20ex/Presentation/next_ex_view.dart';
 import 'package:alrahaala/features/next/Presentation/next_view.dart';
 import 'package:alrahaala/features/password/Presentation/password_view.dart';
@@ -31,4 +32,5 @@ Map<String, Widget Function(BuildContext)> routes = {
   AccountStatementView.id: (context) => const AccountStatementView(),
   MoneyTransferView.id: (context) => const MoneyTransferView(),
   chatView.id: (context) =>const chatView(),
+  UserMoneyTransfer.id: (context) =>const UserMoneyTransfer(),
 };

@@ -9,11 +9,9 @@ final class RegisterSuccess extends RegisterState {
   final String message;
 
   RegisterSuccess({required this.message});
-
 }
 final class RegisterFailures extends RegisterState {
   final String message;
 
   RegisterFailures({required this.message});
-
 }

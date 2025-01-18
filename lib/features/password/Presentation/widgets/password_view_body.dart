@@ -1,3 +1,4 @@
+import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/core/utils/helper/thems.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/button_item.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/text_from_filed_item.dart';
@@ -33,10 +34,11 @@ class passwordViewBody extends StatelessWidget {
              prefixIcon: FontAwesomeIcons.hashtag,
               pass: false,
               isSecurePassword: false,
+              textType: TextInputType.number,
               ),
               const  SizedBox(height: 5),
               Text('سوف تتلقى منا اشعارات عبر الواتساب لاغراض الامان وتسجيل الدخول',
-              style: googleFont18.copyWith(fontSize: 13),
+              style: googleFont18.copyWith(fontSize: getRsonsiveFontSize(context, fontSize: 13)),
               textAlign: TextAlign.center,
               ),
               const  SizedBox(height: 30),

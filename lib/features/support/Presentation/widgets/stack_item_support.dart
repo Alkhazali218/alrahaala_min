@@ -30,11 +30,11 @@ class stackItemSupport extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(height: 20),
-                  Icon(iconSupport, color: kpColor, size: 40),
+                  Icon(iconSupport, color: kpColor, size: getRsonsiveFontSize(context, fontSize: 40)),
                   const SizedBox(height: 20),
                   Text(
                     textSupport,
-                    style: googleFont30.copyWith(fontSize: 20),
+                    style: googleFont30.copyWith(fontSize: getRsonsiveFontSize(context, fontSize: 20)),
                   ),
                 ],
               ),

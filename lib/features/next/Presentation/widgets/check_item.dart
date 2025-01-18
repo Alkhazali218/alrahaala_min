@@ -21,7 +21,7 @@ class CheckItem extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Text(textCheckItem,
           textAlign: TextAlign.center,
-          style: googleFont30.copyWith(fontSize: 14,color: kprimaryColor),
+          style: googleFont30.copyWith(fontSize: getRsonsiveFontSize(context, fontSize: 14),color: kprimaryColor),
           ),
         ),
       ),

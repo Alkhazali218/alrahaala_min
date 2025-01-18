@@ -54,9 +54,9 @@ class _plashViewBodyState extends State<plashViewBody> {
                           children: [
                           
                              Text(items.title,
-                            style: const TextStyle(
+                            style:  TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 30,
+                            fontSize: getRsonsiveFontSize(context, fontSize: 30),
                             color: kcolor,
                             ),
                             ),
@@ -64,8 +64,8 @@ class _plashViewBodyState extends State<plashViewBody> {
                               Text(
                               items.subtitle,
                             textAlign: TextAlign.center,
-                            style: const TextStyle(fontWeight: FontWeight.bold,
-                            fontSize: 17,
+                            style:  TextStyle(fontWeight: FontWeight.bold,
+                            fontSize: getRsonsiveFontSize(context, fontSize: 17),
                             color: Colors.black45,
                             ),
                             ),
@@ -102,10 +102,10 @@ class _plashViewBodyState extends State<plashViewBody> {
     },
     elevation: 0,
     backgroundColor:const Color(0xffFAF7F0),
-    child:const Text('تخطي',
+    child: Text('تخطي',
     style: TextStyle(
       color: kcolor,
-      fontSize: 18,
+      fontSize: getRsonsiveFontSize(context, fontSize: 18),
     ),
     )
     ),

@@ -27,7 +27,7 @@ class userViewBody extends StatelessWidget {
               },
               child: Text(
                 'تسجيل الخروج',
-                style: googleFont30.copyWith(color: kpColor, fontSize: 16),
+                style: googleFont30.copyWith(color: kpColor, fontSize: getRsonsiveFontSize(context, fontSize: 16)),
                 textAlign: TextAlign.center,
               ),
             ),

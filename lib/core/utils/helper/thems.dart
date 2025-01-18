@@ -8,12 +8,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 TextStyle googleFont30 = GoogleFonts.notoSansArabic(
   color: kcolor,
-  fontSize: 30,
   );
 
   TextStyle googleFont18 = GoogleFonts.notoSansArabic(
   color: Colors.black45,
-  fontSize: 18,
   );
 
   void showSnackBar(BuildContext context, String message, Color showColor) {

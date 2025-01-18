@@ -1,4 +1,4 @@
-part of 'login_cubit.dart';
+part of 'sing_in_cubit.dart';
 
 @immutable
 sealed class SingInState {}
@@ -10,7 +10,6 @@ final class SingInSuccess extends SingInState {
 
   SingInSuccess({required this.message});
 }
-
 final class SingInFailures extends SingInState {
   final String message;
 

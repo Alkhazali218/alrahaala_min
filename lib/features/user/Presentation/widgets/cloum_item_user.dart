@@ -16,12 +16,15 @@ class CloumItemUser extends StatelessWidget {
         const SizedBox(height: 20),
         Text(
           text,
-          style: googleFont30.copyWith(color: Colors.black87, fontSize: 16),
+          style: googleFont30.copyWith(color: Colors.black87, fontSize: getRsonsiveFontSize(context, fontSize: 16)),
         ),
         const SizedBox(height: 5),
         Text(
           textMoney,
-          style: googleFont30.copyWith(color: kpColor),
+          style: googleFont30.copyWith(
+            color: kpColor,
+            fontSize: getRsonsiveFontSize(context, fontSize: 30),
+          ),
         ),
         const SizedBox(height: 20),
         const textItem(

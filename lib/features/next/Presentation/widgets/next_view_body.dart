@@ -21,6 +21,7 @@ class nextViewBody extends StatelessWidget {
             prefixIcon: FontAwesomeIcons.user,
             pass: false,
             isSecurePassword: false,
+            textType: TextInputType.name,
           ),
           const SizedBox(height: 15),
           textFromFiledItem(
@@ -29,6 +30,7 @@ class nextViewBody extends StatelessWidget {
             prefixIcon: FontAwesomeIcons.hashtag,
             pass: false,
             isSecurePassword: false,
+            textType: TextInputType.number,
           ),
           const SizedBox(height: 15),
           textFromFiledItem(
@@ -37,6 +39,7 @@ class nextViewBody extends StatelessWidget {
             prefixIcon: FontAwesomeIcons.treeCity,
             pass: false,
             isSecurePassword: false,
+            textType: TextInputType.name,
           ),
           const SizedBox(height: 15),
           textFromFiledItem(
@@ -45,6 +48,7 @@ class nextViewBody extends StatelessWidget {
             prefixIcon: FontAwesomeIcons.dollarSign,
             pass: false,
             isSecurePassword: false,
+            textType: TextInputType.number,
           ),
           const SizedBox(height: 20),
           Row(

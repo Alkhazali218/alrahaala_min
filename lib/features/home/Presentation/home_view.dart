@@ -23,20 +23,20 @@ final screen = const [
 ];
   @override
   Widget build(BuildContext context) {
-    const items = <Widget>[
-      Icon(Icons.support_agent, size: 30),
-      Icon(Icons.person, size: 30),
-       Icon(Icons.home, size: 30),
+  List<Widget>  items = [
+      Icon(Icons.support_agent, size: getRsonsiveFontSize(context, fontSize: 30)),
+      Icon(Icons.person, size:  getRsonsiveFontSize(context, fontSize: 30)),
+       Icon(Icons.home, size:  getRsonsiveFontSize(context, fontSize: 30)),
     ];
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: kcolor,
-          title:const Text(
+          title: Text(
             'شركة الرحالة القابضة',
             style: TextStyle(
               color: kprimaryColor,
-              fontSize: 30,
+              fontSize: getRsonsiveFontSize(context, fontSize: 30),
               fontFamily: 'decotype',
             )
           ),

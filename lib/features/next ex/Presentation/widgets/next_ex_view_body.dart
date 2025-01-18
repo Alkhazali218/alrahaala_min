@@ -7,86 +7,78 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // ignore: must_be_immutable
 class NextExViewBody extends StatelessWidget {
-const NextExViewBody({super.key});
+  const NextExViewBody({super.key});
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10),
       child: ListView(
         children: [
-          const SizedBox(height: 60),
+          const SizedBox(height: 40),
           textFromFiledItem(
-             onChanged: (p0) {
-              
-            },
+            onChanged: (p0) {},
             hintText: 'الاسم المستلم',
             prefixIcon: FontAwesomeIcons.user,
             pass: false,
             isSecurePassword: false,
+            textType: TextInputType.name,
           ),
           const SizedBox(height: 15),
           textFromFiledItem(
-            onChanged: (p0) {
-              
-            },
+            onChanged: (p0) {},
             hintText: 'رقم الهاتف المستلم',
             prefixIcon: FontAwesomeIcons.hashtag,
             pass: false,
             isSecurePassword: false,
+            textType: TextInputType.number,
           ),
-          
           const SizedBox(height: 15),
           textFromFiledItem(
-             onChanged: (p0) {
-              
-            },
+            onChanged: (p0) {},
             hintText: 'المدينة',
             prefixIcon: FontAwesomeIcons.treeCity,
             pass: false,
             isSecurePassword: false,
+            textType: TextInputType.name,
           ),
           const SizedBox(height: 15),
-          
-           textFromFiledItem(
-             onChanged: (p0) {
-              
-            },
+          textFromFiledItem(
+            onChanged: (p0) {},
             hintText: 'الدولة',
             prefixIcon: FontAwesomeIcons.earthAfrica,
             pass: false,
             isSecurePassword: false,
+            textType: TextInputType.name,
           ),
           const SizedBox(height: 15),
           textFromFiledItem(
-            onChanged: (p0) {
-              
-            },
-            hintText: 'القيمة المراد ارسالها',
-            prefixIcon: FontAwesomeIcons.dollarSign,
-            pass: false,
-            isSecurePassword: false,
-          ),
-           const SizedBox(height: 15),
-          textFromFiledItem(
-             onChanged: (p0) {
-              
-            },
+            onChanged: (p0) {},
             hintText: 'العملة',
             prefixIcon: FontAwesomeIcons.dollarSign,
             pass: false,
             isSecurePassword: false,
+            textType: TextInputType.name,
           ),
-         
+          const SizedBox(height: 15),
+          textFromFiledItem(
+            onChanged: (p0) {},
+            hintText: 'القيمة المراد ارسالها',
+            prefixIcon: FontAwesomeIcons.dollarSign,
+            pass: false,
+            isSecurePassword: false,
+            textType: TextInputType.number,
+          ),
           const SizedBox(height: 20),
-           Row(
+          Row(
             children: [
               CheckItem(
-                onTap: () => Navigator.pushNamed(context,StackUserViewBasic.id),
+                onTap: () =>
+                    Navigator.pushNamed(context, StackUserViewBasic.id),
                 textCheckItem: 'تاكيد',
               ),
               const SizedBox(width: 10),
               CheckItem(
-                onTap: () => Navigator.pushNamed(context,homeView.id),
+                onTap: () => Navigator.pushNamed(context, homeView.id),
                 textCheckItem: 'الغاء الامر',
               ),
             ],

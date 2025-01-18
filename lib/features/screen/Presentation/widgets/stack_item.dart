@@ -47,11 +47,11 @@ class stackItem extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(height: 30),
-                  Icon(icons, color: kpColor, size: 40),
+                  Icon(icons, color: kpColor, size: getRsonsiveFontSize(context, fontSize: 40)),
                   const SizedBox(height: 10),
                   Text(
                     textProject,
-                    style: googleFont30.copyWith(color: kcolor, fontSize: 18),
+                    style: googleFont30.copyWith(color: kcolor, fontSize: getRsonsiveFontSize(context, fontSize: 18)),
                   ),
                   const SizedBox(height: 60),
                   Row(
@@ -60,14 +60,14 @@ class stackItem extends StatelessWidget {
                       Text(
                         textInside1,
                         style: googleFont30.copyWith(
-                          fontSize: 15,
+                          fontSize: getRsonsiveFontSize(context, fontSize: 15),
                           color: Colors.black54,
                         ),
                       ),
                       Text(
                         textInside2,
                         style: googleFont18.copyWith(
-                          fontSize: 15,
+                          fontSize: getRsonsiveFontSize(context, fontSize: 15),
                           color: Colors.black54,
                         ),
                       ),
@@ -78,7 +78,7 @@ class stackItem extends StatelessWidget {
                     textAlign: TextAlign.right,
                     textInside3,
                     style: googleFont18.copyWith(
-                      fontSize: 15,
+                      fontSize: getRsonsiveFontSize(context, fontSize: 15),
                       color: Colors.black54,
                     ),
                   ),

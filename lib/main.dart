@@ -6,7 +6,7 @@ import 'package:alrahaala/core/utils/helper/server_local.dart';
 import 'package:alrahaala/core/utils/local%20NetWork/local_netWork.dart';
 import 'package:alrahaala/features/chat/data/cubit/chat_cubit.dart';
 import 'package:alrahaala/features/login/Presentation/login_view.dart';
-import 'package:alrahaala/features/login/data/cubit/cubit/login_cubit.dart';
+import 'package:alrahaala/features/login/data/cubit/sing_in_cubit.dart';
 import 'package:alrahaala/features/register/data/cubit/register_cubit.dart';
 import 'package:alrahaala/features/splash/Presentation/splash_view.dart';
 import 'package:alrahaala/firebase_options.dart';

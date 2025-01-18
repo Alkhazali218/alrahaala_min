@@ -23,7 +23,7 @@ class buttonTextItem extends StatelessWidget {
             textLandtextR,
             style: googleFont18.copyWith(
               color: kpColor,
-              fontSize: 14,
+              fontSize: getRsonsiveFontSize(context, fontSize: 14),
               decoration: TextDecoration.underline,
               decorationColor: kpColor,
             ),
@@ -31,7 +31,7 @@ class buttonTextItem extends StatelessWidget {
         ),
         Text(
           ifText,
-          style: googleFont18.copyWith(fontSize: 14),
+          style: googleFont18.copyWith(fontSize: getRsonsiveFontSize(context, fontSize: 14)),
         ),
       ],
     );

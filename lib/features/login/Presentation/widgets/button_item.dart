@@ -20,7 +20,7 @@ final VoidCallback onTap;
           child: Center(
             child: Text(
               textButton,
-              style: googleFont30.copyWith(color: Colors.white,fontSize: 14),
+              style: googleFont30.copyWith(color: Colors.white,fontSize: getRsonsiveFontSize(context, fontSize: 14)),
             ),
           ),
         ),

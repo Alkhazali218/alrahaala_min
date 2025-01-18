@@ -10,6 +10,7 @@ class textFromFiledItem extends StatefulWidget {
     required this.pass,
     required this.isSecurePassword,
     required this.onChanged,
+    required this.textType,
     
   });
   final String hintText;
@@ -17,6 +18,7 @@ class textFromFiledItem extends StatefulWidget {
   final bool pass;
   bool isSecurePassword;
   Function(String) onChanged;
+  final TextInputType textType;
   
 
   @override
@@ -34,10 +36,11 @@ class _textFromFiledItemState extends State<textFromFiledItem> {
       child: TextFormField(
         validator: (value) {
           if (value!.isEmpty) {
-            return 'رجاءا ادخل البيانات';
+            return "رجاءً إدخال البيانات بطريقة صحيحة";
           }
           return null;
         },
+        keyboardType: widget.textType,
         onChanged: widget.onChanged,
         textAlign: TextAlign.right,
         obscureText: widget.isSecurePassword,
