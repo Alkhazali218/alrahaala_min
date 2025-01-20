@@ -13,6 +13,7 @@ import 'package:alrahaala/features/splash/Presentation/splash_view.dart';
 import 'package:alrahaala/features/stack%20user%20basic/Presentation/stack_user_view_basic.dart';
 import 'package:alrahaala/features/stack%20user%20star/Presentation/stack_user_view_star.dart';
 import 'package:alrahaala/features/support/Presentation/support_view.dart';
+import 'package:alrahaala/features/user%20chat/Presentation/user_chat.dart';
 import 'package:alrahaala/features/user/Presentation/user_view.dart';
 import 'package:flutter/material.dart';
 
@@ -33,4 +34,5 @@ Map<String, Widget Function(BuildContext)> routes = {
   MoneyTransferView.id: (context) => const MoneyTransferView(),
   chatView.id: (context) =>const chatView(),
   UserMoneyTransfer.id: (context) =>const UserMoneyTransfer(),
+  UserChat.id: (context) =>const UserChat(),
 };

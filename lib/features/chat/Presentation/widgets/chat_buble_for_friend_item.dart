@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable, camel_case_types
 class chatBubleForFriendItem extends StatelessWidget {
  chatBubleForFriendItem({super.key,required this.message});
-  MessageModel message;
+  ChatMessageModel message;
   @override
   Widget build(BuildContext context) {
     return Align(

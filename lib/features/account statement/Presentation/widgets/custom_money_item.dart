@@ -16,11 +16,13 @@ class CustomMoneyItem extends StatelessWidget {
             children: [
               Text(
                 'القيمة',
-                style: googleFont30.copyWith(fontSize: getRsonsiveFontSize(context, fontSize: 18)),
+                style: googleFont30.copyWith(
+                    fontSize: getRsonsiveFontSize(context, fontSize: 18)),
               ),
               Text(
                 '650',
-                style: googleFont30.copyWith(fontSize: getRsonsiveFontSize(context, fontSize: 18)),
+                style: googleFont30.copyWith(
+                    fontSize: getRsonsiveFontSize(context, fontSize: 18)),
               ),
             ],
           ),

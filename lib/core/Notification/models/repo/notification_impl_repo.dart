@@ -19,7 +19,7 @@ class NotificationImplRepo implements NotificationRepo {
     String? accessToken = await InitNotification.getAccessToken();
     try {
       var data = await apiServer.post(
-        endPoint: 'projects/alrahaala-f36e1/messages:send',
+        url: 'https://fcm.googleapis.com/v1/projects/alrahaala-f36e1/messages:send',
         data: {
           "message": {
             "topic": topic,

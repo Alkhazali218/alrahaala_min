@@ -12,6 +12,10 @@ class CacheNetWork {
     return await sharedPre.setBool(key, value);
   }
 
+  static Future<bool> insterToToken({required String key, required String value}) async {
+    return await sharedPre.setString(key, value);
+  }
+
   static dynamic getCacheDaTaSplash({required String key}) {
     return sharedPre.getBool(key);
   }

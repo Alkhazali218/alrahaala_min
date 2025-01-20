@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class chatBubleItem extends StatelessWidget {
   const chatBubleItem({super.key,required this.message});
 
-  final MessageModel message;
+  final ChatMessageModel message;
   @override
   Widget build(BuildContext context) {
     return Align(

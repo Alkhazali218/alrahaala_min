@@ -6,7 +6,7 @@ import 'package:alrahaala/features/login/Presentation/widgets/button_item.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/button_text_item.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/custom_circular.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/text_from_filed_item.dart';
-import 'package:alrahaala/features/login/data/cubit/sing_in_cubit.dart';
+import 'package:alrahaala/features/login/data/cubit/login_cubit.dart';
 import 'package:alrahaala/features/password/Presentation/password_view.dart';
 import 'package:alrahaala/features/register/Presentation/register_view.dart';
 import 'package:animated_snack_bar/animated_snack_bar.dart';
@@ -16,7 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginViewBody extends StatelessWidget {
-  late String email;
+  late String number;
   late String password;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -24,15 +24,19 @@ class LoginViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SingInCubit, SingInState>(
+    return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
-        if (state is SingInSuccess) {
+        if (state is LoginSuccess) {
           BlocProvider.of<ChatCubit>(context).getMessage();
+
+          BlocProvider.of<ChatCubit>(context).setCurrentUser(number);
+
           Navigator.pushNamed(context, homeView.id);
-          AnimatedSnackBar.material(state.message,
+
+          AnimatedSnackBar.material('تم تسجيل الدخول بنجاح',
                   type: AnimatedSnackBarType.success)
               .show(context);
-        } else if (state is SingInFailures) {
+        } else if (state is LoginFaliures) {
           AnimatedSnackBar.material(state.message,
                   type: AnimatedSnackBarType.error)
               .show(context);
@@ -63,12 +67,12 @@ class LoginViewBody extends StatelessWidget {
                 ),
                 const SizedBox(height: 50),
                 textFromFiledItem(
-                  onChanged: (data) => email = data,
+                  onChanged: (data) => number = data,
                   hintText: 'البريد الالكتروني',
                   prefixIcon: FontAwesomeIcons.envelope,
                   pass: false,
                   isSecurePassword: false,
-                  textType: TextInputType.emailAddress,
+                  textType: TextInputType.number,
                 ),
                 const SizedBox(height: 20),
                 textFromFiledItem(
@@ -80,18 +84,19 @@ class LoginViewBody extends StatelessWidget {
                   textType: TextInputType.visiblePassword,
                 ),
                 const SizedBox(height: 30),
-               state is SingInLoading
+                state is LoginLoading
                     ? const CustomCircular()
-                    :  ButtonItem(
-                  textButton: 'تسجيل الدخول',
-                  onTap: () async {
-                    if (formKey.currentState!.validate()) {
-                      BlocProvider.of<SingInCubit>(context)
-                          .loginUser(email: email, password: password);
-                    }
-                    await FirebaseMessaging.instance.subscribeToTopic(kTopic);
-                  },
-                ),
+                    : ButtonItem(
+                        textButton: 'تسجيل الدخول',
+                        onTap: () async {
+                          if (formKey.currentState!.validate()) {
+                            BlocProvider.of<LoginCubit>(context)
+                                .loginUser(number: number, password: password);
+                          }
+                          await FirebaseMessaging.instance
+                              .subscribeToTopic(kTopic);
+                        },
+                      ),
                 const SizedBox(height: 20),
                 GestureDetector(
                   onTap: () => Navigator.pushNamed(context, passwordView.id),

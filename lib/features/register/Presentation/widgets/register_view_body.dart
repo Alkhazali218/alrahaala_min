@@ -31,7 +31,12 @@ class registerViewBody extends StatelessWidget {
           ).show(context);
           Navigator.pushNamed(context, loginView.id);
         }
-        if (state is RegisterFailures) {}
+        if (state is RegisterFailures) {
+          AnimatedSnackBar.material(
+            state.message,
+            type: AnimatedSnackBarType.error,
+          ).show(context);
+        }
       },
       builder: (context, state) {
         return Form(
