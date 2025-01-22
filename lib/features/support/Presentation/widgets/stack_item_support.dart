@@ -12,13 +12,15 @@ class stackItemSupport extends StatelessWidget {
   final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.sizeOf(context).width;
+    var height = MediaQuery.sizeOf(context).height;
     return GestureDetector(
       onTap: onTap,
       child: Stack(
         children: [
           Container(
-            height: 150,
-            width: 180,
+            height: height*0.18,
+            width: width*0.45,
             decoration: BoxDecoration(
               border: Border.all(color: colorStack, width: 0.5),
               borderRadius: BorderRadius.circular(16),
@@ -29,9 +31,9 @@ class stackItemSupport extends StatelessWidget {
               alignment: Alignment.center,
               child: Column(
                 children: [
-                  const SizedBox(height: 20),
+                   SizedBox(height: height *0.030),
                   Icon(iconSupport, color: kpColor, size: getRsonsiveFontSize(context, fontSize: 40)),
-                  const SizedBox(height: 20),
+                   SizedBox(height: height *0.030),
                   Text(
                     textSupport,
                     style: googleFont30.copyWith(fontSize: getRsonsiveFontSize(context, fontSize: 20)),

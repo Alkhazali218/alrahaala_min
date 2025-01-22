@@ -7,11 +7,12 @@ class CustomTimeItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.sizeOf(context).height;
     return Flexible(
       child: FittedBox(
         child: Column(
           children: [
-            const SizedBox(height: 10),
+           SizedBox(height: height * 0.010),
             Text(
               '01/01/2025',
               style: googleFont18.copyWith(fontSize: getRsonsiveFontSize(context, fontSize: 13)),

@@ -1,3 +1,4 @@
+import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/features/screen/Presentation/widgets/stack_item.dart';
 import 'package:alrahaala/features/stack%20user%20basic/Presentation/stack_user_view_basic.dart';
 import 'package:alrahaala/features/stack%20user%20star/Presentation/stack_user_view_star.dart';
@@ -10,9 +11,10 @@ class screenViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.sizeOf(context).height;
     return ListView(
       children:  [
-       const SizedBox(height: 30),
+        SizedBox(height: height * 0.05),
         stackItem(
           onTap: () => Navigator.pushNamed(context,StackUserViewBasic.id),
           icons: FontAwesomeIcons.box,
@@ -21,6 +23,14 @@ class screenViewBody extends StatelessWidget {
           textInside2: 'الحوالات الداخلية',
           textInside3: '',
         ),
+        SizedBox(height: height * 0.010),
+         const Divider(
+          color: kcolor,
+          thickness: 0.3,
+          indent: 13,
+          endIndent: 13,
+        ),
+         SizedBox(height: height * 0.010),
         stackItem(
           onTap: () => Navigator.pushNamed(context,StackUserViewStar.id),
           icons: FontAwesomeIcons.solidStar,

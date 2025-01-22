@@ -28,7 +28,7 @@ class supportViewBody extends StatelessWidget {
                 onTap: () =>
                     _launchURL(url: 'https://rhalla.online/', context: context),
                 textSupport: 'موقعنا الالكتروني',
-                iconSupport: Icons.travel_explore,
+                iconSupport: FontAwesomeIcons.globe,
               ),
             ],
           ),

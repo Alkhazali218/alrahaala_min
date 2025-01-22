@@ -22,16 +22,16 @@ class stackItem extends StatelessWidget {
   final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.sizeOf(context).height;
     return GestureDetector(
       onTap: onTap,
       child: Stack(
         children: [
-          const SizedBox(height: 50),
           Padding(
             padding: const EdgeInsets.all(14),
             child: Container(
               width: double.infinity,
-              height: 250,
+              height: height * 0.30,
               decoration: BoxDecoration(
                 border: Border.all(
                   color: colorStack,
@@ -46,14 +46,21 @@ class stackItem extends StatelessWidget {
               alignment: Alignment.center,
               child: Column(
                 children: [
-                  const SizedBox(height: 30),
-                  Icon(icons, color: kpColor, size: getRsonsiveFontSize(context, fontSize: 40)),
-                  const SizedBox(height: 10),
+                  SizedBox(height: height * 0.05),
+                  Icon(
+                    icons,
+                    color: kpColor,
+                    size: getRsonsiveFontSize(context, fontSize: 40),
+                  ),
+                  SizedBox(height: height * 0.02),
                   Text(
                     textProject,
-                    style: googleFont30.copyWith(color: kcolor, fontSize: getRsonsiveFontSize(context, fontSize: 18)),
+                    style: googleFont30.copyWith(
+                      color: kcolor,
+                      fontSize: getRsonsiveFontSize(context, fontSize: 18),
+                    ),
                   ),
-                  const SizedBox(height: 60),
+                  SizedBox(height: height * 0.05),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -73,7 +80,7 @@ class stackItem extends StatelessWidget {
                       ),
                     ],
                   ),
-                 const SizedBox(height: 30),
+                  SizedBox(height: height * 0.02),
                   Text(
                     textAlign: TextAlign.right,
                     textInside3,

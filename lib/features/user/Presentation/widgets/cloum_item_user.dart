@@ -11,14 +11,15 @@ class CloumItemUser extends StatelessWidget {
   final String textMoney;
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.sizeOf(context).height;
     return Column(
       children: [
-        const SizedBox(height: 20),
+         SizedBox(height: height*0.04),
         Text(
           text,
           style: googleFont30.copyWith(color: Colors.black87, fontSize: getRsonsiveFontSize(context, fontSize: 16)),
         ),
-        const SizedBox(height: 5),
+         SizedBox(height: height* 0.010),
         Text(
           textMoney,
           style: googleFont30.copyWith(
@@ -26,7 +27,7 @@ class CloumItemUser extends StatelessWidget {
             fontSize: getRsonsiveFontSize(context, fontSize: 30),
           ),
         ),
-        const SizedBox(height: 20),
+         SizedBox(height: height* 0.005),
         const textItem(
           textItemOne: '9685746146894321',
           textitemTwo: 'رقم الحساب',

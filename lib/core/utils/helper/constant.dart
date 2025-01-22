@@ -6,12 +6,15 @@ const kcolor = Color(0xff603F26);
 const kpColor = Colors.orange;
 const colorStack = Color(0xffB99470);
 
-//chat messages constant
+//const models chat
 const kMessagesCollections = 'messages';
+const kUsersCollections = 'Users';
+const kNumber = 'number';
+const kUserName = 'UserName';
 const kMessage = 'message';
 const kCreatedAt = 'createdAt';
-// ignore: constant_identifier_names
-const KUserId = 'UserId';
+const kIdSender = 'idSender';
+const kIdReceiver = 'idReceiver';
 const kTopic = 'alrahaala';
 
 

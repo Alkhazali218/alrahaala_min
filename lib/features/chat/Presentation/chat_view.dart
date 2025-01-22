@@ -13,7 +13,7 @@ class chatView extends StatelessWidget {
         backgroundColor: kcolor,
         foregroundColor: kprimaryColor,
       ),
-      body: chatViewBody(),
+      body:const ChatViewBody(),
     );
   }
 }

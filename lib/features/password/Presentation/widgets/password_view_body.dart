@@ -6,48 +6,51 @@ import 'package:alrahaala/features/verification/Presentation/verification_view.d
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-
 // ignore: must_be_immutable, camel_case_types
 class passwordViewBody extends StatelessWidget {
- const passwordViewBody({super.key});
+  const passwordViewBody({super.key});
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListView(
         children: [
-        const  SizedBox(height: 100),
-          Text('البحث عن حساب',
-          style: googleFont30,
-          textAlign: TextAlign.right,
+          const SizedBox(height: 100),
+          Text(
+            'البحث عن حساب',
+            style: googleFont30.copyWith(
+                fontSize: getRsonsiveFontSize(context, fontSize: 30)),
+            textAlign: TextAlign.right,
           ),
-          Text('ادخل الرقم الهاتف',
-          style: googleFont18,
-          textAlign: TextAlign.right,
+          Text(
+            'ادخل الرقم الهاتف',
+            style: googleFont18,
+            textAlign: TextAlign.right,
           ),
-          const  SizedBox(height: 20),
+          const SizedBox(height: 20),
           textFromFiledItem(
-            onChanged: (p0) {
-              
-            },
+            onChanged: (p0) {},
             hintText: 'رقم الهاتف',
-             prefixIcon: FontAwesomeIcons.hashtag,
-              pass: false,
-              isSecurePassword: false,
-              textType: TextInputType.number,
-              ),
-              const  SizedBox(height: 5),
-              Text('سوف تتلقى منا اشعارات عبر الواتساب لاغراض الامان وتسجيل الدخول',
-              style: googleFont18.copyWith(fontSize: getRsonsiveFontSize(context, fontSize: 13)),
-              textAlign: TextAlign.center,
-              ),
-              const  SizedBox(height: 30),
-              ButtonItem(textButton: 'متابعة',
-            onTap: () => Navigator.pushNamed(context,verificationView.id),
+            prefixIcon: FontAwesomeIcons.hashtag,
+            pass: false,
+            isSecurePassword: false,
+            textType: TextInputType.number,
+          ),
+          const SizedBox(height: 5),
+          Text(
+            'سوف تتلقى منا اشعارات عبر الواتساب لاغراض الامان وتسجيل الدخول',
+            style: googleFont18.copyWith(
+              fontSize: getRsonsiveFontSize(context, fontSize: 13),
             ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 30),
+          ButtonItem(
+            textButton: 'متابعة',
+            onTap: () => Navigator.pushNamed(context, verificationView.id),
+          ),
         ],
       ),
     );
   }
-
 }

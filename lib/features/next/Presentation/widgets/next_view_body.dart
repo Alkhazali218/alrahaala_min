@@ -10,11 +10,13 @@ class nextViewBody extends StatelessWidget {
   const nextViewBody({super.key});
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.sizeOf(context).height;
+    var width = MediaQuery.sizeOf(context).width;
     return Padding(
       padding: const EdgeInsets.all(10),
       child: ListView(
         children: [
-          const SizedBox(height: 40),
+           SizedBox(height: height * 0.05),
           textFromFiledItem(
             onChanged: (p0) {},
             hintText: 'الاسم المستلم',
@@ -23,7 +25,7 @@ class nextViewBody extends StatelessWidget {
             isSecurePassword: false,
             textType: TextInputType.name,
           ),
-          const SizedBox(height: 15),
+           SizedBox(height: height * 0.02),
           textFromFiledItem(
             onChanged: (p0) {},
             hintText: 'رقم الهاتف المستلم',
@@ -32,7 +34,7 @@ class nextViewBody extends StatelessWidget {
             isSecurePassword: false,
             textType: TextInputType.number,
           ),
-          const SizedBox(height: 15),
+           SizedBox(height: height * 0.02),
           textFromFiledItem(
             onChanged: (p0) {},
             hintText: 'المدينة',
@@ -41,7 +43,7 @@ class nextViewBody extends StatelessWidget {
             isSecurePassword: false,
             textType: TextInputType.name,
           ),
-          const SizedBox(height: 15),
+            SizedBox(height: height * 0.02),
           textFromFiledItem(
             onChanged: (p0) {},
             hintText: 'القيمة المراد ارسالها',
@@ -50,7 +52,7 @@ class nextViewBody extends StatelessWidget {
             isSecurePassword: false,
             textType: TextInputType.number,
           ),
-          const SizedBox(height: 20),
+            SizedBox(height: height * 0.035),
           Row(
             children: [
               CheckItem(
@@ -58,7 +60,7 @@ class nextViewBody extends StatelessWidget {
                     Navigator.pushNamed(context, StackUserViewBasic.id),
                 textCheckItem: 'تاكيد',
               ),
-              const SizedBox(width: 10),
+                SizedBox(width: width * 0.020),
               CheckItem(
                 onTap: () =>
                     Navigator.pushNamed(context, homeView.id),

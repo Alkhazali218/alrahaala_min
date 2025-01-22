@@ -1,48 +1,36 @@
-import 'package:alrahaala/core/Notification/models/repo/notification_repo.dart';
 import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/features/chat/data/cubit/chat_state.dart';
 import 'package:alrahaala/features/chat/data/models/message_model.dart';
+import 'package:alrahaala/features/login/data/models/login_model.dart';
+import 'package:alrahaala/features/user%20chat/data/models/user_chat_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatCubit extends Cubit<ChatState> {
-  ChatCubit(this.notificationRepo) : super(ChatInitial());
-  final NotificationRepo notificationRepo;
+  ChatCubit() : super(ChatInitial());
 
   CollectionReference message = FirebaseFirestore.instance.collection(kMessagesCollections);
 
   List<ChatMessageModel> messageList = [];
 
-  String? currentUserPhoneNumber;
-
   void sendMessage({
     required String data,
+    required LoginModel loginUserModel,
+    required UserChatModel userChatModel,
   }) {
-    if (currentUserPhoneNumber == null) {
-      // ignore: avoid_print
-      print("User is not logged in");
-      return;
-    }
     try {
       message.add({
+        kIdSender: loginUserModel.number,
+        kIdReceiver: userChatModel.number,
         kMessage: data,
         kCreatedAt: DateTime.now(),
-        KUserId: currentUserPhoneNumber,
-      }).then(
-        (_) async {
-          notificationRepo.fetchNotificationMessage(
-            body: data,
-            title: 'دردشة المستخدمين',
-            topic: kTopic,
-          );
-        },
-      );
+      });
     } on Exception catch (e) {
       print("Error sending message: $e");
     }
   }
 
-  // جلب الرسائل من Firebase
+
   void getMessage() {
     message.orderBy(kCreatedAt, descending: true).snapshots().listen((event) {
       messageList.clear();
@@ -51,10 +39,5 @@ class ChatCubit extends Cubit<ChatState> {
       }
       emit(ChatSucess(messages: List.from(messageList)));
     });
-  }
-
-  // تعيين رقم الهاتف بعد تسجيل الدخول
-  void setCurrentUser(String phoneNumber) {
-    currentUserPhoneNumber = phoneNumber;
   }
 }

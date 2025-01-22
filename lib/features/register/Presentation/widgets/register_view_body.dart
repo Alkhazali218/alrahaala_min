@@ -73,8 +73,8 @@ class registerViewBody extends StatelessWidget {
                 const SizedBox(height: 20),
                 textFromFiledItem(
                   onChanged: (data) => email = data,
-                  hintText: 'البريد الالكتروني',
-                  prefixIcon: FontAwesomeIcons.envelope,
+                  hintText: 'رقم الهاتف',
+                  prefixIcon: FontAwesomeIcons.hashtag,
                   pass: false,
                   isSecurePassword: false,
                   textType: TextInputType.emailAddress,

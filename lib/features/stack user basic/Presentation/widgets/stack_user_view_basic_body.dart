@@ -9,9 +9,10 @@ class StackUserViewBasicBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.sizeOf(context).height;
     return  Column(
       children: [
-       const SizedBox(height: 60),
+        SizedBox(height: height * 0.06),
         Padding(
           padding:const EdgeInsets.all(10),
           child: Row(

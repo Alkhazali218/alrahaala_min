@@ -10,23 +10,25 @@ class moneyTransferItem extends StatelessWidget {
   final String text;
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.sizeOf(context).height;
+    var width = MediaQuery.sizeOf(context).width;
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, UserMoneyTransfer.id);
       },
       child: Row(
         children: [
-          const SizedBox(width: 10),
+           SizedBox(width: width * 0.05),
           Container(
-            width: 120,
-            height: 65,
+            width: width * 0.35,
+            height: height * 0.08,
             decoration: BoxDecoration(
               color: kcolor,
               borderRadius: BorderRadius.circular(16),
             ),
             child: CustomWidgetMoney(text: text),
           ),
-          const SizedBox(height: 100),
+           SizedBox(height: height * 0.12),
         ],
       ),
     );

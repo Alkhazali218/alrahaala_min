@@ -41,12 +41,12 @@ class serverFailures extends Failures{
   // ignore: non_constant_identifier_names
   factory serverFailures.FromResponse(int stateCode,dynamic response) {
     if(stateCode == 401 || stateCode == 402 || stateCode == 403) {
-      return serverFailures(errorMessage: response['error']['message']);
+      return serverFailures(errorMessage: response['message']);
     }
-    if(stateCode == 404) {
+    else if(stateCode == 404) {
       return serverFailures(errorMessage: 'Your response no found,Please try later !');
     }
-    if(stateCode == 500) {
+    else if(stateCode == 500) {
       return serverFailures(errorMessage: 'Internal server error, Please try later !');
     } else {
       return serverFailures(errorMessage: 'Opps there was an error, Please try again !');

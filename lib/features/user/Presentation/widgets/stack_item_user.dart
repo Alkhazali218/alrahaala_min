@@ -8,13 +8,14 @@ class stackItemUser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.sizeOf(context).height;
     return Stack(
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
             width: double.infinity,
-            height: 400,
+            height: height*0.50,
             decoration: BoxDecoration(
               border: Border.all(
                 color: colorStack,

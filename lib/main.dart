@@ -1,5 +1,4 @@
 import 'package:alrahaala/core/Notification/init%20Notifications/init_Notification.dart';
-import 'package:alrahaala/core/Notification/models/repo/notification_impl_repo.dart';
 import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/core/utils/helper/routes.dart';
 import 'package:alrahaala/core/utils/helper/server_local.dart';
@@ -10,6 +9,7 @@ import 'package:alrahaala/features/login/data/cubit/login_cubit.dart';
 import 'package:alrahaala/features/login/data/models/repo/login_repo_implo.dart';
 import 'package:alrahaala/features/register/data/cubit/register_cubit.dart';
 import 'package:alrahaala/features/splash/Presentation/splash_view.dart';
+import 'package:alrahaala/features/user%20chat/data/cubit/cubit/user_chat_cubit.dart';
 import 'package:alrahaala/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -36,9 +36,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => RegisterCubit()),
-        BlocProvider(create: (context) => ChatCubit(getIt.get<NotificationImplRepo>())),
+        //other bloc application
+        BlocProvider(create: (context) => ChatCubit()),
         BlocProvider(create: (context) => LoginCubit(getIt.get<LoginRepoImplo>())),
+        //Auth application
+        BlocProvider(create: (context) => RegisterCubit()),
+        BlocProvider(create: (context) => UserChatCubit()),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,

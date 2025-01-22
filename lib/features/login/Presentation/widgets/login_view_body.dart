@@ -16,11 +16,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginViewBody extends StatelessWidget {
+  LoginViewBody({super.key});
   late String number;
   late String password;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-  LoginViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +27,6 @@ class LoginViewBody extends StatelessWidget {
       listener: (context, state) {
         if (state is LoginSuccess) {
           BlocProvider.of<ChatCubit>(context).getMessage();
-
-          BlocProvider.of<ChatCubit>(context).setCurrentUser(number);
 
           Navigator.pushNamed(context, homeView.id);
 
@@ -68,8 +65,8 @@ class LoginViewBody extends StatelessWidget {
                 const SizedBox(height: 50),
                 textFromFiledItem(
                   onChanged: (data) => number = data,
-                  hintText: 'البريد الالكتروني',
-                  prefixIcon: FontAwesomeIcons.envelope,
+                  hintText: 'رقم الهاتف',
+                  prefixIcon: FontAwesomeIcons.hashtag,
                   pass: false,
                   isSecurePassword: false,
                   textType: TextInputType.number,
@@ -90,8 +87,10 @@ class LoginViewBody extends StatelessWidget {
                         textButton: 'تسجيل الدخول',
                         onTap: () async {
                           if (formKey.currentState!.validate()) {
-                            BlocProvider.of<LoginCubit>(context)
-                                .loginUser(number: number, password: password);
+                            BlocProvider.of<LoginCubit>(context).loginUser(
+                                number: number,
+                                password: password,
+                                context: context);
                           }
                           await FirebaseMessaging.instance
                               .subscribeToTopic(kTopic);

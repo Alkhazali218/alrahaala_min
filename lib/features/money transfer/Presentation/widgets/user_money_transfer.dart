@@ -11,6 +11,7 @@ class UserMoneyTransfer extends StatelessWidget {
   static String id = 'UserMoneyTransfer';
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.sizeOf(context).height;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -28,7 +29,7 @@ class UserMoneyTransfer extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            const SizedBox(height: 40),
+            SizedBox(height: height * 0.05),
             textFromFiledItem(
               onChanged: (p0) {},
               hintText: 'اسم المستلم',
@@ -37,7 +38,7 @@ class UserMoneyTransfer extends StatelessWidget {
               isSecurePassword: false,
               textType: TextInputType.name,
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: height * 0.020),
             textFromFiledItem(
               onChanged: (p0) {},
               hintText: 'رقم  الهاتف المستلم',
@@ -46,7 +47,7 @@ class UserMoneyTransfer extends StatelessWidget {
               isSecurePassword: false,
               textType: TextInputType.number,
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: height * 0.020),
             textFromFiledItem(
               onChanged: (p0) {},
               hintText: 'القيمة المراد ارسالها',
@@ -55,7 +56,7 @@ class UserMoneyTransfer extends StatelessWidget {
               isSecurePassword: false,
               textType: TextInputType.number,
             ),
-            const SizedBox(height: 20),
+           SizedBox(height: height * 0.035),
             ButtonItem(
               textButton: 'تحويل',
               onTap: () {},
