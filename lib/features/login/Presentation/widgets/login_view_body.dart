@@ -23,6 +23,7 @@ class LoginViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.sizeOf(context).height;
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state is LoginSuccess) {
@@ -46,7 +47,7 @@ class LoginViewBody extends StatelessWidget {
             key: formKey,
             child: ListView(
               children: [
-                Image.asset(assets.klogo, height: 150),
+                Image.asset(assets.klogo, height: height * 0.20),
                 Text(
                   ' ! مرحبا بك',
                   textAlign: TextAlign.right,
@@ -54,7 +55,7 @@ class LoginViewBody extends StatelessWidget {
                     fontSize: getRsonsiveFontSize(context, fontSize: 30),
                   ),
                 ),
-                const SizedBox(height: 5),
+                SizedBox(height: height * 0.0050),
                 Text(
                   'قم بتسجيل الدخول للاستمرار',
                   textAlign: TextAlign.right,
@@ -62,7 +63,7 @@ class LoginViewBody extends StatelessWidget {
                     fontSize: getRsonsiveFontSize(context, fontSize: 18),
                   ),
                 ),
-                const SizedBox(height: 50),
+                SizedBox(height: height * 0.04),
                 textFromFiledItem(
                   onChanged: (data) => number = data,
                   hintText: 'رقم الهاتف',
@@ -71,7 +72,7 @@ class LoginViewBody extends StatelessWidget {
                   isSecurePassword: false,
                   textType: TextInputType.number,
                 ),
-                const SizedBox(height: 20),
+               SizedBox(height: height * 0.02),
                 textFromFiledItem(
                   onChanged: (data) => password = data,
                   hintText: 'كلمة المرور',
@@ -80,7 +81,7 @@ class LoginViewBody extends StatelessWidget {
                   isSecurePassword: true,
                   textType: TextInputType.visiblePassword,
                 ),
-                const SizedBox(height: 30),
+               SizedBox(height: height * 0.02),
                 state is LoginLoading
                     ? const CustomCircular()
                     : ButtonItem(
@@ -96,7 +97,7 @@ class LoginViewBody extends StatelessWidget {
                               .subscribeToTopic(kTopic);
                         },
                       ),
-                const SizedBox(height: 20),
+               SizedBox(height: height * 0.02),
                 GestureDetector(
                   onTap: () => Navigator.pushNamed(context, passwordView.id),
                   child: Text(
@@ -108,7 +109,7 @@ class LoginViewBody extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 30),
+               SizedBox(height: height * 0.03),
                 buttonTextItem(
                   ifText: ' ليس لديك حساب؟',
                   textLandtextR: 'انشاء حساب',

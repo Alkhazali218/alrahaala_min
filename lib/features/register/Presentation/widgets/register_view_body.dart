@@ -22,6 +22,7 @@ class registerViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.sizeOf(context).height;
     return BlocConsumer<RegisterCubit, RegisterState>(
       listener: (context, state) {
         if (state is RegisterSuccess) {
@@ -45,7 +46,7 @@ class registerViewBody extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             child: ListView(
               children: [
-                Image.asset(assets.klogo, height: 150),
+                Image.asset(assets.klogo, height: height * 0.20),
                 Text(
                   'انشاء حساب جديد',
                   textAlign: TextAlign.right,
@@ -53,7 +54,7 @@ class registerViewBody extends StatelessWidget {
                     fontSize: getRsonsiveFontSize(context, fontSize: 30),
                   ),
                 ),
-                const SizedBox(height: 5),
+                SizedBox(height: height * 0.0050),
                 Text(
                   'شركة الرحالة القابضة الاولى',
                   textAlign: TextAlign.right,
@@ -61,7 +62,7 @@ class registerViewBody extends StatelessWidget {
                     fontSize: getRsonsiveFontSize(context, fontSize: 18),
                   ),
                 ),
-                const SizedBox(height: 50),
+                SizedBox(height: height * 0.02),
                 textFromFiledItem(
                   onChanged: (data) => userName = data,
                   hintText: 'اسم المستخدم',
@@ -70,7 +71,7 @@ class registerViewBody extends StatelessWidget {
                   isSecurePassword: false,
                   textType: TextInputType.name,
                 ),
-                const SizedBox(height: 20),
+              SizedBox(height: height * 0.02),
                 textFromFiledItem(
                   onChanged: (data) => email = data,
                   hintText: 'رقم الهاتف',
@@ -79,7 +80,7 @@ class registerViewBody extends StatelessWidget {
                   isSecurePassword: false,
                   textType: TextInputType.emailAddress,
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: height * 0.02),
                 textFromFiledItem(
                   onChanged: (data) => password = data,
                   hintText: 'كلمة السر',
@@ -88,7 +89,7 @@ class registerViewBody extends StatelessWidget {
                   isSecurePassword: true,
                   textType: TextInputType.visiblePassword,
                 ),
-                const SizedBox(height: 30),
+                  SizedBox(height: height * 0.02),
                 state is RegisterLoading
                     ? const CustomCircular()
                     : ButtonItem(
@@ -102,7 +103,7 @@ class registerViewBody extends StatelessWidget {
                           }
                         },
                       ),
-                const SizedBox(height: 20),
+                 SizedBox(height: height * 0.03),
                 buttonTextItem(
                   ifText: ' هل لديك حساب بالفعل؟',
                   textLandtextR: 'تسجيل الدخول',

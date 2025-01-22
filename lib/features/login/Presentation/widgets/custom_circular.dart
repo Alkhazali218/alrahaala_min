@@ -6,9 +6,10 @@ class CustomCircular extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.sizeOf(context).height;
     return Container(
           width: double.infinity,
-          height: 65,
+          height: height * 0.15,
           decoration: BoxDecoration(
             color: kcolor,
             borderRadius: BorderRadius.circular(16),

@@ -8,11 +8,12 @@ final  String textButton;
 final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
+   var height = MediaQuery.sizeOf(context).height;
   return GestureDetector(
     onTap: onTap,
     child: Container(
           width: double.infinity,
-          height: 65,
+          height: height * 0.08,
           decoration: BoxDecoration(
             color: kcolor,
             borderRadius: BorderRadius.circular(16),
