@@ -16,7 +16,7 @@ class passwordView extends StatelessWidget {
       forceMaterialTransparency: true,
       primary: true,
     ),
-    body:const passwordViewBody(),
+    body: PasswordViewBody(),
   );
   }
 

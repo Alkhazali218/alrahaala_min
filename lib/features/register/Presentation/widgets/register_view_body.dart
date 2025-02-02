@@ -11,12 +11,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-// ignore: must_be_immutable, camel_case_types
-class registerViewBody extends StatelessWidget {
-  registerViewBody({super.key});
-  late String userName;
-  late String email;
-  late String password;
+class RegisterViewBody extends StatelessWidget {
+  RegisterViewBody({super.key});
+  final userNameController = TextEditingController();
+  final numberController = TextEditingController();
+  final passwordController = TextEditingController();
+  final passwordConfirmationController = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -27,12 +27,12 @@ class registerViewBody extends StatelessWidget {
       listener: (context, state) {
         if (state is RegisterSuccess) {
           AnimatedSnackBar.material(
-            state.message,
+            'تم انشاء حساب بنجاح',
             type: AnimatedSnackBarType.success,
           ).show(context);
           Navigator.pushNamed(context, loginView.id);
         }
-        if (state is RegisterFailures) {
+        if (state is RegisterFaliures) {
           AnimatedSnackBar.material(
             state.message,
             type: AnimatedSnackBarType.error,
@@ -64,16 +64,7 @@ class registerViewBody extends StatelessWidget {
                 ),
                 SizedBox(height: height * 0.02),
                 textFromFiledItem(
-                  onChanged: (data) => userName = data,
-                  hintText: 'اسم المستخدم',
-                  prefixIcon: FontAwesomeIcons.user,
-                  pass: false,
-                  isSecurePassword: false,
-                  textType: TextInputType.name,
-                ),
-              SizedBox(height: height * 0.02),
-                textFromFiledItem(
-                  onChanged: (data) => email = data,
+                  controller: numberController,
                   hintText: 'رقم الهاتف',
                   prefixIcon: FontAwesomeIcons.hashtag,
                   pass: false,
@@ -82,28 +73,40 @@ class registerViewBody extends StatelessWidget {
                 ),
                 SizedBox(height: height * 0.02),
                 textFromFiledItem(
-                  onChanged: (data) => password = data,
+                  controller: passwordController,
                   hintText: 'كلمة السر',
                   prefixIcon: Icons.password,
                   pass: true,
                   isSecurePassword: true,
                   textType: TextInputType.visiblePassword,
                 ),
-                  SizedBox(height: height * 0.02),
+                SizedBox(height: height * 0.02),
+                textFromFiledItem(
+                  controller: passwordConfirmationController,
+                  hintText: 'تاكيد كلمة السر',
+                  prefixIcon: Icons.password,
+                  pass: true,
+                  isSecurePassword: true,
+                  textType: TextInputType.visiblePassword,
+                ),
+                SizedBox(height: height * 0.02),
                 state is RegisterLoading
                     ? const CustomCircular()
                     : ButtonItem(
                         textButton: 'انشاء حساب',
                         onTap: () {
                           if (formKey.currentState!.validate()) {
-                            BlocProvider.of<RegisterCubit>(context).registerUser(
-                              email: email,
-                              password: password,
+                            BlocProvider.of<RegisterCubit>(context)
+                                .userRegister(
+                              userName: userNameController.text,
+                              number: numberController.text,
+                              password: passwordController.text,
+                              passwordConfirmation: passwordConfirmationController.text,
                             );
                           }
                         },
                       ),
-                 SizedBox(height: height * 0.03),
+                SizedBox(height: height * 0.03),
                 buttonTextItem(
                   ifText: ' هل لديك حساب بالفعل؟',
                   textLandtextR: 'تسجيل الدخول',

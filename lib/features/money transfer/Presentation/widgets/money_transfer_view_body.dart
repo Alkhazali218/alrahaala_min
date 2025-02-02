@@ -9,8 +9,11 @@ class MoneyTransferViewBody extends StatelessWidget {
     return const Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        moneyTransferItem(
-          text: 'تحويل القيمة',
+
+        Expanded(
+          child: moneyTransferItem(
+            text: 'تحويل القيمة',
+          ),
         ),
       ],
     );

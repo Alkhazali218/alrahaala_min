@@ -1,17 +1,14 @@
 part of 'register_cubit.dart';
 
-@immutable
-sealed class RegisterState {}
+ class RegisterState {}
 
-final class RegisterInitial extends RegisterState {}
-final class RegisterLoading extends RegisterState {}
-final class RegisterSuccess extends RegisterState {
+ class RegisterInitial extends RegisterState {}
+ class RegisterLoading extends RegisterState {}
+
+ class RegisterSuccess extends RegisterState {}
+
+ class RegisterFaliures extends RegisterState {
   final String message;
 
-  RegisterSuccess({required this.message});
-}
-final class RegisterFailures extends RegisterState {
-  final String message;
-
-  RegisterFailures({required this.message});
+  RegisterFaliures({required this.message});
 }

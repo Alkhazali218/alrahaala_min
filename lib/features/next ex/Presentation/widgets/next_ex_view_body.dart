@@ -5,9 +5,10 @@ import 'package:alrahaala/features/stack%20user%20basic/Presentation/stack_user_
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-// ignore: must_be_immutable
+
 class NextExViewBody extends StatelessWidget {
-  const NextExViewBody({super.key});
+ NextExViewBody({super.key});
+  final controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
@@ -18,7 +19,7 @@ class NextExViewBody extends StatelessWidget {
         children: [
           const SizedBox(height: 40),
           textFromFiledItem(
-            onChanged: (p0) {},
+           controller: controller,
             hintText: 'الاسم المستلم',
             prefixIcon: FontAwesomeIcons.user,
             pass: false,
@@ -27,7 +28,7 @@ class NextExViewBody extends StatelessWidget {
           ),
            SizedBox(height: height * 0.02),
           textFromFiledItem(
-            onChanged: (p0) {},
+           controller: controller,
             hintText: 'رقم الهاتف المستلم',
             prefixIcon: FontAwesomeIcons.hashtag,
             pass: false,
@@ -36,7 +37,16 @@ class NextExViewBody extends StatelessWidget {
           ),
            SizedBox(height: height * 0.02),
           textFromFiledItem(
-            onChanged: (p0) {},
+            controller: controller,
+            hintText: 'الدولة',
+            prefixIcon: FontAwesomeIcons.earthAfrica,
+            pass: false,
+            isSecurePassword: false,
+            textType: TextInputType.name,
+          ),
+           SizedBox(height: height * 0.02),
+          textFromFiledItem(
+            controller: controller,
             hintText: 'المدينة',
             prefixIcon: FontAwesomeIcons.treeCity,
             pass: false,
@@ -45,16 +55,7 @@ class NextExViewBody extends StatelessWidget {
           ),
           SizedBox(height: height * 0.02),
           textFromFiledItem(
-            onChanged: (p0) {},
-            hintText: 'الدولة',
-            prefixIcon: FontAwesomeIcons.earthAfrica,
-            pass: false,
-            isSecurePassword: false,
-            textType: TextInputType.name,
-          ),
-          SizedBox(height: height * 0.02),
-          textFromFiledItem(
-            onChanged: (p0) {},
+            controller: controller,
             hintText: 'العملة',
             prefixIcon: FontAwesomeIcons.dollarSign,
             pass: false,
@@ -63,7 +64,7 @@ class NextExViewBody extends StatelessWidget {
           ),
            SizedBox(height: height * 0.02),
           textFromFiledItem(
-            onChanged: (p0) {},
+            controller: controller,
             hintText: 'القيمة المراد ارسالها',
             prefixIcon: FontAwesomeIcons.dollarSign,
             pass: false,

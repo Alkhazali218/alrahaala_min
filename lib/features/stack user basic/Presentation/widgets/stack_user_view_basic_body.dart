@@ -1,3 +1,4 @@
+import 'package:alrahaala/features/foreign%20exchange/Presentation/foreign_exchange_view.dart';
 import 'package:alrahaala/features/next%20ex/Presentation/next_ex_view.dart';
 import 'package:alrahaala/features/next/Presentation/next_view.dart';
 import 'package:alrahaala/features/support/Presentation/widgets/stack_item_support.dart';
@@ -10,28 +11,37 @@ class StackUserViewBasicBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
-    return  Column(
-      children: [
-        SizedBox(height: height * 0.06),
-        Padding(
-          padding:const EdgeInsets.all(10),
-          child: Row(
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+         crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          SizedBox(height: height * 0.06),
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               stackItemSupport(
-                onTap: () => Navigator.pushNamed(context,NextExView.id),
+                onTap: () => Navigator.pushNamed(context, NextExView.id),
                 textSupport: 'حوالة خارجية',
                 iconSupport: FontAwesomeIcons.moneyBillTransfer,
               ),
               stackItemSupport(
-                onTap: () => Navigator.pushNamed(context,nextView.id),
+                onTap: () => Navigator.pushNamed(context, nextView.id),
                 textSupport: 'حوالة داخلية',
                 iconSupport: FontAwesomeIcons.moneyBillTransfer,
               ),
             ],
           ),
-        ),
-      ],
+          SizedBox(height: height * 0.03),
+           stackItemSupport(
+            textSupport: 'اداع النقد الاجنبي',
+            iconSupport: FontAwesomeIcons.dollarSign,
+            onTap: () {
+              Navigator.pushNamed(context, ForeignExchangeView.id);
+            },
+          ),
+        ],
+      ),
     );
   }
 }

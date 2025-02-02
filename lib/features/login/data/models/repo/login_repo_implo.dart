@@ -25,8 +25,9 @@ class LoginRepoImplo implements LoginRepo {
       );
       return right(LoginModel.fromJson(data));
     } on Exception catch (e) {
+      // ignore: deprecated_member_use
       if (e is DioError) {
-        return left(serverFailures.FromDioError(e));
+        return left(serverFailures.fromDioError(e));
       } else {
         return left(serverFailures(errorMessage: e.toString()));
       }

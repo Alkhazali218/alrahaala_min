@@ -16,6 +16,7 @@ const kCreatedAt = 'createdAt';
 const kIdSender = 'idSender';
 const kIdReceiver = 'idReceiver';
 const kTopic = 'alrahaala';
+const kFcmToken = 'fcmToken';
 
 
 

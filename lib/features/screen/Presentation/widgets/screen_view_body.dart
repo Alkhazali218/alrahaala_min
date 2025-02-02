@@ -21,7 +21,7 @@ class screenViewBody extends StatelessWidget {
           textProject: 'الخدمات الاساسية',
           textInside1: 'الحوالات الخارجية',
           textInside2: 'الحوالات الداخلية',
-          textInside3: '',
+          textInside3: 'اداع النقد الاجنبي',
         ),
         SizedBox(height: height * 0.010),
          const Divider(

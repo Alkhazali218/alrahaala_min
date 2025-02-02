@@ -18,6 +18,11 @@ class InitNotification {
     );
   }
 
+  void getToken() async {
+    String? token = await getAccessToken();
+    print('is get is token :$token');
+  }
+
   static Future<String> getAccessToken() async {
     final serviceAccountJson = {
       "type": "service_account",

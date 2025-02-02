@@ -9,16 +9,15 @@ class textFromFiledItem extends StatefulWidget {
     required this.prefixIcon,
     required this.pass,
     required this.isSecurePassword,
-    required this.onChanged,
-    required this.textType,
+    required this.textType, required this.controller,
     
   });
   final String hintText;
   final IconData prefixIcon;
   final bool pass;
   bool isSecurePassword;
-  Function(String) onChanged;
   final TextInputType textType;
+  final TextEditingController controller;
   
 
   @override
@@ -41,7 +40,7 @@ class _textFromFiledItemState extends State<textFromFiledItem> {
           return null;
         },
         keyboardType: widget.textType,
-        onChanged: widget.onChanged,
+        controller: widget.controller,
         textAlign: TextAlign.right,
         obscureText: widget.isSecurePassword,
         decoration: InputDecoration(

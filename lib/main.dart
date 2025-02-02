@@ -8,6 +8,7 @@ import 'package:alrahaala/features/login/Presentation/login_view.dart';
 import 'package:alrahaala/features/login/data/cubit/login_cubit.dart';
 import 'package:alrahaala/features/login/data/models/repo/login_repo_implo.dart';
 import 'package:alrahaala/features/register/data/cubit/register_cubit.dart';
+import 'package:alrahaala/features/register/data/models/register_repo_impl.dart';
 import 'package:alrahaala/features/splash/Presentation/splash_view.dart';
 import 'package:alrahaala/features/user%20chat/data/cubit/cubit/user_chat_cubit.dart';
 import 'package:alrahaala/firebase_options.dart';
@@ -38,10 +39,10 @@ class MyApp extends StatelessWidget {
       providers: [
         //other bloc application
         BlocProvider(create: (context) => ChatCubit()),
-        BlocProvider(create: (context) => LoginCubit(getIt.get<LoginRepoImplo>())),
+         BlocProvider(create: (context) => UserChatCubit()),
         //Auth application
-        BlocProvider(create: (context) => RegisterCubit()),
-        BlocProvider(create: (context) => UserChatCubit()),
+        BlocProvider(create: (context) => RegisterCubit(getIt.get<RegisterRepoImpl>())),
+        BlocProvider(create: (context) => LoginCubit(getIt.get<LoginRepoImplo>())),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,

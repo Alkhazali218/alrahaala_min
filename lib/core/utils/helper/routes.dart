@@ -1,8 +1,11 @@
 import 'package:alrahaala/features/account%20statement/Presentation/account_statement_view.dart';
 import 'package:alrahaala/features/chat/Presentation/chat_view.dart';
+import 'package:alrahaala/features/foreign%20exchange/Presentation/foreign_exchange_view.dart';
+import 'package:alrahaala/features/foreign%20exchange/Presentation/widgets/navigator_foreign_item.dart';
 import 'package:alrahaala/features/home/Presentation/home_view.dart';
 import 'package:alrahaala/features/login/Presentation/login_view.dart';
 import 'package:alrahaala/features/money%20transfer/Presentation/money_transfer_view.dart';
+import 'package:alrahaala/features/money%20transfer/Presentation/widgets/custom_transfer_user_item.dart';
 import 'package:alrahaala/features/money%20transfer/Presentation/widgets/user_money_transfer.dart';
 import 'package:alrahaala/features/next%20ex/Presentation/next_ex_view.dart';
 import 'package:alrahaala/features/next/Presentation/next_view.dart';
@@ -20,7 +23,7 @@ import 'package:flutter/material.dart';
 Map<String, Widget Function(BuildContext)> routes = {
   splashView.id: (context) => splashView(),
   loginView.id: (context) => const loginView(),
-  registerView.id: (context) => const registerView(),
+  RegisterView.id: (context) => const RegisterView(),
   homeView.id: (context) => const homeView(),
   passwordView.id: (context) => const passwordView(),
   userView.id: (context) => const userView(),
@@ -33,6 +36,18 @@ Map<String, Widget Function(BuildContext)> routes = {
   AccountStatementView.id: (context) => const AccountStatementView(),
   MoneyTransferView.id: (context) => const MoneyTransferView(),
   chatView.id: (context) =>const chatView(),
-  UserMoneyTransfer.id: (context) =>const UserMoneyTransfer(),
+  UserMoneyTransfer.id: (context) => UserMoneyTransfer(),
   UserChat.id: (context) =>const UserChat(),
+  CustomTransferUserItem.id: (context) => CustomTransferUserItem(),
+  ForeignExchangeView.id: (context) =>const ForeignExchangeView(),
+  NavigatorForeignItem.id: (context) =>const NavigatorForeignItem(),
 };
+
+
+
+class MyArguments {
+  final String receiverNumber;
+  final String fcmToken;
+
+  MyArguments({required this.receiverNumber, required this.fcmToken});
+}

@@ -9,8 +9,10 @@ abstract class Failures {
 class serverFailures extends Failures{
   serverFailures({required super.errorMessage});
 
-  // ignore: deprecated_member_use, non_constant_identifier_names
-  factory serverFailures.FromDioError(DioError dioError) {
+  
+  // ignore: deprecated_member_use
+  factory serverFailures.fromDioError(DioError dioError) {
+
     switch(dioError.type) {
       case DioExceptionType.connectionTimeout:
       return serverFailures(errorMessage: 'Connection Timeout with ApiServer !');
@@ -25,7 +27,7 @@ class serverFailures extends Failures{
       return serverFailures(errorMessage: 'Bad Certificate with ApiServer !');
 
       case DioExceptionType.badResponse:
-      return serverFailures.FromResponse(dioError.response!.statusCode!, dioError.response!.data);
+      return serverFailures.fromResponse(dioError.response!.statusCode!, dioError.response!.data);
 
       case DioExceptionType.cancel:
       return serverFailures(errorMessage: 'Request to ApiServer was canceld !');
@@ -38,9 +40,8 @@ class serverFailures extends Failures{
     } 
   }
 
-  // ignore: non_constant_identifier_names
-  factory serverFailures.FromResponse(int stateCode,dynamic response) {
-    if(stateCode == 401 || stateCode == 402 || stateCode == 403) {
+  factory serverFailures.fromResponse(int stateCode,dynamic response) {
+    if(stateCode == 401 || stateCode == 402 || stateCode == 403 || stateCode == 422) {
       return serverFailures(errorMessage: response['message']);
     }
     else if(stateCode == 404) {

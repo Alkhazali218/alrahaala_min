@@ -2,13 +2,16 @@ import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/core/utils/helper/thems.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/button_item.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/text_from_filed_item.dart';
+import 'package:alrahaala/features/money%20transfer/Presentation/widgets/custom_transfer_user_item.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class UserMoneyTransfer extends StatelessWidget {
-  const UserMoneyTransfer({super.key});
+   UserMoneyTransfer({super.key});
 
   static String id = 'UserMoneyTransfer';
+
+  final controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
@@ -16,7 +19,7 @@ class UserMoneyTransfer extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'عملية تحويل الفوري',
+          'تحويل الاموال',
           style: googleFont30.copyWith(
             color: kprimaryColor,
             fontSize: getRsonsiveFontSize(context, fontSize: 20),
@@ -31,17 +34,8 @@ class UserMoneyTransfer extends StatelessWidget {
           children: [
             SizedBox(height: height * 0.05),
             textFromFiledItem(
-              onChanged: (p0) {},
-              hintText: 'اسم المستلم',
-              prefixIcon: FontAwesomeIcons.user,
-              pass: false,
-              isSecurePassword: false,
-              textType: TextInputType.name,
-            ),
-            SizedBox(height: height * 0.020),
-            textFromFiledItem(
-              onChanged: (p0) {},
-              hintText: 'رقم  الهاتف المستلم',
+              controller: controller,
+              hintText: 'رقم حساب المستلم',
               prefixIcon: FontAwesomeIcons.hashtag,
               pass: false,
               isSecurePassword: false,
@@ -49,7 +43,7 @@ class UserMoneyTransfer extends StatelessWidget {
             ),
             SizedBox(height: height * 0.020),
             textFromFiledItem(
-              onChanged: (p0) {},
+              controller: controller,
               hintText: 'القيمة المراد ارسالها',
               prefixIcon: FontAwesomeIcons.moneyBill,
               pass: false,
@@ -59,7 +53,9 @@ class UserMoneyTransfer extends StatelessWidget {
            SizedBox(height: height * 0.035),
             ButtonItem(
               textButton: 'تحويل',
-              onTap: () {},
+              onTap: () {
+                Navigator.pushReplacementNamed(context, CustomTransferUserItem.id);
+              },
             ),
           ],
         ),

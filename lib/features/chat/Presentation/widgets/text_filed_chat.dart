@@ -5,7 +5,8 @@ class TextFieldChat extends StatelessWidget {
   const TextFieldChat({super.key, required this.controller, required this.onTap});
 
   final TextEditingController controller;
- final Function() onTap;
+  final Function() onTap;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,7 +16,7 @@ class TextFieldChat extends StatelessWidget {
         decoration: InputDecoration(
           hintText: 'Send Message',
           suffixIcon: GestureDetector(
-            onTap: () => onTap,
+            onTap: onTap,
             child: const Icon(
               Icons.send,
               color: kcolor,
@@ -35,3 +36,4 @@ class TextFieldChat extends StatelessWidget {
     );
   }
 }
+

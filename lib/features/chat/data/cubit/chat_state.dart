@@ -8,5 +8,12 @@ class ChatLoading extends ChatState {}
 
 class ChatSucess extends ChatState {
   List<ChatMessageModel> messages = [];
+
   ChatSucess({required this.messages});
+}
+
+class ChatFaliures extends ChatState {
+  final String message;
+
+  ChatFaliures({required this.message});
 }

@@ -5,9 +5,10 @@ import 'package:alrahaala/features/stack%20user%20basic/Presentation/stack_user_
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-// ignore: must_be_immutable, camel_case_types
-class nextViewBody extends StatelessWidget {
-  const nextViewBody({super.key});
+
+class NextViewBody extends StatelessWidget {
+   NextViewBody({super.key});
+  final controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
@@ -18,7 +19,7 @@ class nextViewBody extends StatelessWidget {
         children: [
            SizedBox(height: height * 0.05),
           textFromFiledItem(
-            onChanged: (p0) {},
+            controller: controller,
             hintText: 'الاسم المستلم',
             prefixIcon: FontAwesomeIcons.user,
             pass: false,
@@ -27,7 +28,7 @@ class nextViewBody extends StatelessWidget {
           ),
            SizedBox(height: height * 0.02),
           textFromFiledItem(
-            onChanged: (p0) {},
+            controller: controller,
             hintText: 'رقم الهاتف المستلم',
             prefixIcon: FontAwesomeIcons.hashtag,
             pass: false,
@@ -36,7 +37,7 @@ class nextViewBody extends StatelessWidget {
           ),
            SizedBox(height: height * 0.02),
           textFromFiledItem(
-            onChanged: (p0) {},
+            controller: controller,
             hintText: 'المدينة',
             prefixIcon: FontAwesomeIcons.treeCity,
             pass: false,
@@ -45,7 +46,7 @@ class nextViewBody extends StatelessWidget {
           ),
             SizedBox(height: height * 0.02),
           textFromFiledItem(
-            onChanged: (p0) {},
+           controller: controller,
             hintText: 'القيمة المراد ارسالها',
             prefixIcon: FontAwesomeIcons.dollarSign,
             pass: false,

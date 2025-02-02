@@ -1,6 +1,5 @@
 import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/core/utils/helper/thems.dart';
-import 'package:alrahaala/features/chat/data/cubit/chat_cubit.dart';
 import 'package:alrahaala/features/home/Presentation/home_view.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/button_item.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/button_text_item.dart';
@@ -10,15 +9,14 @@ import 'package:alrahaala/features/login/data/cubit/login_cubit.dart';
 import 'package:alrahaala/features/password/Presentation/password_view.dart';
 import 'package:alrahaala/features/register/Presentation/register_view.dart';
 import 'package:animated_snack_bar/animated_snack_bar.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginViewBody extends StatelessWidget {
   LoginViewBody({super.key});
-  late String number;
-  late String password;
+  final numberController = TextEditingController();
+  final passwordController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
@@ -27,7 +25,6 @@ class LoginViewBody extends StatelessWidget {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state is LoginSuccess) {
-          BlocProvider.of<ChatCubit>(context).getMessage();
 
           Navigator.pushNamed(context, homeView.id);
 
@@ -65,7 +62,7 @@ class LoginViewBody extends StatelessWidget {
                 ),
                 SizedBox(height: height * 0.04),
                 textFromFiledItem(
-                  onChanged: (data) => number = data,
+                  controller: numberController,
                   hintText: 'رقم الهاتف',
                   prefixIcon: FontAwesomeIcons.hashtag,
                   pass: false,
@@ -74,7 +71,7 @@ class LoginViewBody extends StatelessWidget {
                 ),
                SizedBox(height: height * 0.02),
                 textFromFiledItem(
-                  onChanged: (data) => password = data,
+                 controller: passwordController,
                   hintText: 'كلمة المرور',
                   prefixIcon: Icons.password,
                   pass: true,
@@ -86,15 +83,13 @@ class LoginViewBody extends StatelessWidget {
                     ? const CustomCircular()
                     : ButtonItem(
                         textButton: 'تسجيل الدخول',
-                        onTap: () async {
+                        onTap: ()  {
                           if (formKey.currentState!.validate()) {
                             BlocProvider.of<LoginCubit>(context).loginUser(
-                                number: number,
-                                password: password,
+                                number: numberController.text,
+                                password: passwordController.text,
                                 context: context);
                           }
-                          await FirebaseMessaging.instance
-                              .subscribeToTopic(kTopic);
                         },
                       ),
                SizedBox(height: height * 0.02),
@@ -113,7 +108,7 @@ class LoginViewBody extends StatelessWidget {
                 buttonTextItem(
                   ifText: ' ليس لديك حساب؟',
                   textLandtextR: 'انشاء حساب',
-                  onTap: () => Navigator.pushNamed(context, registerView.id),
+                  onTap: () => Navigator.pushNamed(context, RegisterView.id),
                 ),
               ],
             ),

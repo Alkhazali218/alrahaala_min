@@ -2,6 +2,7 @@ import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/features/login/data/models/login_model.dart';
 import 'package:alrahaala/features/user%20chat/data/models/user_chat_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'user_chat_state.dart';
 
@@ -14,20 +15,26 @@ class UserChatCubit extends Cubit<UserChatState> {
 
   Future<void> addUser({required LoginUserModel loginUserModel}) async {
     try {
-      var userQuery = await message
-          .where(kNumber, isEqualTo: loginUserModel.phoneNumber)
-          .get();
+      String? token = await FirebaseMessaging.instance.getToken();
 
-      if (userQuery.docs.isEmpty) {
-        await message.add(
+      // استخدام رقم الهاتف كمفتاح للمستند
+      DocumentReference userRef = message.doc(loginUserModel.phoneNumber);
+
+      var userDoc = await userRef.get();
+
+      if (!userDoc.exists) {
+        // إذا كان المستند غير موجود، نقوم بإنشائه
+        await userRef.set(
           {
             kNumber: loginUserModel.phoneNumber,
             kUserName: loginUserModel.name,
             kCreatedAt: DateTime.now(),
+            kFcmToken: token,
           },
         );
+        print("تم إضافة المستخدم بنجاح.");
       } else {
-        print("المستخدم موجود بالفعل في Firebase");
+        print("تم العثور على المستخدم في Firebase.");
       }
     } on Exception catch (e) {
       if (e is FirebaseException) {
@@ -36,19 +43,21 @@ class UserChatCubit extends Cubit<UserChatState> {
     }
   }
 
-  Future<void> fetchUsers() async {
+ Future<void> fetchUsers() async {
     try {
-      var result =
-          await FirebaseFirestore.instance.collection(kUsersCollections).get();
+      var result = await FirebaseFirestore.instance.collection(kUsersCollections).get();
 
-      userList =
-          result.docs.map((doc) => UserChatModel.fromJson(doc.data())).toList();
+      userList = result.docs
+          .map((doc) => UserChatModel.fromJson(doc.data()))
+          .toList();
 
       emit(UserChatSuccess());
     } catch (e) {
+      print("حدث خطأ: $e");
       if (e is FirebaseException) {
         emit(UserChatError(message: e.toString()));
       }
     }
   }
 }
+
