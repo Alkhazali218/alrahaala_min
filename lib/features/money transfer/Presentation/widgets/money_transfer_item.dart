@@ -18,7 +18,7 @@ class moneyTransferItem extends StatelessWidget {
       },
       child: Row(
         children: [
-           SizedBox(width: width * 0.05),
+          SizedBox(width: width * 0.05),
           Container(
             width: width * 0.35,
             height: height * 0.08,
@@ -28,7 +28,7 @@ class moneyTransferItem extends StatelessWidget {
             ),
             child: CustomWidgetMoney(text: text),
           ),
-           SizedBox(height: height * 0.12),
+          SizedBox(height: height * 0.12),
         ],
       ),
     );

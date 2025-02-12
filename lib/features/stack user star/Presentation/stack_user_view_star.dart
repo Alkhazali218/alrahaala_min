@@ -7,12 +7,12 @@ class StackUserViewStar extends StatelessWidget {
   static String id = 'stack User  View Star';
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
-      appBar:AppBar(
+    return Scaffold(
+      appBar: AppBar(
         backgroundColor: kcolor,
-      foregroundColor: kprimaryColor,
-    ),
-    body:const StackUserViewStarBody(),
-   );
+        foregroundColor: kprimaryColor,
+      ),
+      body: const StackUserViewStarBody(),
+    );
   }
 }

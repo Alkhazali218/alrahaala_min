@@ -15,7 +15,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginViewBody extends StatelessWidget {
   LoginViewBody({super.key});
-  final numberController = TextEditingController();
+  final phoneController = TextEditingController();
   final passwordController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -25,7 +25,6 @@ class LoginViewBody extends StatelessWidget {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state is LoginSuccess) {
-
           Navigator.pushNamed(context, homeView.id);
 
           AnimatedSnackBar.material('تم تسجيل الدخول بنجاح',
@@ -62,37 +61,42 @@ class LoginViewBody extends StatelessWidget {
                 ),
                 SizedBox(height: height * 0.04),
                 textFromFiledItem(
-                  controller: numberController,
+                  controller: phoneController,
                   hintText: 'رقم الهاتف',
                   prefixIcon: FontAwesomeIcons.hashtag,
                   pass: false,
                   isSecurePassword: false,
                   textType: TextInputType.number,
                 ),
-               SizedBox(height: height * 0.02),
+                SizedBox(height: height * 0.02),
                 textFromFiledItem(
-                 controller: passwordController,
+                  controller: passwordController,
                   hintText: 'كلمة المرور',
                   prefixIcon: Icons.password,
                   pass: true,
                   isSecurePassword: true,
                   textType: TextInputType.visiblePassword,
                 ),
-               SizedBox(height: height * 0.02),
+                SizedBox(height: height * 0.02),
                 state is LoginLoading
                     ? const CustomCircular()
                     : ButtonItem(
                         textButton: 'تسجيل الدخول',
-                        onTap: ()  {
+                        onTap: () async {
                           if (formKey.currentState!.validate()) {
+                            String deviceId =
+                                await getDeviceId(); // انتظر حتى تحصل على deviceId
                             BlocProvider.of<LoginCubit>(context).loginUser(
-                                number: numberController.text,
-                                password: passwordController.text,
-                                context: context);
+                              number: phoneController.text,
+                              password: passwordController.text,
+                              deviceId:
+                                  deviceId, // استخدم deviceId الذي تم الحصول عليه
+                              context: context,
+                            );
                           }
                         },
                       ),
-               SizedBox(height: height * 0.02),
+                SizedBox(height: height * 0.02),
                 GestureDetector(
                   onTap: () => Navigator.pushNamed(context, passwordView.id),
                   child: Text(
@@ -104,7 +108,7 @@ class LoginViewBody extends StatelessWidget {
                     ),
                   ),
                 ),
-               SizedBox(height: height * 0.03),
+                SizedBox(height: height * 0.03),
                 buttonTextItem(
                   ifText: ' ليس لديك حساب؟',
                   textLandtextR: 'انشاء حساب',

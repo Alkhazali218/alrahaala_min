@@ -10,20 +10,18 @@ class RegisterRepoImpl extends RegisterRepo {
   RegisterRepoImpl(this.apiServer);
 
   @override
-  Future<Either<Failures,RegisterModel>>featchRegister({
-    required String userName,
-    required String number,
+  Future<Either<Failures, RegisterModel>> featchRegister({
+    required String phone,
     required String password,
-    required String passwordConfirmation,
+    required String deviceId,
   }) async {
     try {
       var data = await apiServer.post(
-        url: 'https://exchange.rhalla.online/api/register',
+        endPoint: 'register',
         data: {
-          'name': userName,
-          'phone_number': number,
-          'password': password,
-          'password_confirmation': passwordConfirmation,
+          "phone": phone,
+          "password": password,
+          "device_id": deviceId,
         },
         headers: {'Accept': 'application/json'},
       );

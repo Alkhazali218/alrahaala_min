@@ -6,7 +6,7 @@ class NavigatorForeignItemBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   return ListView.builder(
+    return ListView.builder(
       itemBuilder: (context, index) {
         return const CustomAspectItem();
       },

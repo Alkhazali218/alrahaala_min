@@ -4,7 +4,8 @@ import 'package:alrahaala/features/user%20chat/data/models/user_chat_model.dart'
 import 'package:flutter/material.dart';
 
 class RecentChats extends StatelessWidget {
- const RecentChats({super.key, required this.filteredData, required this.userList});
+  const RecentChats(
+      {super.key, required this.filteredData, required this.userList});
   final List<UserChatModel> userList;
   final List<UserChatModel> filteredData;
 
@@ -31,15 +32,15 @@ class RecentChats extends StatelessWidget {
       child: ListView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: filteredData.isNotEmpty ? filteredData.length : userList.length,
+        itemCount:
+            filteredData.isNotEmpty ? filteredData.length : userList.length,
         itemBuilder: (context, index) {
           return CustomUserItem(
-            userChatModel: filteredData.isNotEmpty ? filteredData[index] : userList[index],
+            userChatModel:
+                filteredData.isNotEmpty ? filteredData[index] : userList[index],
           );
         },
       ),
     );
   }
 }
-
-

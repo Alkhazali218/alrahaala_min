@@ -5,12 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class CustomBadgeItem extends StatelessWidget {
- const CustomBadgeItem({super.key, required this.userChatModel});
- final UserChatModel userChatModel;
+  const CustomBadgeItem({super.key, required this.userChatModel});
+  final UserChatModel userChatModel;
 
   @override
   Widget build(BuildContext context) {
-    String formattedTime = DateFormat('hh:mm a').format(userChatModel.createdAt);
+    String formattedTime =
+        DateFormat('hh:mm a').format(userChatModel.createdAt);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [

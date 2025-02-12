@@ -11,10 +11,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class RegisterViewBody extends StatelessWidget {
-  RegisterViewBody({super.key});
-  final userNameController = TextEditingController();
-  final numberController = TextEditingController();
+class RegisterViewBody extends StatefulWidget {
+  const RegisterViewBody({super.key});
+
+  @override
+  _RegisterViewBodyState createState() => _RegisterViewBodyState();
+}
+
+class _RegisterViewBodyState extends State<RegisterViewBody> {
+  final phoneController = TextEditingController();
   final passwordController = TextEditingController();
   final passwordConfirmationController = TextEditingController();
 
@@ -23,6 +28,7 @@ class RegisterViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
+
     return BlocConsumer<RegisterCubit, RegisterState>(
       listener: (context, state) {
         if (state is RegisterSuccess) {
@@ -64,12 +70,12 @@ class RegisterViewBody extends StatelessWidget {
                 ),
                 SizedBox(height: height * 0.02),
                 textFromFiledItem(
-                  controller: numberController,
+                  controller: phoneController,
                   hintText: 'رقم الهاتف',
                   prefixIcon: FontAwesomeIcons.hashtag,
                   pass: false,
                   isSecurePassword: false,
-                  textType: TextInputType.emailAddress,
+                  textType: TextInputType.phone,
                 ),
                 SizedBox(height: height * 0.02),
                 textFromFiledItem(
@@ -81,27 +87,18 @@ class RegisterViewBody extends StatelessWidget {
                   textType: TextInputType.visiblePassword,
                 ),
                 SizedBox(height: height * 0.02),
-                textFromFiledItem(
-                  controller: passwordConfirmationController,
-                  hintText: 'تاكيد كلمة السر',
-                  prefixIcon: Icons.password,
-                  pass: true,
-                  isSecurePassword: true,
-                  textType: TextInputType.visiblePassword,
-                ),
-                SizedBox(height: height * 0.02),
                 state is RegisterLoading
                     ? const CustomCircular()
                     : ButtonItem(
                         textButton: 'انشاء حساب',
-                        onTap: () {
+                        onTap: () async {
                           if (formKey.currentState!.validate()) {
+                            String deviceId = await getDeviceId();
                             BlocProvider.of<RegisterCubit>(context)
                                 .userRegister(
-                              userName: userNameController.text,
-                              number: numberController.text,
+                              phone: phoneController.text,
                               password: passwordController.text,
-                              passwordConfirmation: passwordConfirmationController.text,
+                              deviceId: deviceId,
                             );
                           }
                         },

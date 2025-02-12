@@ -13,26 +13,26 @@ class screenViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
     return ListView(
-      children:  [
+      children: [
         SizedBox(height: height * 0.05),
         stackItem(
-          onTap: () => Navigator.pushNamed(context,StackUserViewBasic.id),
+          onTap: () => Navigator.pushNamed(context, StackUserViewBasic.id),
           icons: FontAwesomeIcons.box,
           textProject: 'الخدمات الاساسية',
           textInside1: 'الحوالات الخارجية',
           textInside2: 'الحوالات الداخلية',
-          textInside3: 'اداع النقد الاجنبي',
+          textInside3: 'ودائع النقد الاجنبي',
         ),
         SizedBox(height: height * 0.010),
-         const Divider(
+        const Divider(
           color: kcolor,
           thickness: 0.3,
           indent: 13,
           endIndent: 13,
         ),
-         SizedBox(height: height * 0.010),
+        SizedBox(height: height * 0.010),
         stackItem(
-          onTap: () => Navigator.pushNamed(context,StackUserViewStar.id),
+          onTap: () => Navigator.pushNamed(context, StackUserViewStar.id),
           icons: FontAwesomeIcons.solidStar,
           textProject: 'الخدمات المميزة',
           textInside1: 'تحويل الاموال',

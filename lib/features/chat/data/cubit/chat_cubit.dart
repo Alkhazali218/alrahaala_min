@@ -13,27 +13,27 @@ class ChatCubit extends Cubit<ChatState> {
       FirebaseFirestore.instance.collection(kMessagesCollections);
   List<ChatMessageModel> messageList = [];
 
-  LoginUserModel? numberSender;
+  InfoModel? numberSender;
 
   String? getNumberSender() {
-    return numberSender?.phoneNumber;
+    return numberSender?.phone;
   }
 
-  void setUser(LoginUserModel user) {
+  void setUser(InfoModel user) {
     numberSender = user;
   }
 
   void sendMessage({
     required String data,
-    required LoginUserModel numberSender,
+    required InfoModel numberSender,
     required String idReceiver,
     required String fcmToken,
   }) {
-    String chatId = _getChatId(numberSender.phoneNumber, idReceiver);
+    String chatId = _getChatId(numberSender.phone, idReceiver);
 
     try {
       message.doc(chatId).collection(kMessagesCollections).add({
-        kIdSender: numberSender.phoneNumber,
+        kIdSender: numberSender.phone,
         kIdReceiver: idReceiver,
         kMessage: data,
         kCreatedAt: DateTime.now(),
@@ -48,10 +48,9 @@ class ChatCubit extends Cubit<ChatState> {
   }
 
   void getMessage({required String idReceiver}) {
-    String? idSender = numberSender?.phoneNumber;
-    if (idSender == null) return;
+    String? idSender = numberSender?.phone;
 
-    String chatId = _getChatId(idSender, idReceiver);
+    String chatId = _getChatId(idSender!, idReceiver);
 
     message
         .doc(chatId)

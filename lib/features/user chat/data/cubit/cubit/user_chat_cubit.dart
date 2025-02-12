@@ -13,12 +13,12 @@ class UserChatCubit extends Cubit<UserChatState> {
       FirebaseFirestore.instance.collection(kUsersCollections);
   List<UserChatModel> userList = [];
 
-  Future<void> addUser({required LoginUserModel loginUserModel}) async {
+  Future<void> addUser({required InfoModel infoLoginModel}) async {
     try {
       String? token = await FirebaseMessaging.instance.getToken();
 
       // استخدام رقم الهاتف كمفتاح للمستند
-      DocumentReference userRef = message.doc(loginUserModel.phoneNumber);
+      DocumentReference userRef = message.doc(infoLoginModel.phone);
 
       var userDoc = await userRef.get();
 
@@ -26,8 +26,8 @@ class UserChatCubit extends Cubit<UserChatState> {
         // إذا كان المستند غير موجود، نقوم بإنشائه
         await userRef.set(
           {
-            kNumber: loginUserModel.phoneNumber,
-            kUserName: loginUserModel.name,
+            kNumber: infoLoginModel.phone,
+            kUserName: infoLoginModel.accName,
             kCreatedAt: DateTime.now(),
             kFcmToken: token,
           },
@@ -43,13 +43,13 @@ class UserChatCubit extends Cubit<UserChatState> {
     }
   }
 
- Future<void> fetchUsers() async {
+  Future<void> fetchUsers() async {
     try {
-      var result = await FirebaseFirestore.instance.collection(kUsersCollections).get();
+      var result =
+          await FirebaseFirestore.instance.collection(kUsersCollections).get();
 
-      userList = result.docs
-          .map((doc) => UserChatModel.fromJson(doc.data()))
-          .toList();
+      userList =
+          result.docs.map((doc) => UserChatModel.fromJson(doc.data())).toList();
 
       emit(UserChatSuccess());
     } catch (e) {
@@ -60,4 +60,3 @@ class UserChatCubit extends Cubit<UserChatState> {
     }
   }
 }
-

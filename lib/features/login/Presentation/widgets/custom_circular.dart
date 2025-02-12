@@ -8,13 +8,13 @@ class CustomCircular extends StatelessWidget {
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
     return Container(
-          width: double.infinity,
-          height: height * 0.08,
-          decoration: BoxDecoration(
-            color: kcolor,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: const Center(
+      width: double.infinity,
+      height: height * 0.08,
+      decoration: BoxDecoration(
+        color: kcolor,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: const Center(
         child: CircularProgressIndicator(
           color: kpColor,
         ),

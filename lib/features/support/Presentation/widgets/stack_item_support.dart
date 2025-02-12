@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 // ignore: camel_case_types
 class stackItemSupport extends StatelessWidget {
   const stackItemSupport(
-      {super.key, required this.textSupport, required this.iconSupport,required this.onTap});
+      {super.key,
+      required this.textSupport,
+      required this.iconSupport,
+      required this.onTap});
 
   final String textSupport;
   final IconData iconSupport;
@@ -19,8 +22,8 @@ class stackItemSupport extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            height: height*0.18,
-            width: width*0.45,
+            height: height * 0.18,
+            width: width * 0.45,
             decoration: BoxDecoration(
               border: Border.all(color: colorStack, width: 0.5),
               borderRadius: BorderRadius.circular(16),
@@ -31,12 +34,15 @@ class stackItemSupport extends StatelessWidget {
               alignment: Alignment.center,
               child: Column(
                 children: [
-                   SizedBox(height: height *0.030),
-                  Icon(iconSupport, color: kpColor, size: getRsonsiveFontSize(context, fontSize: 40)),
-                   SizedBox(height: height *0.030),
+                  SizedBox(height: height * 0.030),
+                  Icon(iconSupport,
+                      color: kpColor,
+                      size: getRsonsiveFontSize(context, fontSize: 40)),
+                  SizedBox(height: height * 0.030),
                   Text(
                     textSupport,
-                    style: googleFont30.copyWith(fontSize: getRsonsiveFontSize(context, fontSize: 20)),
+                    style: googleFont30.copyWith(
+                        fontSize: getRsonsiveFontSize(context, fontSize: 20)),
                   ),
                 ],
               ),

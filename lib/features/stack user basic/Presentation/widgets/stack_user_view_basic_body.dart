@@ -14,7 +14,7 @@ class StackUserViewBasicBody extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
-         crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           SizedBox(height: height * 0.06),
           Row(
@@ -33,7 +33,7 @@ class StackUserViewBasicBody extends StatelessWidget {
             ],
           ),
           SizedBox(height: height * 0.03),
-           stackItemSupport(
+          stackItemSupport(
             textSupport: 'اداع النقد الاجنبي',
             iconSupport: FontAwesomeIcons.dollarSign,
             onTap: () {

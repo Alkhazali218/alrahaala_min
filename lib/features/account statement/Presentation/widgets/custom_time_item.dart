@@ -12,14 +12,16 @@ class CustomTimeItem extends StatelessWidget {
       child: FittedBox(
         child: Column(
           children: [
-           SizedBox(height: height * 0.010),
+            SizedBox(height: height * 0.010),
             Text(
               '01/01/2025',
-              style: googleFont18.copyWith(fontSize: getRsonsiveFontSize(context, fontSize: 13)),
+              style: googleFont18.copyWith(
+                  fontSize: getRsonsiveFontSize(context, fontSize: 13)),
             ),
             Text(
               'خصم',
-              style: googleFont18.copyWith(fontSize: getRsonsiveFontSize(context, fontSize: 13)),
+              style: googleFont18.copyWith(
+                  fontSize: getRsonsiveFontSize(context, fontSize: 13)),
             ),
           ],
         ),

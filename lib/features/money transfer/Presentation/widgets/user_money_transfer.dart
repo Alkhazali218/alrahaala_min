@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class UserMoneyTransfer extends StatelessWidget {
-   UserMoneyTransfer({super.key});
+  UserMoneyTransfer({super.key});
 
   static String id = 'UserMoneyTransfer';
 
@@ -50,11 +50,12 @@ class UserMoneyTransfer extends StatelessWidget {
               isSecurePassword: false,
               textType: TextInputType.number,
             ),
-           SizedBox(height: height * 0.035),
+            SizedBox(height: height * 0.035),
             ButtonItem(
               textButton: 'تحويل',
               onTap: () {
-                Navigator.pushReplacementNamed(context, CustomTransferUserItem.id);
+                Navigator.pushReplacementNamed(
+                    context, CustomTransferUserItem.id);
               },
             ),
           ],

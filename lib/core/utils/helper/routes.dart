@@ -35,15 +35,13 @@ Map<String, Widget Function(BuildContext)> routes = {
   NextExView.id: (context) => const NextExView(),
   AccountStatementView.id: (context) => const AccountStatementView(),
   MoneyTransferView.id: (context) => const MoneyTransferView(),
-  chatView.id: (context) =>const chatView(),
+  chatView.id: (context) => const chatView(),
   UserMoneyTransfer.id: (context) => UserMoneyTransfer(),
-  UserChat.id: (context) =>const UserChat(),
+  UserChat.id: (context) => const UserChat(),
   CustomTransferUserItem.id: (context) => CustomTransferUserItem(),
-  ForeignExchangeView.id: (context) =>const ForeignExchangeView(),
-  NavigatorForeignItem.id: (context) =>const NavigatorForeignItem(),
+  ForeignExchangeView.id: (context) => const ForeignExchangeView(),
+  NavigatorForeignItem.id: (context) => const NavigatorForeignItem(),
 };
-
-
 
 class MyArguments {
   final String receiverNumber;

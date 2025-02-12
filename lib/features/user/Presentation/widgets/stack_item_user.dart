@@ -15,7 +15,7 @@ class stackItemUser extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Container(
             width: double.infinity,
-            height: height*0.50,
+            height: height * 0.50,
             decoration: BoxDecoration(
               border: Border.all(
                 color: colorStack,
@@ -25,7 +25,7 @@ class stackItemUser extends StatelessWidget {
             ),
           ),
         ),
-        const Positioned.fill(
+        Positioned.fill(
           child: Align(
             alignment: Alignment.center,
             child: CloumItemUser(

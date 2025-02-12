@@ -9,19 +9,21 @@ class LoginRepoImplo implements LoginRepo {
   final ApiServer apiServer;
 
   LoginRepoImplo(this.apiServer);
+
   @override
-  Future<Either<Failures,LoginModel>> featchLogin(
-      {required String number, required String password}) async {
+  Future<Either<Failures, LoginModel>> featchLogin(
+      {required String phone,
+      required String password,
+      required String deviceId}) async {
     try {
       var data = await apiServer.post(
-        url: 'https://exchange.rhalla.online/api/login',
+        endPoint: 'login',
         data: {
-          'phone_number': number,
+          'phone': phone,
           'password': password,
+          'device_id': deviceId,
         },
-        headers: {
-          'Accept': 'application/json'
-        }
+        headers: {'Accept': 'application/json'},
       );
       return right(LoginModel.fromJson(data));
     } on Exception catch (e) {

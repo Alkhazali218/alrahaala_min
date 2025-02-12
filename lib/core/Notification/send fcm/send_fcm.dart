@@ -30,7 +30,7 @@ class SendFcm {
     try {
       ApiServer apiServer = ApiServer(Dio());
       var response = await apiServer.post(
-        url:
+        endPoint:
             'https://fcm.googleapis.com/v1/projects/alrahaala-f36e1/messages:send',
         data: messageData,
         headers: headers,

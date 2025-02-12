@@ -7,8 +7,8 @@ class userView extends StatelessWidget {
   static String id = 'user View';
   @override
   Widget build(BuildContext context) {
- return Scaffold(
-  body: userViewBody(),
- );
+    return Scaffold(
+      body: userViewBody(),
+    );
   }
 }

@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SearchTextFiled extends StatelessWidget {
   const SearchTextFiled({super.key, required this.onChanged});
- final Function(String) onChanged;
+  final Function(String) onChanged;
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -39,8 +39,8 @@ class SearchTextFiled extends StatelessWidget {
                 ),
               ),
             ),
-           const Spacer(),
-           const Icon(
+            const Spacer(),
+            const Icon(
               FontAwesomeIcons.search,
               color: kpColor,
             ),

@@ -9,19 +9,19 @@ class CustomWidgetItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.sizeOf(context).width;
-    return  Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-      const  CustomTimeItem(),
+        const CustomTimeItem(),
         SizedBox(width: width * 0.50),
-       const CustomMoneyItem(),
+        const CustomMoneyItem(),
         Flexible(
           child: FittedBox(
             child: Padding(
-              padding:const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Icon(
                 Icons.account_balance_wallet_outlined,
-                size:  getRsonsiveFontSize(context, fontSize: 40),
+                size: getRsonsiveFontSize(context, fontSize: 40),
                 color: kpColor,
               ),
             ),

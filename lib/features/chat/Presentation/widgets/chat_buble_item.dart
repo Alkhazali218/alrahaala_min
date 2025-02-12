@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
 class chatBubleItem extends StatelessWidget {
-  const chatBubleItem({super.key,required this.message});
+  const chatBubleItem({super.key, required this.message});
 
   final ChatMessageModel message;
   @override
@@ -24,7 +24,7 @@ class chatBubleItem extends StatelessWidget {
         ),
         child: Text(
           message.message,
-          style:const TextStyle(color: kprimaryColor),
+          style: const TextStyle(color: kprimaryColor),
         ),
       ),
     );

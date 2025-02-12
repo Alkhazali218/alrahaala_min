@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable, camel_case_types
 class chatBubleForFriendItem extends StatelessWidget {
- chatBubleForFriendItem({super.key,required this.message});
+  chatBubleForFriendItem({super.key, required this.message});
   ChatMessageModel message;
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class chatBubleForFriendItem extends StatelessWidget {
         ),
         child: Text(
           message.message,
-          style:const TextStyle(color: kprimaryColor),
+          style: const TextStyle(color: kprimaryColor),
         ),
       ),
     );

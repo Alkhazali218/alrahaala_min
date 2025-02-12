@@ -18,7 +18,10 @@ class CustomUserItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: InkWell(
         onTap: () {
-          Navigator.pushNamed(context, chatView.id, arguments: MyArguments(receiverNumber: userChatModel.number, fcmToken: userChatModel.fcmToken));
+          Navigator.pushNamed(context, chatView.id,
+              arguments: MyArguments(
+                  receiverNumber: userChatModel.number,
+                  fcmToken: userChatModel.fcmToken));
         },
         child: SizedBox(
           height: height * 0.09,

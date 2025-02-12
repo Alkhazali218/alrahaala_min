@@ -1,31 +1,84 @@
 class LoginModel {
-  final String number;
+  final String phone;
   final String password;
-  final LoginUserModel user;
-  LoginModel({required this.number, required this.password,required this.user});
+  final String deviceId;
+  final InfoModel info;
+  final DataLoginModel data;
+
+  LoginModel(
+      {required this.phone,
+      required this.password,
+      required this.deviceId,
+      required this.info,
+      required this.data});
 
   factory LoginModel.fromJson(dataJson) {
+    var infoData = dataJson['data'] != null && dataJson['data']['info'] != null
+        ? dataJson['data']['info']
+        : {};
+
+    var data = dataJson['data'] != null && dataJson['data'] != null
+        ? dataJson['data']
+        : {};
+
     return LoginModel(
-      user: LoginUserModel.fromJson(dataJson['user']),
-      number: dataJson['phone_number'] ?? '',
+      phone: dataJson['phone'] ?? '',
       password: dataJson['password'] ?? '',
+      deviceId: dataJson['device_id'] ?? '',
+      info: infoData.isNotEmpty
+          ? InfoModel.fromJson(infoData)
+          : InfoModel(
+              accName: '',
+              branchID: '',
+              phone: '',
+              bName: '',
+              cName: '',
+              accCode: '',
+              countiresId: ''
+              ),
+      data: data.isNotEmpty
+          ? DataLoginModel.fromJson(data)
+          : DataLoginModel(token: ''),
     );
   }
 }
 
+class InfoModel {
+  final String accName;
+  final String branchID;
+  final String phone;
+  final String accCode;
+  final String bName;
+  final String cName;
+  final String countiresId;
 
-class LoginUserModel {
-  final String name;
-  final int id;
-  final String phoneNumber;
+  InfoModel({
+    required this.accName,
+    required this.branchID,
+    required this.phone,
+    required this.bName,
+    required this.cName,
+    required this.accCode,
+    required this.countiresId,
+  });
 
-  LoginUserModel({required this.name, required this.phoneNumber,required this.id});
+  factory InfoModel.fromJson(dataJson) {
+    return InfoModel(
+      countiresId: dataJson['Countires_ID'] ?? '',
+        accName: dataJson['AccName'] ?? '',
+        branchID: dataJson['BranchID'] ?? '',
+        phone: dataJson['phone'] ?? '',
+        bName: dataJson['BName'] ?? '',
+        cName: dataJson['CName'] ?? '',
+        accCode: dataJson['AccCode'] ?? '');
+  }
+}
 
-  factory LoginUserModel.fromJson(dataJson) {
-    return LoginUserModel(
-      id: dataJson['id'] ?? '',
-      name: dataJson['name'] ?? '',
-      phoneNumber: dataJson['phone_number'] ?? '',
-    );
+class DataLoginModel {
+  final String token;
+
+  DataLoginModel({required this.token});
+  factory DataLoginModel.fromJson(dataJson) {
+    return DataLoginModel(token: dataJson['token'] ?? '');
   }
 }

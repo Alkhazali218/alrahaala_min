@@ -12,4 +12,3 @@ class supportView extends StatelessWidget {
     );
   }
 }
-

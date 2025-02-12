@@ -17,11 +17,15 @@ class textItem extends StatelessWidget {
         children: [
           Text(
             textItemOne,
-            style: googleFont30.copyWith(fontSize: getRsonsiveFontSize(context, fontSize: 14), color: Colors.black54),
+            style: googleFont30.copyWith(
+                fontSize: getRsonsiveFontSize(context, fontSize: 14),
+                color: Colors.black54),
           ),
           Text(
             textitemTwo,
-            style: googleFont30.copyWith(color: Colors.black87, fontSize: getRsonsiveFontSize(context, fontSize: 16)),
+            style: googleFont30.copyWith(
+                color: Colors.black87,
+                fontSize: getRsonsiveFontSize(context, fontSize: 16)),
           ),
         ],
       ),

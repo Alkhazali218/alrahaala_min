@@ -6,7 +6,6 @@ class verificationView extends StatelessWidget {
   static String id = 'verification View';
   @override
   Widget build(BuildContext context) {
-  return const Scaffold();
+    return const Scaffold();
   }
-
 }

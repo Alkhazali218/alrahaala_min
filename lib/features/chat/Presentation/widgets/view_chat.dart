@@ -22,7 +22,7 @@ class ViewChat extends StatelessWidget {
             controller: _controller,
             itemCount: messageList.length,
             itemBuilder: (context, index) {
-              return messageList[index].idSender == loginModel!.number
+              return messageList[index].idSender == loginModel
                   ? chatBubleItem(message: messageList[index])
                   : chatBubleForFriendItem(message: messageList[index]);
             },

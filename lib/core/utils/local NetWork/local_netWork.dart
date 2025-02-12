@@ -12,16 +12,22 @@ class CacheNetWork {
     return await sharedPre.setBool(key, value);
   }
 
-  static Future<bool> insterToToken({required String key, required String value}) async {
+  static Future<bool> removeCacheDate({required String key}) async {
+    return await sharedPre.remove(key);
+  }
+
+  static Future<bool> insterToInfo(
+      {required String key, required String value}) async {
     return await sharedPre.setString(key, value);
   }
 
-  static dynamic getCacheDaTaSplash({required String key}) {
-    return sharedPre.getBool(key);
+  static String getCacheDaTaInfo({required String key}) {
+    return sharedPre.getString(key) ?? '';
   }
 
-  static Future<bool> removeCacheDate({required String key}) async {
-    return await sharedPre.remove(key);
+//splashView app
+  static dynamic getCacheDaTaSplash({required String key}) {
+    return sharedPre.getBool(key);
   }
 
   static Future<bool> checkFirstLaunch() async {

@@ -4,7 +4,7 @@ import 'package:alrahaala/features/user%20chat/Presentation/widgets/user_chat_bo
 import 'package:flutter/material.dart';
 
 class UserChat extends StatelessWidget {
- const UserChat({super.key});
+  const UserChat({super.key});
 
   static String id = 'UserChat';
   @override
@@ -22,7 +22,7 @@ class UserChat extends StatelessWidget {
         backgroundColor: kcolor,
         foregroundColor: kprimaryColor,
       ),
-      body:const UserChatBody(),
+      body: const UserChatBody(),
     );
   }
 }

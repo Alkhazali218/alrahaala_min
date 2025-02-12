@@ -31,7 +31,8 @@ class buttonTextItem extends StatelessWidget {
         ),
         Text(
           ifText,
-          style: googleFont18.copyWith(fontSize: getRsonsiveFontSize(context, fontSize: 14)),
+          style: googleFont18.copyWith(
+              fontSize: getRsonsiveFontSize(context, fontSize: 14)),
         ),
       ],
     );

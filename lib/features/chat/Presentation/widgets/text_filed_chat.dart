@@ -2,7 +2,8 @@ import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldChat extends StatelessWidget {
-  const TextFieldChat({super.key, required this.controller, required this.onTap});
+  const TextFieldChat(
+      {super.key, required this.controller, required this.onTap});
 
   final TextEditingController controller;
   final Function() onTap;
@@ -36,4 +37,3 @@ class TextFieldChat extends StatelessWidget {
     );
   }
 }
-

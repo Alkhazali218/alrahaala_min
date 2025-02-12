@@ -6,7 +6,6 @@ import 'package:alrahaala/features/verification/Presentation/verification_view.d
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-
 class PasswordViewBody extends StatelessWidget {
   PasswordViewBody({super.key});
   final controller = TextEditingController();
@@ -30,7 +29,7 @@ class PasswordViewBody extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           textFromFiledItem(
-           controller: controller,
+            controller: controller,
             hintText: 'رقم الهاتف',
             prefixIcon: FontAwesomeIcons.hashtag,
             pass: false,

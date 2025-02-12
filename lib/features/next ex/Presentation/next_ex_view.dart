@@ -12,7 +12,7 @@ class NextExView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: kcolor,
         foregroundColor: kprimaryColor,
-         automaticallyImplyLeading: false,
+        automaticallyImplyLeading: false,
       ),
       body: NextExViewBody(),
     );

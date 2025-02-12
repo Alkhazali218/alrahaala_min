@@ -15,49 +15,46 @@ class homeView extends StatefulWidget {
 
 // ignore: camel_case_types
 class _homeViewState extends State<homeView> {
-int  index = 2;
-final screen = const [
- supportView(),
- userView(),
- screenView(),
-];
+  int index = 2;
+  final screen = const [
+    supportView(),
+    userView(),
+    screenView(),
+  ];
   @override
   Widget build(BuildContext context) {
-  List<Widget>  items = [
-      Icon(Icons.support_agent, size: getRsonsiveFontSize(context, fontSize: 30)),
-      Icon(Icons.person, size:  getRsonsiveFontSize(context, fontSize: 30)),
-       Icon(Icons.home, size:  getRsonsiveFontSize(context, fontSize: 30)),
+    List<Widget> items = [
+      Icon(Icons.support_agent,
+          size: getRsonsiveFontSize(context, fontSize: 30)),
+      Icon(Icons.person, size: getRsonsiveFontSize(context, fontSize: 30)),
+      Icon(Icons.home, size: getRsonsiveFontSize(context, fontSize: 30)),
     ];
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: kcolor,
-          title: Text(
-            'شركة الرحالة القابضة',
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: kcolor,
+        title: Text('شركة الرحالة لصرافة',
             style: TextStyle(
               color: kprimaryColor,
               fontSize: getRsonsiveFontSize(context, fontSize: 30),
               fontFamily: 'decotype',
-            )
-          ),
-          centerTitle: true,
+            )),
+        centerTitle: true,
+      ),
+      bottomNavigationBar: Theme(
+        data: Theme.of(context)
+            .copyWith(iconTheme: const IconThemeData(color: kpColor)),
+        child: CurvedNavigationBar(
+          index: index,
+          color: kcolor,
+          buttonBackgroundColor: kprimaryColor,
+          onTap: (index) => setState(() => this.index = index),
+          backgroundColor: kprimaryColor,
+          animationDuration: const Duration(milliseconds: 300),
+          items: items,
         ),
-        bottomNavigationBar: Theme(
-          data: Theme.of(context)
-              .copyWith(iconTheme: const IconThemeData(color: kpColor)),
-          child: CurvedNavigationBar(
-            index: index,
-            color: kcolor,
-            buttonBackgroundColor: kprimaryColor,
-           onTap: (index) => setState(
-             () => this.index = index
-           ),
-           backgroundColor: kprimaryColor,
-            animationDuration: const Duration(milliseconds: 300),
-            items: items,
-          ),
-        ),
-        body: screen[index],
-      );
+      ),
+      body: screen[index],
+    );
   }
 }

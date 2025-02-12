@@ -6,7 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class CustomWidgetMoney extends StatelessWidget {
   const CustomWidgetMoney({super.key, required this.text});
 
-final String text;
+  final String text;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,7 +21,7 @@ final String text;
                 color: kprimaryColor,
                 fontWeight: FontWeight.bold),
           ),
-           Icon(
+          Icon(
             FontAwesomeIcons.plus,
             size: getRsonsiveFontSize(context, fontSize: 14),
             color: kprimaryColor,

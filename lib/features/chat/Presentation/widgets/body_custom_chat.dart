@@ -100,14 +100,14 @@ class _BodyCustomChatState extends State<BodyCustomChat> {
     required String idReceiver,
     required String fcmToken,
   }) async {
-    LoginUserModel? idSender = BlocProvider.of<ChatCubit>(context).numberSender;
-    
-      BlocProvider.of<ChatCubit>(context).sendMessage(
-        data: data,
-        numberSender: idSender!,
-        idReceiver: idReceiver,
-        fcmToken: fcmToken,
-      );
+    InfoModel? idSender = BlocProvider.of<ChatCubit>(context).numberSender;
+
+    BlocProvider.of<ChatCubit>(context).sendMessage(
+      data: data,
+      numberSender: idSender!,
+      idReceiver: idReceiver,
+      fcmToken: fcmToken,
+    );
     _textController.clear();
     await Future.delayed(const Duration(milliseconds: 200));
 

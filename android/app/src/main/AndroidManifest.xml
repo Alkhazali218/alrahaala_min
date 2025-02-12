@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Provide required visibility configuration for API level 30 and above -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <queries>
   <!-- If your app checks for SMS support -->
         <intent>
@@ -20,7 +21,7 @@
     <application
         android:label="alrahaala"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/alrahala">
         <activity
             android:name=".MainActivity"
             android:exported="true"

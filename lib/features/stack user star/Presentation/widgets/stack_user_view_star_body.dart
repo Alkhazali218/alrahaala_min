@@ -6,10 +6,10 @@ class StackUserViewStarBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
-    return  Column(
+    return Column(
       children: [
-         SizedBox(height: height * 0.040),
-      const  CustomCloumItem(),
+        SizedBox(height: height * 0.040),
+        const CustomCloumItem(),
       ],
     );
   }

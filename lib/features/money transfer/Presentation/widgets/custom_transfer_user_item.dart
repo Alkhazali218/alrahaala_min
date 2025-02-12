@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomTransferUserItem extends StatelessWidget {
-   CustomTransferUserItem({super.key});
+  CustomTransferUserItem({super.key});
   static String id = 'CustomTransferUserItem';
   final controller = TextEditingController();
 
@@ -43,7 +43,7 @@ class CustomTransferUserItem extends StatelessWidget {
               controller: controller,
             ),
             SizedBox(height: height * 0.012),
-             textFromFiledItem(
+            textFromFiledItem(
               hintText: 'رقم الهاتف',
               prefixIcon: FontAwesomeIcons.hashtag,
               pass: false,
@@ -51,8 +51,8 @@ class CustomTransferUserItem extends StatelessWidget {
               textType: TextInputType.text,
               controller: controller,
             ),
-             SizedBox(height: height * 0.012),
-             textFromFiledItem(
+            SizedBox(height: height * 0.012),
+            textFromFiledItem(
               hintText: 'رقم الحساب',
               prefixIcon: FontAwesomeIcons.hashtag,
               pass: false,
@@ -60,8 +60,8 @@ class CustomTransferUserItem extends StatelessWidget {
               textType: TextInputType.text,
               controller: controller,
             ),
-             SizedBox(height: height * 0.012),
-             textFromFiledItem(
+            SizedBox(height: height * 0.012),
+            textFromFiledItem(
               hintText: 'الفرع',
               prefixIcon: FontAwesomeIcons.locationCrosshairs,
               pass: false,
@@ -69,8 +69,8 @@ class CustomTransferUserItem extends StatelessWidget {
               textType: TextInputType.text,
               controller: controller,
             ),
-             SizedBox(height: height * 0.012),
-             textFromFiledItem(
+            SizedBox(height: height * 0.012),
+            textFromFiledItem(
               hintText: 'القيمة المراد ارسالها',
               prefixIcon: FontAwesomeIcons.moneyBill,
               pass: false,
@@ -78,21 +78,21 @@ class CustomTransferUserItem extends StatelessWidget {
               textType: TextInputType.text,
               controller: controller,
             ),
-             SizedBox(height: height * 0.035),
+            SizedBox(height: height * 0.035),
             Row(
-            children: [
-              CheckItem(
-                onTap: () =>
-                    Navigator.pushNamed(context, StackUserViewStar.id),
-                textCheckItem: 'تاكيد',
-              ),
-               SizedBox(width: width * 0.020),
-              CheckItem(
-                onTap: () => Navigator.pushNamed(context, homeView.id),
-                textCheckItem: 'الغاء الامر',
-              ),
-            ],
-          )
+              children: [
+                CheckItem(
+                  onTap: () =>
+                      Navigator.pushNamed(context, StackUserViewStar.id),
+                  textCheckItem: 'تاكيد',
+                ),
+                SizedBox(width: width * 0.020),
+                CheckItem(
+                  onTap: () => Navigator.pushNamed(context, homeView.id),
+                  textCheckItem: 'الغاء الامر',
+                ),
+              ],
+            )
           ],
         ),
       ),

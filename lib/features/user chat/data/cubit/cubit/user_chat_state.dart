@@ -1,11 +1,11 @@
 part of 'user_chat_cubit.dart';
 
+class UserChatState {}
 
- class UserChatState {}
-
- class UserChatInitial extends UserChatState {}
+class UserChatInitial extends UserChatState {}
 
 class UserChatLoading extends UserChatState {}
+
 class UserChatSuccess extends UserChatState {}
 
 class UserChatError extends UserChatState {

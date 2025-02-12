@@ -4,9 +4,8 @@ import 'package:dartz/dartz.dart';
 
 abstract class RegisterRepo {
   Future<Either<Failures, RegisterModel>> featchRegister({
-    required String userName,
-    required String number,
+    required String phone,
     required String password,
-    required String passwordConfirmation,
+    required String deviceId,
   });
 }

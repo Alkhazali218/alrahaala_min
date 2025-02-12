@@ -1,56 +1,60 @@
 import 'package:dio/dio.dart';
 
 abstract class Failures {
-   final String errorMessage;
+  final String errorMessage;
   Failures({required this.errorMessage});
 }
 
 // ignore: camel_case_types
-class serverFailures extends Failures{
+class serverFailures extends Failures {
   serverFailures({required super.errorMessage});
 
-  
   // ignore: deprecated_member_use
   factory serverFailures.fromDioError(DioError dioError) {
-
-    switch(dioError.type) {
+    switch (dioError.type) {
       case DioExceptionType.connectionTimeout:
-      return serverFailures(errorMessage: 'Connection Timeout with ApiServer !');
+        return serverFailures(errorMessage: 'انتهت مهلة الاتصال بالخادم');
 
       case DioExceptionType.sendTimeout:
-      return serverFailures(errorMessage: 'Send Timeout with ApiServer !');
+        return serverFailures(errorMessage: 'Send Timeout with ApiServer !');
 
       case DioExceptionType.receiveTimeout:
-      return serverFailures(errorMessage: 'Receive Timeout with ApiServer !');
+        return serverFailures(errorMessage: 'Receive Timeout with ApiServer !');
 
       case DioExceptionType.badCertificate:
-      return serverFailures(errorMessage: 'Bad Certificate with ApiServer !');
+        return serverFailures(errorMessage: 'Bad Certificate with ApiServer !');
 
       case DioExceptionType.badResponse:
-      return serverFailures.fromResponse(dioError.response!.statusCode!, dioError.response!.data);
+        return serverFailures.fromResponse(
+            dioError.response!.statusCode!, dioError.response!.data);
 
       case DioExceptionType.cancel:
-      return serverFailures(errorMessage: 'Request to ApiServer was canceld !');
+        return serverFailures(
+            errorMessage: 'Request to ApiServer was canceld !');
 
       case DioExceptionType.unknown:
-      return serverFailures(errorMessage: 'Unexpected Error, Please try later again !');
+        return serverFailures(
+            errorMessage: 'خطأ غير متوقع، يرجى المحاولة مرة أخرى في وقت لاحق');
 
       case DioExceptionType.connectionError:
-      return serverFailures(errorMessage: 'No internet Connection');
-    } 
+        return serverFailures(errorMessage: 'لا يوجد اتصال بالإنترنت');
+    }
   }
 
-  factory serverFailures.fromResponse(int stateCode,dynamic response) {
-    if(stateCode == 401 || stateCode == 402 || stateCode == 403 || stateCode == 422) {
+  factory serverFailures.fromResponse(int stateCode, dynamic response) {
+    if (stateCode == 401 ||
+        stateCode == 402 ||
+        stateCode == 403 ||
+        stateCode == 422) {
       return serverFailures(errorMessage: response['message']);
-    }
-    else if(stateCode == 404) {
-      return serverFailures(errorMessage: 'Your response no found,Please try later !');
-    }
-    else if(stateCode == 500) {
-      return serverFailures(errorMessage: 'Internal server error, Please try later !');
+    } else if (stateCode == 404) {
+      return serverFailures(errorMessage: "المستخدم غير موجود علي المنظومه");
+    } else if (stateCode == 500) {
+      return serverFailures(
+          errorMessage: '! خطأ في الخادم , يرجى  المحاولة لاحقًا');
     } else {
-      return serverFailures(errorMessage: 'Opps there was an error, Please try again !');
+      return serverFailures(
+          errorMessage: 'Opps there was an error, Please try again !');
     }
   }
 }

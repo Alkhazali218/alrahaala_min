@@ -9,16 +9,21 @@ class textFromFiledItem extends StatefulWidget {
     required this.prefixIcon,
     required this.pass,
     required this.isSecurePassword,
-    required this.textType, required this.controller,
-    
+    required this.textType,
+    required this.controller,
+    this.validator, // إضافة الـ validator كـ parameter
+    this.onChanged, // إضافة onChanged لتحديث الحالة
   });
+
   final String hintText;
   final IconData prefixIcon;
   final bool pass;
   bool isSecurePassword;
   final TextInputType textType;
   final TextEditingController controller;
-  
+  final FormFieldValidator<String>? validator; // الـ validator هنا
+  final ValueChanged<String>?
+      onChanged; // onChanged إذا أردت مراقبة التغيير في النص
 
   @override
   State<StatefulWidget> createState() {
@@ -33,12 +38,7 @@ class _textFromFiledItemState extends State<textFromFiledItem> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: TextFormField(
-        validator: (value) {
-          if (value!.isEmpty) {
-            return "رجاءً إدخال البيانات بطريقة صحيحة";
-          }
-          return null;
-        },
+        onChanged: widget.onChanged, // لتحديث النص
         keyboardType: widget.textType,
         controller: widget.controller,
         textAlign: TextAlign.right,

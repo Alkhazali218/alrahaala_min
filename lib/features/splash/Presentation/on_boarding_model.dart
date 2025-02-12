@@ -3,7 +3,7 @@ class OnBoardingModel {
   final String title;
   final String subtitle;
 
-  OnBoardingModel(this.lottieURL,this.title,this.subtitle);
+  OnBoardingModel(this.lottieURL, this.title, this.subtitle);
 }
 
 List<OnBoardingModel> onboardintItems = [
