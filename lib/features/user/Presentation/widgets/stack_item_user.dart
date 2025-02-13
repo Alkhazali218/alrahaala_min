@@ -1,11 +1,15 @@
 import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/features/user/Presentation/widgets/cloum_item_user.dart';
+import 'package:alrahaala/features/user/data/cubit/user_cubit.dart';
+import 'package:alrahaala/features/user/data/model/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 // ignore: camel_case_types
 class stackItemUser extends StatelessWidget {
-  const stackItemUser({super.key});
-
+   stackItemUser({super.key});
+  
+  DataUserModel? user;
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
@@ -25,15 +29,25 @@ class stackItemUser extends StatelessWidget {
             ),
           ),
         ),
-        Positioned.fill(
+        BlocBuilder<UserCubit, UserState>(
+          builder: (context, state) {
+           if (state is UserSuccess) {
+              return Positioned.fill(
           child: Align(
             alignment: Alignment.center,
             child: CloumItemUser(
               text: 'الرصيد الحالي',
-              textMoney: '20,250,098',
+              textMoney: user!.walet,
             ),
           ),
-        ),
+        );
+           } else if(state is UserFaliures) {
+            return Center(child: Text(state.message));
+           } else {
+            return const Center(child: CircularProgressIndicator(color: kpColor));
+           }
+          },
+        )
       ],
     );
   }

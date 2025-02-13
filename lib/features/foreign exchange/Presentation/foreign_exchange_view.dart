@@ -22,7 +22,7 @@ class ForeignExchangeView extends StatelessWidget {
         backgroundColor: kcolor,
         foregroundColor: kprimaryColor,
       ),
-      body: const ForeignExchangeViewBody(),
+      body: ForeignExchangeViewBody(),
     );
   }
 }

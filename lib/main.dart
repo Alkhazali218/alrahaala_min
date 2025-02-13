@@ -4,21 +4,26 @@ import 'package:alrahaala/core/utils/helper/routes.dart';
 import 'package:alrahaala/core/utils/helper/server_local.dart';
 import 'package:alrahaala/core/utils/local%20NetWork/local_netWork.dart';
 import 'package:alrahaala/features/chat/data/cubit/chat_cubit.dart';
+import 'package:alrahaala/features/foreign%20exchange/data/cubit/forgien_cubit.dart';
+import 'package:alrahaala/features/foreign%20exchange/data/model/repo/forgien_repo_implo.dart';
 import 'package:alrahaala/features/login/Presentation/login_view.dart';
 import 'package:alrahaala/features/login/data/cubit/login_cubit.dart';
 import 'package:alrahaala/features/login/data/models/repo/login_repo_implo.dart';
 import 'package:alrahaala/features/next%20ex/data/cubits/country/country_cubit.dart';
 import 'package:alrahaala/features/next%20ex/data/models/country_model/repo/country_repo_implo.dart';
-import 'package:alrahaala/features/next/data/cubit/next_cubit.dart';
-import 'package:alrahaala/features/next/data/model/repo/next_repo_implo.dart';
+import 'package:alrahaala/features/next/data/cubit/city_cubit.dart';
+import 'package:alrahaala/features/next/data/model/repo/city_repo_implo.dart';
 import 'package:alrahaala/features/register/data/cubit/register_cubit.dart';
 import 'package:alrahaala/features/register/data/models/register_repo_impl.dart';
 import 'package:alrahaala/features/splash/Presentation/splash_view.dart';
 import 'package:alrahaala/features/user%20chat/data/cubit/cubit/user_chat_cubit.dart';
+import 'package:alrahaala/features/user/data/cubit/user_cubit.dart';
+import 'package:alrahaala/features/user/data/model/repo/user_repo_implo.dart';
 import 'package:alrahaala/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -51,7 +56,11 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) => CountryCubit(getIt.get<CountryRepoImplo>())),
          BlocProvider(
-            create: (context) => NextCubit(getIt.get<NextRepoImplo>())),
+            create: (context) => CityCubit(getIt.get<CityRepoImplo>())),
+         BlocProvider(
+            create: (context) => ForgienCubit(getIt.get<ForgienRepoImplo>())),
+        BlocProvider(
+            create: (context) => UserCubit(getIt.get<UserRepoImplo>())),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,

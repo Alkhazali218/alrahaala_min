@@ -48,7 +48,7 @@ class serverFailures extends Failures {
         stateCode == 422) {
       return serverFailures(errorMessage: response['message']);
     } else if (stateCode == 404) {
-      return serverFailures(errorMessage: "المستخدم غير موجود علي المنظومه");
+      return serverFailures(errorMessage: response['message']);
     } else if (stateCode == 500) {
       return serverFailures(
           errorMessage: '! خطأ في الخادم , يرجى  المحاولة لاحقًا');

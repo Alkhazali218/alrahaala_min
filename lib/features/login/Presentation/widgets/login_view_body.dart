@@ -1,5 +1,6 @@
 import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/core/utils/helper/thems.dart';
+import 'package:alrahaala/features/foreign%20exchange/data/cubit/forgien_cubit.dart';
 import 'package:alrahaala/features/home/Presentation/home_view.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/button_item.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/button_text_item.dart';
@@ -25,6 +26,7 @@ class LoginViewBody extends StatelessWidget {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state is LoginSuccess) {
+          BlocProvider.of<ForgienCubit>(context).getForgien();
           Navigator.pushNamed(context, homeView.id);
 
           AnimatedSnackBar.material('تم تسجيل الدخول بنجاح',

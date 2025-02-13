@@ -1,10 +1,11 @@
 import 'package:alrahaala/core/utils/helper/constant.dart';
-import 'package:alrahaala/features/next/data/cubit/next_cubit.dart';
+import 'package:alrahaala/features/next/data/cubit/city_cubit.dart';
+import 'package:alrahaala/features/next/data/cubit/city_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomCityDropDownItem extends StatefulWidget {
-const  CustomCityDropDownItem({super.key});
+  const CustomCityDropDownItem({super.key});
 
   @override
   State<CustomCityDropDownItem> createState() => _CustomCityDropDownItemState();
@@ -12,19 +13,20 @@ const  CustomCityDropDownItem({super.key});
 
 class _CustomCityDropDownItemState extends State<CustomCityDropDownItem> {
   String? selectedCity;
+  List<String> cityNames = [];
 
   @override
   void initState() {
     super.initState();
-    // استدعاء دالة getCity عند دخول الـ Widget
-    BlocProvider.of<NextCubit>(context).getCity();
+    BlocProvider.of<CityCubit>(context).getCity();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NextCubit, NextState>(
+    return BlocBuilder<CityCubit, CityState>(
       builder: (context, state) {
-        if (state is NextSuccess) {
+        if (state is Citysuccess) {
+          cityNames = state.cityList;
           return Container(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
@@ -44,21 +46,19 @@ class _CustomCityDropDownItemState extends State<CustomCityDropDownItem> {
                     selectedCity = newValue;
                   });
                 },
-                items: state.cityNames.map((String city) {
+                items: cityNames.map((String cityName) {
                   return DropdownMenuItem<String>(
-                    value: city,
-                    child: Text(city),
+                    value: cityName,
+                    child: Text(cityName),
                   );
                 }).toList(),
               ),
             ),
           );
-        } else if (state is NextFaliures) {
-          String message = state.message;
-          return Center(child: Text(message));
+        } else if (state is CityFaliures) {
+          return Center(child: Text(state.message));
         } else {
-          return const Center(
-              child: CircularProgressIndicator(color: Colors.orange));
+          return const Center(child: CircularProgressIndicator(color: kpColor));
         }
       },
     );

@@ -40,6 +40,8 @@ class LoginCubit extends Cubit<LoginState> {
         CacheNetWork.insterToInfo(key: 'phone', value: info.phone);
         CacheNetWork.insterToInfo(key: 'AccCode', value: info.accCode);
         CacheNetWork.insterToInfo(key: 'Countires_ID', value: info.countiresId);
+        CacheNetWork.insterToInfo(key: 'defualtCurrency', value: info.defualtCurrency);
+        CacheNetWork.insterToInfo(key: 'curCode', value: info.curCode);
 
         ///token
         CacheNetWork.insterToInfo(key: 'token', value: loginSuccessData.data.token);

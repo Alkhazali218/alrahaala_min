@@ -16,7 +16,7 @@ class userViewBody extends StatelessWidget {
       child: ListView(
         children: [
           const SizedBox(height: 40),
-          const stackItemUser(),
+           stackItemUser(),
           const SizedBox(height: 20),
           Text(
             'تسجيل الخروج',

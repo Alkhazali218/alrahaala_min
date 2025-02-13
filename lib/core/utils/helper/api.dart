@@ -21,9 +21,13 @@ class ApiServer {
     return response.data;
   }
 
-  Future<Map<String, dynamic>> get({required String endPoint}) async {
+  Future<Map<String, dynamic>> get({required String endPoint,required Map<String, String> headers}) async {
     // ignore: unnecessary_string_interpolations
-    var response = await _dio.get('$endPoint');
+    var response = await _dio.get('$_baseUrl$endPoint',
+     options: Options(
+        headers: headers,
+      ),
+    );
     return response.data;
   }
 }

@@ -34,7 +34,9 @@ class LoginModel {
               bName: '',
               cName: '',
               accCode: '',
-              countiresId: ''
+              countiresId: '',
+              curCode: '',
+              defualtCurrency: '',
               ),
       data: data.isNotEmpty
           ? DataLoginModel.fromJson(data)
@@ -51,6 +53,8 @@ class InfoModel {
   final String bName;
   final String cName;
   final String countiresId;
+  final String defualtCurrency;
+  final String curCode;
 
   InfoModel({
     required this.accName,
@@ -60,10 +64,14 @@ class InfoModel {
     required this.cName,
     required this.accCode,
     required this.countiresId,
+    required this.defualtCurrency,
+    required this.curCode,
   });
 
   factory InfoModel.fromJson(dataJson) {
     return InfoModel(
+      curCode: dataJson['CurCode'],
+      defualtCurrency: dataJson['DefualtCurrency'],
       countiresId: dataJson['Countires_ID'] ?? '',
         accName: dataJson['AccName'] ?? '',
         branchID: dataJson['BranchID'] ?? '',
@@ -71,6 +79,7 @@ class InfoModel {
         bName: dataJson['BName'] ?? '',
         cName: dataJson['CName'] ?? '',
         accCode: dataJson['AccCode'] ?? '');
+        
   }
 }
 
