@@ -2,7 +2,6 @@ import 'package:alrahaala/features/foreign%20exchange/data/model/forgien_model.d
 import 'package:alrahaala/features/foreign%20exchange/data/model/repo/forgien_repo.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-
 part 'forgien_state.dart';
 
 class ForgienCubit extends Cubit<ForgienState> {
@@ -20,7 +19,7 @@ class ForgienCubit extends Cubit<ForgienState> {
         emit(ForgienFaliures(message: failures.errorMessage));
       },
       (success) {
-        emit(ForgienSuccess(forgien: success.data)); // تمرير البيانات الأصلية
+        emit(ForgienSuccess(forgien: success.data));
       },
     );
   }

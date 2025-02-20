@@ -1,40 +1,41 @@
 class CountryModel {
   final String countryId;
-  final List<DataModel> data; // قائمة الدول
+  final List<DataCountryModel> data;
 
   CountryModel({
     required this.countryId,
     required this.data,
   });
 
-  // دالة لتحويل JSON إلى NextExModel
   factory CountryModel.fromJson(Map<String, dynamic> json) {
     var dataList = (json['data'] as List)
-        .map((item) => DataModel.fromJson(item))
+        .map((item) => DataCountryModel.fromJson(item))
         .toList();
 
     return CountryModel(
-      countryId: json['country_id'] ?? '',  // تعيين قيمة country_id من الـ JSON
+      countryId: json['country_id'] ?? '',
       data: dataList,
     );
   }
 }
 
-
-class DataModel {
+class DataCountryModel {
   final String id;
   final String cName;
+  final String defualtCurrency;
 
-  DataModel({
+  DataCountryModel({
     required this.id,
     required this.cName,
+    required this.defualtCurrency,
   });
 
   // دالة لتحويل JSON إلى CountryModel
-  factory DataModel.fromJson(Map<String, dynamic> json) {
-    return DataModel(
-      id: json['ID'] ?? '',  // تعيين القيمة الفارغة إذا كانت غير موجودة
+  factory DataCountryModel.fromJson(Map<String, dynamic> json) {
+    return DataCountryModel(
+      id: json['ID'] ?? '',
       cName: json['CName'] ?? '',
+      defualtCurrency: json['DefualtCurrency'] ?? '',
     );
   }
 }

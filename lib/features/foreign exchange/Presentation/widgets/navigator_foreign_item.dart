@@ -9,11 +9,12 @@ class NavigatorForeignItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String cuName = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'كشف الحساب',
+          'كشف الحساب $cuName',
           style: googleFont30.copyWith(
             color: kprimaryColor,
             fontSize: getRsonsiveFontSize(context, fontSize: 20),
@@ -22,7 +23,7 @@ class NavigatorForeignItem extends StatelessWidget {
         backgroundColor: kcolor,
         foregroundColor: kprimaryColor,
       ),
-      body: const NavigatorForeignItemBody(),
+      body:  NavigatorForeignItemBody(),
     );
   }
 }

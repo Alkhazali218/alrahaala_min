@@ -1,9 +1,11 @@
 import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/core/utils/helper/thems.dart';
+import 'package:alrahaala/features/account%20statement/data/model/statement_model.dart';
 import 'package:flutter/material.dart';
 
 class CustomTimeItem extends StatelessWidget {
-  const CustomTimeItem({super.key});
+  const CustomTimeItem({super.key,required this.data});
+ final DataStatementModel data;
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +16,12 @@ class CustomTimeItem extends StatelessWidget {
           children: [
             SizedBox(height: height * 0.010),
             Text(
-              '01/01/2025',
+              data.insertDate,
               style: googleFont18.copyWith(
                   fontSize: getRsonsiveFontSize(context, fontSize: 13)),
             ),
             Text(
-              'خصم',
+              data.typeFrom,
               style: googleFont18.copyWith(
                   fontSize: getRsonsiveFontSize(context, fontSize: 13)),
             ),
@@ -29,3 +31,4 @@ class CustomTimeItem extends StatelessWidget {
     );
   }
 }
+

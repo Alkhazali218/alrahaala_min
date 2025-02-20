@@ -25,11 +25,13 @@ class DataForgienModel {
   final String walet;
   final String cuName;
   final String curCode;
+  final String currencyID;
 
   DataForgienModel({
     required this.walet,
     required this.cuName,
     required this.curCode,
+    required this.currencyID,
   });
 
   // دالة لتحويل JSON إلى CountryModel
@@ -38,6 +40,7 @@ class DataForgienModel {
       walet: json['Walet'] ?? '',
       cuName: json['CuName'] ?? '',
       curCode: json['CurCode'] ?? '',
+      currencyID: json['Currency_ID'] ?? '',
     );
   }
 }

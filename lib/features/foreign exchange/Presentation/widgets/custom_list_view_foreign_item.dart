@@ -1,15 +1,17 @@
 import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/core/utils/helper/thems.dart';
 import 'package:alrahaala/features/foreign%20exchange/Presentation/widgets/navigator_foreign_item.dart';
+import 'package:alrahaala/features/foreign%20exchange/data/data/cubit/deposit_cubit.dart';
 import 'package:alrahaala/features/foreign%20exchange/data/model/forgien_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomListViewForeignItem extends StatelessWidget {
-  final DataForgienModel data; // استلام البيانات عبر الـ constructor
+  final DataForgienModel data;
 
   const CustomListViewForeignItem(
-      {super.key, required this.data}); // تم إضافة required لتمرير البيانات
+      {super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,8 @@ class CustomListViewForeignItem extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, NavigatorForeignItem.id);
+        BlocProvider.of<DepositCubit>(context).getDeposit(currencyId: data.currencyID);
+        Navigator.pushNamed(context, NavigatorForeignItem.id,arguments: data.cuName);
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),

@@ -7,19 +7,22 @@ class CityCubit extends Cubit<CityState> {
 
   CityRepo cityRepo;
 
-  Future<void> getCity() async {
+  Future<void> getCity({
+    required String countryId,
+    required String cityId,
+  }) async {
     emit(CityLoading());
-    var result = await cityRepo.featchCity();
+    var result = await cityRepo.featchCity(
+      countryId: countryId,
+      cityId: cityId,
+    );
 
     result.fold(
       (failure) {
         emit(CityFaliures(message: failure.errorMessage));
       },
       (success) {
-        // تحويل DataModel إلى قائمة من أسماء المدن
-        List<String> cityNames =
-            success.data.map((city) => city.cityName).toList();
-        emit(Citysuccess(cityList: cityNames));
+        emit(Citysuccess(cityList: success.data));
       },
     );
   }

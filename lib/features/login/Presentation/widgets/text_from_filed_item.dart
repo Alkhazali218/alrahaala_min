@@ -1,9 +1,8 @@
 import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable, camel_case_types
-class textFromFiledItem extends StatefulWidget {
-  textFromFiledItem({
+class TextFromFiledItem extends StatefulWidget {
+  TextFromFiledItem({
     super.key,
     required this.hintText,
     required this.prefixIcon,
@@ -13,6 +12,7 @@ class textFromFiledItem extends StatefulWidget {
     required this.controller,
     this.validator, // إضافة الـ validator كـ parameter
     this.onChanged, // إضافة onChanged لتحديث الحالة
+    this.readOnly = false, // إضافة خاصية readOnly
   });
 
   final String hintText;
@@ -22,23 +22,30 @@ class textFromFiledItem extends StatefulWidget {
   final TextInputType textType;
   final TextEditingController controller;
   final FormFieldValidator<String>? validator; // الـ validator هنا
-  final ValueChanged<String>?
-      onChanged; // onChanged إذا أردت مراقبة التغيير في النص
+  final ValueChanged<String>? onChanged; // onChanged إذا أردت مراقبة التغيير في النص
+  final bool readOnly; // خاصية readOnly لتمكين أو تعطيل التعديل
+  
 
   @override
   State<StatefulWidget> createState() {
-    return _textFromFiledItemState();
+    return _TextFromFiledItemState();
   }
 }
 
-// ignore: camel_case_types
-class _textFromFiledItemState extends State<textFromFiledItem> {
+class _TextFromFiledItemState extends State<TextFromFiledItem> {
   @override
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: TextFormField(
-        onChanged: widget.onChanged, // لتحديث النص
+        validator: (data) {
+        if (data!.isEmpty) {
+          return 'رجاءا ادخل البيانات ';
+        }
+        return null;
+      },
+        readOnly: widget.readOnly,
+        onChanged: widget.onChanged,
         keyboardType: widget.textType,
         controller: widget.controller,
         textAlign: TextAlign.right,
@@ -80,3 +87,4 @@ class _textFromFiledItemState extends State<textFromFiledItem> {
     );
   }
 }
+

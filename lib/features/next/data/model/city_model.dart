@@ -1,34 +1,43 @@
 class CityModel {
-  final List<DataModel> data;
+  final String countryId;
+  final String cityId;
+  final List<DataCityModel> data;
 
   CityModel({
+    required this.countryId,
+    required this.cityId,
     required this.data,
   });
 
 
   factory CityModel.fromJson( jsonData) {
     var dataList = (jsonData['data'] as List)
-        .map((item) => DataModel.fromJson(item))
+        .map((item) => DataCityModel.fromJson(item))
         .toList();
 
     return CityModel(
+      countryId: jsonData['country_id'] ?? '',
+      cityId: jsonData['exclude_city_id'] ?? '',
       data: dataList,
     );
   }
 }
 
 
-class DataModel {
+class DataCityModel {
   final String cityName;
+  final String id;
 
-  DataModel({
+  DataCityModel({
     required this.cityName,
+    required this.id,
   });
 
   // دالة لتحويل JSON إلى CountryModel
-  factory DataModel.fromJson(Map<String, dynamic> json) {
-    return DataModel(
+  factory DataCityModel.fromJson(Map<String, dynamic> json) {
+    return DataCityModel(
       cityName: json['CityName'] ?? '',
+      id: json['ID'] ?? '',
     );
   }
 }

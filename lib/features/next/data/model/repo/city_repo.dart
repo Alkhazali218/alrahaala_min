@@ -3,5 +3,8 @@ import 'package:alrahaala/features/next/data/model/city_model.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class CityRepo {
-  Future<Either<serverFailures,CityModel>> featchCity();
+  Future<Either<serverFailures, CityModel>> featchCity({
+    required String countryId,
+    required String cityId,
+  });
 }

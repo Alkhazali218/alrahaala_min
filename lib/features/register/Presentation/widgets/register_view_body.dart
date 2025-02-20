@@ -62,14 +62,14 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                 ),
                 SizedBox(height: height * 0.0050),
                 Text(
-                  'شركة الرحالة القابضة الاولى',
+                  'شركة الرحالة لصرافة وتحويل الاموال',
                   textAlign: TextAlign.right,
                   style: googleFont18.copyWith(
                     fontSize: getRsonsiveFontSize(context, fontSize: 18),
                   ),
                 ),
                 SizedBox(height: height * 0.02),
-                textFromFiledItem(
+                TextFromFiledItem(
                   controller: phoneController,
                   hintText: 'رقم الهاتف',
                   prefixIcon: FontAwesomeIcons.hashtag,
@@ -78,7 +78,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                   textType: TextInputType.phone,
                 ),
                 SizedBox(height: height * 0.02),
-                textFromFiledItem(
+                TextFromFiledItem(
                   controller: passwordController,
                   hintText: 'كلمة السر',
                   prefixIcon: Icons.password,

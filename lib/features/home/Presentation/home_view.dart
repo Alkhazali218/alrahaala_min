@@ -18,7 +18,7 @@ class _homeViewState extends State<homeView> {
   int index = 2;
   final screen = const [
     supportView(),
-    userView(),
+    UserView(),
     screenView(),
   ];
   @override

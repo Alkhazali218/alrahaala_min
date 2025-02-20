@@ -25,9 +25,28 @@ class CacheNetWork {
     return sharedPre.getString(key) ?? '';
   }
 
-//splashView app
-  static dynamic getCacheDaTaSplash({required String key}) {
-    return sharedPre.getBool(key);
+  // لتخزين الوقت الحالي (بالملي ثانية)
+  static Future<void> storeLastTransactionTime() async {
+    final currentTime = DateTime.now().millisecondsSinceEpoch;
+    await sharedPre.setInt('lastTransactionTime', currentTime);
+  }
+
+  // لاسترجاع الوقت الذي تم فيه آخر تحويل
+  static int getLastTransactionTime() {
+    return sharedPre.getInt('lastTransactionTime') ?? 0;
+  }
+
+  // التحقق إذا مر 6 دقائق منذ آخر تحويل
+  static Future<bool> canProceedWithTransaction() async {
+    final lastTransactionTime = getLastTransactionTime();
+    if (lastTransactionTime == 0) {
+      // إذا كانت أول مرة يتم فيها تحويل
+      return true;
+    }
+
+    final currentTime = DateTime.now().millisecondsSinceEpoch;
+    final timeDifference = currentTime - lastTransactionTime;
+    return timeDifference >= 360000; // 6 دقائق * 60 ثانية * 1000 ملي ثانية
   }
 
   static Future<bool> checkFirstLaunch() async {

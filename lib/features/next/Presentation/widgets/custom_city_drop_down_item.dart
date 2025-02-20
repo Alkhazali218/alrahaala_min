@@ -1,11 +1,15 @@
 import 'package:alrahaala/core/utils/helper/constant.dart';
+import 'package:alrahaala/core/utils/local%20NetWork/local_netWork.dart';
 import 'package:alrahaala/features/next/data/cubit/city_cubit.dart';
 import 'package:alrahaala/features/next/data/cubit/city_state.dart';
+import 'package:alrahaala/features/next/data/model/city_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomCityDropDownItem extends StatefulWidget {
-  const CustomCityDropDownItem({super.key});
+  final Function(String) onCitySelected; // Callback function
+
+  const CustomCityDropDownItem({super.key, required this.onCitySelected});
 
   @override
   State<CustomCityDropDownItem> createState() => _CustomCityDropDownItemState();
@@ -13,12 +17,18 @@ class CustomCityDropDownItem extends StatefulWidget {
 
 class _CustomCityDropDownItemState extends State<CustomCityDropDownItem> {
   String? selectedCity;
-  List<String> cityNames = [];
+  String? selectedCityId; // متغير لحفظ id المدينة
+  List<DataCityModel> cityList = []; // سيتم تخزين قائمة المدن هنا
 
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<CityCubit>(context).getCity();
+    String id = CacheNetWork.getCacheDaTaInfo(key: 'Countires_ID');
+    String countries = CacheNetWork.getCacheDaTaInfo(key: 'Countries');
+    BlocProvider.of<CityCubit>(context).getCity(
+      countryId: id,
+      cityId: countries,
+    );
   }
 
   @override
@@ -26,7 +36,7 @@ class _CustomCityDropDownItemState extends State<CustomCityDropDownItem> {
     return BlocBuilder<CityCubit, CityState>(
       builder: (context, state) {
         if (state is Citysuccess) {
-          cityNames = state.cityList;
+          cityList = state.cityList; // هنا cityList هو List<DataCityModel>
           return Container(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
@@ -44,12 +54,21 @@ class _CustomCityDropDownItemState extends State<CustomCityDropDownItem> {
                 onChanged: (String? newValue) {
                   setState(() {
                     selectedCity = newValue;
+                    // العثور على الـ id المرتبط بالمدينة المختارة
+                    selectedCityId = cityList
+                        .firstWhere((city) => city.cityName == newValue)
+                        .id;
                   });
+
+                  // تمرير selectedCityId إلى الـ parent widget (NextViewBody)
+                  if (selectedCityId != null) {
+                    widget.onCitySelected(selectedCityId!);
+                  }
                 },
-                items: cityNames.map((String cityName) {
+                items: cityList.map((DataCityModel city) {
                   return DropdownMenuItem<String>(
-                    value: cityName,
-                    child: Text(cityName),
+                    value: city.cityName,
+                    child: Text(city.cityName),
                   );
                 }).toList(),
               ),

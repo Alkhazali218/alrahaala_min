@@ -12,13 +12,19 @@ class CityRepoImplo implements CityRepo {
   CityRepoImplo(this.apiServer);
 
   @override
-  Future<Either<serverFailures, CityModel>> featchCity() async {
-    String countryID = CacheNetWork.getCacheDaTaInfo(key: 'Countires_ID');
+  Future<Either<serverFailures, CityModel>> featchCity({
+    required String countryId,
+    required String cityId,
+  }) async {
     String? token = CacheNetWork.getCacheDaTaInfo(key: 'token');
     try {
-      var data = await apiServer.get(
-        endPoint: 'cities/$countryID',
-       headers: {
+      var data = await apiServer.post(
+        endPoint: 'cities',
+        data: {
+          "country_id": countryId,
+          "exclude_city_id": cityId,
+        },
+        headers: {
           'Authorization': 'bearer $token',
         },
       );

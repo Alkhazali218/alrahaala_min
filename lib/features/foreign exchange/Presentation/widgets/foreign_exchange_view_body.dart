@@ -5,32 +5,21 @@ import 'package:alrahaala/features/foreign%20exchange/data/model/forgien_model.d
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ForeignExchangeViewBody extends StatefulWidget {
-  const ForeignExchangeViewBody({super.key});
+class ForeignExchangeViewBody extends StatelessWidget {
+  List<DataForgienModel> foreign = [];
 
-  @override
-  State<ForeignExchangeViewBody> createState() => _ForeignExchangeViewBodyState();
-}
-
-class _ForeignExchangeViewBodyState extends State<ForeignExchangeViewBody> {
-  List<DataForgienModel> foreign = []; // تحديث نوع البيانات هنا
-
-  @override
-  void initState() {
-    super.initState();
-    BlocProvider.of<ForgienCubit>(context).getForgien();
-  }
+  ForeignExchangeViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ForgienCubit, ForgienState>(
       builder: (context, state) {
         if (state is ForgienSuccess) {
-          foreign = state.forgien; // نعرض الـ data هنا
+          foreign = state.forgien;
           return ListView.builder(
             itemCount: foreign.length,
             itemBuilder: (context, index) {
-              return CustomListViewForeignItem(data: foreign[index]); // تمرير الـ data بشكل صحيح
+              return CustomListViewForeignItem(data: foreign[index]);
             },
           );
         } else if (state is ForgienFaliures) {

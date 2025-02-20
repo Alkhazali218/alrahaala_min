@@ -1,5 +1,6 @@
 import 'package:alrahaala/core/utils/local%20NetWork/local_netWork.dart';
 import 'package:alrahaala/features/next%20ex/data/cubits/country/country_state.dart';
+import 'package:alrahaala/features/next%20ex/data/models/country_model/country_model.dart';
 import 'package:alrahaala/features/next%20ex/data/models/country_model/repo/country_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,8 +20,7 @@ class CountryCubit extends Cubit<CountryState> {
         emit(CountryFaliures(message: failures.errorMessage));
       },
       (success) {
-         // تمرير قائمة الدول هنا
-        List<String> countries = success.data.map((d) => d.cName).toList();
+        List<DataCountryModel> countries = success.data;
         emit(CountrySuccess(countries: countries));
       },
     );

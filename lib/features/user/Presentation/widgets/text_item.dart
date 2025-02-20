@@ -2,9 +2,8 @@ import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/core/utils/helper/thems.dart';
 import 'package:flutter/material.dart';
 
-// ignore: camel_case_types
-class textItem extends StatelessWidget {
-  const textItem(
+class TextItem extends StatelessWidget {
+  const TextItem(
       {super.key, required this.textItemOne, required this.textitemTwo});
   final String textItemOne;
   final String textitemTwo;

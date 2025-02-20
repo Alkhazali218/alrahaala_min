@@ -1,6 +1,5 @@
 import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/core/utils/helper/thems.dart';
-import 'package:alrahaala/features/foreign%20exchange/data/cubit/forgien_cubit.dart';
 import 'package:alrahaala/features/home/Presentation/home_view.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/button_item.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/button_text_item.dart';
@@ -26,8 +25,7 @@ class LoginViewBody extends StatelessWidget {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state is LoginSuccess) {
-          BlocProvider.of<ForgienCubit>(context).getForgien();
-          Navigator.pushNamed(context, homeView.id);
+          Navigator.restorablePushNamed(context, homeView.id);
 
           AnimatedSnackBar.material('تم تسجيل الدخول بنجاح',
                   type: AnimatedSnackBarType.success)
@@ -62,7 +60,7 @@ class LoginViewBody extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: height * 0.04),
-                textFromFiledItem(
+                TextFromFiledItem(
                   controller: phoneController,
                   hintText: 'رقم الهاتف',
                   prefixIcon: FontAwesomeIcons.hashtag,
@@ -71,7 +69,7 @@ class LoginViewBody extends StatelessWidget {
                   textType: TextInputType.number,
                 ),
                 SizedBox(height: height * 0.02),
-                textFromFiledItem(
+                TextFromFiledItem(
                   controller: passwordController,
                   hintText: 'كلمة المرور',
                   prefixIcon: Icons.password,
@@ -86,13 +84,12 @@ class LoginViewBody extends StatelessWidget {
                         textButton: 'تسجيل الدخول',
                         onTap: () async {
                           if (formKey.currentState!.validate()) {
-                            String deviceId =
-                                await getDeviceId(); // انتظر حتى تحصل على deviceId
+                            String deviceId = await getDeviceId(); 
+                            print(deviceId);
                             BlocProvider.of<LoginCubit>(context).loginUser(
                               number: phoneController.text,
                               password: passwordController.text,
-                              deviceId:
-                                  deviceId, // استخدم deviceId الذي تم الحصول عليه
+                              deviceId: deviceId,
                               context: context,
                             );
                           }

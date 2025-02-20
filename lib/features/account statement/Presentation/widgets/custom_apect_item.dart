@@ -1,9 +1,11 @@
 import 'package:alrahaala/features/account%20statement/Presentation/widgets/custom_widget_item.dart';
+import 'package:alrahaala/features/account%20statement/data/model/statement_model.dart';
 import 'package:flutter/material.dart';
 
 class CustomAspectItem extends StatelessWidget {
-  const CustomAspectItem({super.key});
-
+  const CustomAspectItem({super.key,required this.data});
+  
+  final DataStatementModel data;
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
@@ -14,7 +16,7 @@ class CustomAspectItem extends StatelessWidget {
             color: Colors.grey.shade400,
           ),
         ),
-        child: const CustomWidgetItem(),
+        child: CustomWidgetItem(data: data),
       ),
     );
   }

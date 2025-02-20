@@ -44,10 +44,9 @@ class serverFailures extends Failures {
   factory serverFailures.fromResponse(int stateCode, dynamic response) {
     if (stateCode == 401 ||
         stateCode == 402 ||
-        stateCode == 403 ||
-        stateCode == 422) {
+        stateCode == 403 ) {
       return serverFailures(errorMessage: response['message']);
-    } else if (stateCode == 404) {
+    } else if (stateCode == 422) {
       return serverFailures(errorMessage: response['message']);
     } else if (stateCode == 500) {
       return serverFailures(

@@ -1,10 +1,11 @@
 import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/core/utils/helper/thems.dart';
+import 'package:alrahaala/features/money%20transfer/data/data%20get%20transfer/models/get_transfer_model.dart';
 import 'package:flutter/material.dart';
 
 class CustomNumberAccountItem extends StatelessWidget {
-  const CustomNumberAccountItem({super.key});
-
+ CustomNumberAccountItem({super.key,required this.data});
+  DataGetTransferModel data;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -12,7 +13,7 @@ class CustomNumberAccountItem extends StatelessWidget {
         Flexible(
           child: FittedBox(
             child: Text(
-              '0987564321456789',
+              data.accCode,
               style: googleFont30.copyWith(
                 color: Colors.black,
                 fontSize: getRsonsiveFontSize(
@@ -26,7 +27,7 @@ class CustomNumberAccountItem extends StatelessWidget {
         Flexible(
           child: FittedBox(
             child: Text(
-              '600000',
+              data.transValue,
               style: googleFont30.copyWith(
                 fontSize: getRsonsiveFontSize(
                   context,

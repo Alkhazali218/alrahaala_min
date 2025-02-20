@@ -23,11 +23,16 @@ class UserChatCubit extends Cubit<UserChatState> {
       var userDoc = await userRef.get();
 
       if (!userDoc.exists) {
-        // إذا كان المستند غير موجود، نقوم بإنشائه
+        String name = infoLoginModel.accName;
+
+        if (name.startsWith("حساب ")) {
+          name = name.substring(5);
+        }
+
         await userRef.set(
           {
             kNumber: infoLoginModel.phone,
-            kUserName: infoLoginModel.accName,
+            kUserName: name,
             kCreatedAt: DateTime.now(),
             kFcmToken: token,
           },
