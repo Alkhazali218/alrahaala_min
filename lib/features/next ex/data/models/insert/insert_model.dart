@@ -2,7 +2,7 @@ class InsertModel {
 
     final String recievedCurrencyId;
     final String countryIdFrom;
-    final int recievedBranchId;
+    final String recievedBranchId;
     final String recievedName;
     final String rPhone1;
     final String cityIdTo;
@@ -29,17 +29,17 @@ class InsertModel {
 
     factory InsertModel.fromJson(jsonData){ 
         return InsertModel(
-            recievedCurrencyId: jsonData["RecievedCurrencyID"] ?? '0',
+            recievedCurrencyId: jsonData["RecievedCurrencyID"] ?? '',
             countryIdFrom: jsonData["CountryIDFrom"] ?? '0',
-            recievedBranchId: jsonData["RecievedBranchID"] ?? '0',
+            recievedBranchId: jsonData["RecievedBranchID"] ?? '',
             recievedName: jsonData["RecievedName"] ?? "",
             rPhone1: jsonData["RPhone1"] ?? "",
-            cityIdTo: jsonData["CityIDTo"] ?? '0',
-            deliveredCurrencyId: jsonData["DeliveredCurrencyID"] ?? '0',
-            countryIdTo: jsonData["CountryIDTo"] ?? '0',
-            serviceType: jsonData["ServiceType"] ?? '0',
-            currRecievedVal: jsonData["CurrRecievedVal"] ?? '0',
-            accFrom: jsonData["AccFrom"] ?? '0',
+            cityIdTo: jsonData["CityIDTo"] ?? '',
+            deliveredCurrencyId: jsonData["DeliveredCurrencyID"] ?? '',
+            countryIdTo: jsonData["CountryIDTo"] ?? '',
+            serviceType: jsonData["ServiceType"] ?? '',
+            currRecievedVal: jsonData["CurrRecievedVal"] ?? '',
+            accFrom: jsonData["AccFrom"] ?? '',
             ownAccNo: jsonData["OwnAccNo"] ?? "Null",
         );
     }

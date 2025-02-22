@@ -87,6 +87,22 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                   textType: TextInputType.visiblePassword,
                 ),
                 SizedBox(height: height * 0.02),
+                // إضافة حقل تأكيد كلمة السر
+                TextFromFiledItem(
+                  controller: passwordConfirmationController,
+                  hintText: 'تأكيد كلمة السر',
+                  prefixIcon: Icons.password,
+                  pass: true,
+                  isSecurePassword: true,
+                  textType: TextInputType.visiblePassword,
+                  validator: (value) {
+                    if (value != passwordController.text) {
+                      return 'كلمات السر غير متطابقة';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: height * 0.02),
                 state is RegisterLoading
                     ? const CustomCircular()
                     : ButtonItem(
@@ -94,6 +110,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                         onTap: () async {
                           if (formKey.currentState!.validate()) {
                             String deviceId = await getDeviceId();
+                            // ignore: use_build_context_synchronously
                             BlocProvider.of<RegisterCubit>(context)
                                 .userRegister(
                               phone: phoneController.text,

@@ -30,7 +30,7 @@ class DataServiceModel {
     required this.srId,
   });
 
-  // دالة لتحويل JSON إلى CountryModel
+
   factory DataServiceModel.fromJson(Map<String, dynamic> json) {
     return DataServiceModel(
       srName: json['SRNAME'] ?? '',

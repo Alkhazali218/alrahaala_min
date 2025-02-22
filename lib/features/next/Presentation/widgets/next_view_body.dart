@@ -27,9 +27,11 @@ class _NextViewBodyState extends State<NextViewBody> {
 
   // الدالة التي سيتم استدعائها عند اختيار المدينة
   void onCitySelected(String cityId) {
-    setState(() {
-      selectedCityId = cityId;
-    });
+    setState(
+      () {
+        selectedCityId = cityId;
+      },
+    );
   }
 
   @override

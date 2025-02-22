@@ -48,7 +48,7 @@ class InsertRepoImplo implements InsertRepo {
       );
       return right(InsertModel.fromJson(data));
     } on Exception catch (e) {
-      if (e is DioError) {
+      if (e is DioException) {
         return left(serverFailures.fromDioError(e));
       } else {
         return left(serverFailures(errorMessage: e.toString()));

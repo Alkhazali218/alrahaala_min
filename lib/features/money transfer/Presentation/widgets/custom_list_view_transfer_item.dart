@@ -7,18 +7,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomListViewTransferItem extends StatelessWidget {
-  CustomListViewTransferItem({super.key});
+  CustomListViewTransferItem({super.key, required this.dataList, required this.filteredData});
+
   List<DataGetTransferModel> dataList = [];
+  List<DataGetTransferModel> filteredData = [];
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GetTransferCubit, GetTransferState>(
       builder: (context, state) {
         if (state is GetTransferSuccess) {
+          // تأكد من تحديث البيانات الأصلية عند نجاح الـ Bloc
           dataList = state.getTransfer;
+
+          // الآن لا تحتاج إلى تحديث filteredData في BlocBuilder
           return ListView.builder(
-            itemCount: dataList.length,
+            itemCount: filteredData.isNotEmpty ? filteredData.length : dataList.length,
             itemBuilder: (context, index) {
-              return CustomMoneyTransfer(data: dataList[index]);
+              return CustomMoneyTransfer(data: filteredData.isNotEmpty ? filteredData[index] : dataList[index]);
             },
           );
         } else if (state is GetTransferFaliures) {
@@ -37,3 +43,4 @@ class CustomListViewTransferItem extends StatelessWidget {
     );
   }
 }
+

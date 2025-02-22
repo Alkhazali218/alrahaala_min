@@ -24,20 +24,31 @@ class _NextExViewBodyState extends State<NextExViewBody> {
   final amountController = TextEditingController();
   final bankController = TextEditingController();
   String? selectedCityId;
-  String? deliveredCurrencyId;
-  String? countryIdTo;
-  String? serviceTypeId; // سيتم تحديثها من داخل CustomDropDownItem
-  String? selectedServiceSrid; // سيتم تخزين srId هنا
+  String? selectedDeliveredCurrencyId;
+  String? selectedcountryIdTo;
+  String? selectedServiceType;
 
   void onCitySelected(String cityId) {
     setState(() {
-      selectedServiceSrid = cityId;
+      selectedCityId = cityId;
     });
   }
 
-  void onServiceIdSelected(String serviceId) {
+  void onSelectedDeliveredCurrencyId(String deliveredCurrencyId) {
     setState(() {
-      selectedCityId = serviceId;
+      selectedDeliveredCurrencyId = deliveredCurrencyId;
+    });
+  }
+
+  void onSelectedcountryIdTo(String countryIdTo) {
+    setState(() {
+      selectedcountryIdTo = countryIdTo;
+    });
+  }
+
+  void onSelectedServiceType(String serviceType) {
+    setState(() {
+      selectedServiceType = serviceType;
     });
   }
 
@@ -89,102 +100,140 @@ class _NextExViewBodyState extends State<NextExViewBody> {
             // CustomDropDownItem يتم تمرير قيمة serviceType هنا
             CustomDropDownItem(
               onCitySelected: onCitySelected,
+              ondeliveredCurrencyId: onSelectedDeliveredCurrencyId,
+              oncountryIdToId: onSelectedcountryIdTo,
+              onserviceType: onSelectedServiceType,
               bankController: bankController,
-              deliveredCurrencyId: deliveredCurrencyId,
-              countryIdTo: countryIdTo,
-              onServiceIdSelected: onCitySelected,
             ),
             SizedBox(height: height * 0.035),
 
             // إظهار زر التأكيد والإلغاء بناءً على الحالة
-            BlocConsumer<InsertCubit, InsertState>(
-              listener: (context, state) {
-                if (state is InsertSuccess) {
-                  Navigator.pushNamed(context, homeView.id);
-                  AnimatedSnackBar.material(
-                    'تم تحويل بنجاح',
-                    type: AnimatedSnackBarType.success,
-                  ).show(context);
-                } else if (state is InsertFaliures) {
-                  AnimatedSnackBar.material(
-                    state.message,
-                    type: AnimatedSnackBarType.error,
-                  ).show(context);
-                }
-              },
-              builder: (context, state) {
-                if (state is InsertLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(
-                      color: kpColor,
-                    ),
-                  );
-                }
-                return Row(
-                  children: [
-                    CheckItem(
-                      onTap: () => _handleConfirm(context),
-                      textCheckItem: 'تاكيد',
-                    ),
-                    SizedBox(width: width * 0.020),
-                    CheckItem(
-                      onTap: () => Navigator.pushNamed(context, homeView.id),
-                      textCheckItem: 'الغاء الامر',
-                    ),
-                  ],
+            BlocConsumer<InsertCubit, InsertState>(listener: (context, state) {
+              if (state is InsertSuccess) {
+                Navigator.pushNamed(context, homeView.id);
+                AnimatedSnackBar.material(
+                  'تم تحويل بنجاح',
+                  type: AnimatedSnackBarType.success,
+                ).show(context);
+              } else if (state is InsertFaliures) {
+                AnimatedSnackBar.material(
+                  state.message,
+                  type: AnimatedSnackBarType.error,
+                ).show(context);
+              }
+            }, builder: (context, state) {
+              if (state is InsertLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(
+                    color: kpColor,
+                  ),
                 );
-              },
-            ),
+              }
+              return Row(
+                children: [
+                  CheckItem(
+                    onTap: () {
+                      print(
+                          '=======================================================================================');
+                      print('name ${nameController.text}');
+                      print('phone ${phoneController.text}');
+                      print('city ${selectedCityId ?? "غير مختار"}');
+                      print(
+                          'delivered ${selectedDeliveredCurrencyId ?? "غير مختار"}');
+                      print('country ${selectedcountryIdTo ?? "غير مختار"}');
+                      print('service ${selectedServiceType ?? "غير مختار"}');
+                      print('amount ${amountController.text}');
+                      print(bankController.text);
+                      print(
+                          '=======================================================================================');
+                      _handleConfirm(context);
+                    },
+                    textCheckItem: 'تاكيد',
+                  ),
+                  SizedBox(width: width * 0.020),
+                  CheckItem(
+                    onTap: () => Navigator.pushNamed(context, homeView.id),
+                    textCheckItem: 'الغاء الامر',
+                  ),
+                ],
+              );
+            }),
           ],
         ),
       ),
     );
   }
 
-  // دالة handleConfirm التي ستتعامل مع التأكيد
   Future<void> _handleConfirm(BuildContext context) async {
-    if (fromKey.currentState!.validate()) {
-      // أولاً، تحقق من الحدود قبل إجراء التحويل
-      final checkLimitResult = await BlocProvider.of<InsertCubit>(context)
-          .checkLimit(amount: amountController.text);
-
-      if (checkLimitResult != null && checkLimitResult is InsertFaliures) {
-        AnimatedSnackBar.material(
-          checkLimitResult.message,
-          type: AnimatedSnackBarType.error,
-        // ignore: use_build_context_synchronously
-        ).show(context);
-        return;
-      }
-
-      // التحقق من مرور 6 دقائق من آخر تحويل
-      bool canProceed = await CacheNetWork.canProceedWithTransaction();
-
-      if (!canProceed) {
-        AnimatedSnackBar.material(
-          "يجب أن تنتظر 6 دقائق قبل إجراء التحويل التالي",
-          type: AnimatedSnackBarType.error,
-        // ignore: use_build_context_synchronously
-        ).show(context);
-        return;
-      }
-
-      // تنفيذ عملية الإدخال
-      // ignore: use_build_context_synchronously
-      await BlocProvider.of<InsertCubit>(context).featchInsert(
-        recievedName: nameController.text,
-        rPhone1: phoneController.text,
-        cityIdTo: selectedCityId ?? '0',
-        deliveredCurrencyId: deliveredCurrencyId ?? '0',
-        countryIdTo: countryIdTo ?? '0',
-        serviceType: '3',
-        currRecievedVal: amountController.text,
-        ownAccNo: bankController.text ?? 'Null',
-      );
-
-      // تخزين الوقت الحالي بعد تنفيذ التحويل
-      await CacheNetWork.storeLastTransactionTime();
+    // التحقق من الحقول المطلوبة
+    if (nameController.text.isEmpty ||
+        phoneController.text.isEmpty ||
+        amountController.text.isEmpty ||
+        selectedCityId == null ||
+        selectedServiceType == null) {
+      AnimatedSnackBar.material(
+        "يرجى اختيار جميع البيانات المطلوبة.",
+        type: AnimatedSnackBarType.error,
+      ).show(context);
+      return;
     }
+
+    // التحقق من أن رقم الهاتف يحتوي على أرقام فقط
+    if (!RegExp(r'^[0-9]+$').hasMatch(phoneController.text)) {
+      AnimatedSnackBar.material(
+        "يرجى إدخال رقم هاتف صالح.",
+        type: AnimatedSnackBarType.error,
+      ).show(context);
+      return;
+    }
+
+    // التحقق من أن القيمة المراد إرسالها هي عدد
+    if (double.tryParse(amountController.text) == null) {
+      AnimatedSnackBar.material(
+        "يرجى إدخال قيمة صحيحة.",
+        type: AnimatedSnackBarType.error,
+      ).show(context);
+      return;
+    }
+
+    // التحقق من الحد الأقصى للقيمة
+    final checkLimitResult = await BlocProvider.of<InsertCubit>(context)
+        .checkLimit(amount: amountController.text);
+
+    if (checkLimitResult != null && checkLimitResult is InsertFaliures) {
+      AnimatedSnackBar.material(
+        checkLimitResult.message,
+        type: AnimatedSnackBarType.error,
+      // ignore: use_build_context_synchronously
+      ).show(context);
+      return;
+    }
+
+    // التحقق من أن المستخدم يمكنه المتابعة بعد 6 دقائق
+    bool canProceed = await CacheNetWork.canProceedWithTransaction();
+
+    if (!canProceed) {
+      AnimatedSnackBar.material(
+        "يجب أن تنتظر 6 دقائق قبل إجراء التحويل التالي",
+        type: AnimatedSnackBarType.error,
+      // ignore: use_build_context_synchronously
+      ).show(context);
+      return;
+    }
+
+    // تنفيذ عملية الإضافة
+    await BlocProvider.of<InsertCubit>(context).featchInsert(
+  recievedName: nameController.text,
+  rPhone1: phoneController.text,
+  cityIdTo: selectedCityId ?? '0',
+  deliveredCurrencyId: selectedDeliveredCurrencyId!,
+  countryIdTo: selectedcountryIdTo!,
+  serviceType: selectedServiceType!,
+  currRecievedVal: amountController.text,
+  ownAccNo: bankController.text.isEmpty ? 'Null' : bankController.text,
+);
+
+
+    await CacheNetWork.storeLastTransactionTime();
   }
 }
-

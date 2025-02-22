@@ -12,18 +12,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomDropDownItem extends StatefulWidget {
-  final Function(String) onCitySelected; // Callback function
-   final Function(String) onServiceIdSelected; 
+final Function(String) onCitySelected;
+final Function(String) ondeliveredCurrencyId;
+final Function(String) oncountryIdToId;
+final Function(String) onserviceType; 
   final TextEditingController bankController;
-  final String? deliveredCurrencyId; // إضافة deliveredCurrencyId هنا
-  final String? countryIdTo; // إضافة countryIdTo هنا
- const  CustomDropDownItem({
+  const CustomDropDownItem({
     super.key,
     required this.onCitySelected,
+    required this.ondeliveredCurrencyId,
+    required this.oncountryIdToId,
+    required this.onserviceType,
     required this.bankController,
-    required this.deliveredCurrencyId,
-    required this.countryIdTo,
-    required this.onServiceIdSelected,
   });
 
   @override
@@ -34,11 +34,9 @@ class _CustomDropDownItemState extends State<CustomDropDownItem> {
   String? selectedCountryId;
   String? selectedCountryName;
   String? selectedService;
-  String? selectedCountryDefaultCurrency;
   DataCityModel? selectedCity;
   String? selectedBank;
   String? serviceType;
-  String? selectedServiceSrid;
   List<String> services = [];
   List<DataCityModel> cities = [];
 
@@ -62,7 +60,8 @@ class _CustomDropDownItemState extends State<CustomDropDownItem> {
                 .toSet()
                 .toList();
 
-            return buildDropdown<String>(  
+            return buildDropdown<String>(
+              // هنا تم استخدام buildDropdown
               value: selectedCountryName,
               hint: selectedCountryName ?? "اختر الدولة",
               items: countryNames,
@@ -71,28 +70,31 @@ class _CustomDropDownItemState extends State<CustomDropDownItem> {
                   (country) => country.cName == value,
                 );
 
-                // ignore: unnecessary_null_comparison
-                if (selectedCountry != null) {
-                  setState(() {
+                setState(
+                  () {
                     selectedCountryId = selectedCountry.id;
                     selectedCountryName = selectedCountry.cName;
                     selectedService = null;
                     selectedCity = null;
                     selectedBank = null;
-                    selectedServiceSrid = null;
-                    selectedCountryDefaultCurrency = selectedCountry.defualtCurrency;
-                  });
+                  },
+                );
 
-                  // إرسال استعلامات الـ Service و الـ City 
-                  BlocProvider.of<ServiceCubit>(context).getService(countryId: selectedCountryId!);
-                  BlocProvider.of<CityCubit>(context).getCity(countryId: selectedCountryId!, cityId: countries);
-                }
+                // إرسال استعلامات الـ Service و الـ City
+                BlocProvider.of<ServiceCubit>(context)
+                    .getService(countryId: selectedCountryId!);
+                BlocProvider.of<CityCubit>(context)
+                    .getCity(countryId: selectedCountryId!, cityId: countries);
+
+              widget.ondeliveredCurrencyId(selectedCountry.defualtCurrency);
+              widget.oncountryIdToId(selectedCountry.id);
               },
             );
           } else if (state is CountryFaliures) {
             return Center(child: Text(state.message));
           } else {
-            return const Center(child: CircularProgressIndicator(color: kpColor));
+            return const Center(
+                child: CircularProgressIndicator(color: kpColor));
           }
         }),
 
@@ -114,19 +116,17 @@ class _CustomDropDownItemState extends State<CustomDropDownItem> {
 
                   setState(() {
                     selectedService = value;
-                    selectedServiceSrid = selectedServiceData.srId; // تخزين srId هنا
-                    selectedCity = null; // إعادة تعيين المدينة
+                    selectedCity = null;
                     serviceType = getServiceType(value); // تعيين نوع الخدمة
-                    if (selectedServiceSrid != null) {
-                    widget.onServiceIdSelected(selectedServiceSrid!);
-                  }
                   });
+                  widget.onserviceType(selectedServiceData.srId);
                 },
               );
             } else if (state is ServiceFaliures) {
               return Center(child: Text(state.message));
             } else {
-              return const Center(child: CircularProgressIndicator(color: kpColor));
+              return const Center(
+                  child: CircularProgressIndicator(color: kpColor));
             }
           }),
 
@@ -146,12 +146,15 @@ class _CustomDropDownItemState extends State<CustomDropDownItem> {
                     setState(() {
                       selectedCity = value;
                     });
+                    widget.onCitySelected(
+                        value!.id);
                   },
                 );
               } else if (state is CityFaliures) {
                 return Center(child: Text(state.message));
               } else {
-                return const Center(child: CircularProgressIndicator(color: kpColor));
+                return const Center(
+                    child: CircularProgressIndicator(color: kpColor));
               }
             }),
 
@@ -231,8 +234,3 @@ class _CustomDropDownItemState extends State<CustomDropDownItem> {
     );
   }
 }
-
-
-
-
-
