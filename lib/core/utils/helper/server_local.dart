@@ -11,6 +11,7 @@ import 'package:alrahaala/features/next%20ex/data/models/insert/repo/insert_repo
 import 'package:alrahaala/features/next%20ex/data/models/service_model/repo/service_repo_implo.dart';
 import 'package:alrahaala/features/next/data/data/repo/next_repo_implo.dart';
 import 'package:alrahaala/features/next/data/model/repo/city_repo_implo.dart';
+import 'package:alrahaala/features/otp/data/model/repo/otp_repo_implo.dart';
 import 'package:alrahaala/features/password/data/model/repo/password_repo_implo.dart';
 import 'package:alrahaala/features/register/data/models/register_repo_impl.dart';
 import 'package:alrahaala/features/user/data/model/repo/user_repo_implo.dart';
@@ -93,6 +94,11 @@ void gettItSetup() {
   );
   getIt.registerSingleton<InsertRepoImplo>(
     InsertRepoImplo(
+      getIt.get<ApiServer>(),
+    ),
+  );
+  getIt.registerSingleton<OtpRepoImplo>(
+    OtpRepoImplo(
       getIt.get<ApiServer>(),
     ),
   );

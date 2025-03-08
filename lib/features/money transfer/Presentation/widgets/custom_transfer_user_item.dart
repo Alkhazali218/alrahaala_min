@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/core/utils/helper/thems.dart';
 import 'package:alrahaala/core/utils/local%20NetWork/local_netWork.dart';
@@ -7,6 +9,8 @@ import 'package:alrahaala/features/money%20transfer/data/cubit/transfer_cubit.da
 import 'package:alrahaala/features/money%20transfer/data/cubit/transfer_state.dart';
 import 'package:alrahaala/features/money%20transfer/data/data_transfer/cubit/transfer_account_cubit.dart';
 import 'package:alrahaala/features/next/Presentation/widgets/check_item.dart';
+import 'package:alrahaala/features/otp/Presentation/otp_view.dart';
+import 'package:alrahaala/features/otp/data/cubit/otp_cubit.dart';
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,13 +26,16 @@ class CustomTransferUserItem extends StatelessWidget {
   final TextEditingController accountController = TextEditingController();
   final TextEditingController branchController = TextEditingController();
   final TextEditingController amountController = TextEditingController();
-   String? accIdTo;
+  String? accIdTo;
   GlobalKey<FormState> fromKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
     var width = MediaQuery.sizeOf(context).width;
+    var random = Random();
+    int randomNumber = 10000 + random.nextInt(90000);
+    String phoneRandom = CacheNetWork.getCacheDaTaInfo(key: 'phone');
 
     // جلب رقم الحساب من المعاملات
     final String accCode = ModalRoute.of(context)!.settings.arguments as String;
@@ -157,7 +164,34 @@ class CustomTransferUserItem extends StatelessWidget {
                       : Row(
                           children: [
                             CheckItem(
-                              onTap: ()=> _handleConfirm(context),
+                              onTap: () {
+                                if (fromKey.currentState!.validate()) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => OtpView(
+                                        phone: phoneRandom,
+                                        onCodeChanged: (code) {
+                                          // حفظ الكود المدخل عند تغييره
+                                        },
+                                        onTap: (enteredCode) {
+                                          // التحقق من الكود عند النقر
+                                          onTap(
+                                              context,
+                                              phoneRandom,
+                                              enteredCode,
+                                              randomNumber.toString());
+                                        },
+                                      ),
+                                    ),
+                                  );
+                                  BlocProvider.of<OtpCubit>(context).featchOtp(
+                                    phone: phoneRandom,
+                                    message:
+                                        'كود التحقق الخاص بكَ\n${randomNumber.toString()}\nلا تطلع أحداً عليه',
+                                  );
+                                }
+                              },
                               textCheckItem: 'تاكيد',
                             ),
                             SizedBox(width: width * 0.020),
@@ -213,6 +247,17 @@ class CustomTransferUserItem extends StatelessWidget {
 
       // تخزين الوقت الحالي بعد تنفيذ التحويل
       await CacheNetWork.storeLastTransactionTime();
+    }
+  }
+
+  void onTap(BuildContext context, String phone, String enteredCode,
+      String originalCode) {
+    if (enteredCode == originalCode) {
+      _handleConfirm(context); // إجراء عملية التحويل بعد التحقق من الكود
+    } else {
+      AnimatedSnackBar.material("الكود غير صحيح",
+              type: AnimatedSnackBarType.error)
+          .show(context);
     }
   }
 }

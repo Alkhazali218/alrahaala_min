@@ -29,6 +29,8 @@ import 'package:alrahaala/features/next/data/cubit/city_cubit.dart';
 import 'package:alrahaala/features/next/data/data/cubit/next_cubit.dart';
 import 'package:alrahaala/features/next/data/data/repo/next_repo_implo.dart';
 import 'package:alrahaala/features/next/data/model/repo/city_repo_implo.dart';
+import 'package:alrahaala/features/otp/data/cubit/otp_cubit.dart';
+import 'package:alrahaala/features/otp/data/model/repo/otp_repo_implo.dart';
 import 'package:alrahaala/features/password/data/cubit/password_cubit.dart';
 import 'package:alrahaala/features/password/data/model/repo/password_repo_implo.dart';
 import 'package:alrahaala/features/register/data/cubit/register_cubit.dart';
@@ -102,6 +104,8 @@ class MyApp extends StatelessWidget {
             create: (context) => PasswordCubit(getIt.get<PasswordRepoImplo>())),
         BlocProvider(
             create: (context) => InsertCubit(getIt.get<InsertRepoImplo>())),
+         BlocProvider(
+            create: (context) => OtpCubit(getIt.get<OtpRepoImplo>())),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,

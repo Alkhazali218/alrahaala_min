@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/core/utils/helper/thems.dart';
 import 'package:alrahaala/features/login/Presentation/login_view.dart';
@@ -5,6 +7,8 @@ import 'package:alrahaala/features/login/Presentation/widgets/button_item.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/button_text_item.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/custom_circular.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/text_from_filed_item.dart';
+import 'package:alrahaala/features/otp/Presentation/otp_view.dart';
+import 'package:alrahaala/features/otp/data/cubit/otp_cubit.dart';
 import 'package:alrahaala/features/register/data/cubit/register_cubit.dart';
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
@@ -28,15 +32,32 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
+    var random = Random();
+    int randomNumber = 10000 + random.nextInt(90000);
 
     return BlocConsumer<RegisterCubit, RegisterState>(
       listener: (context, state) {
         if (state is RegisterSuccess) {
-          AnimatedSnackBar.material(
-            'تم انشاء حساب بنجاح',
-            type: AnimatedSnackBarType.success,
-          ).show(context);
-          Navigator.pushNamed(context, loginView.id);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => OtpView(
+                phone: phoneController.text,
+                onCodeChanged: (code) {
+                  // حفظ الكود المدخل عند تغييره
+                },
+                onTap: (enteredCode) {
+                  // التحقق من الكود عند النقر
+                  onTap(context, phoneController.text, enteredCode,
+                      randomNumber.toString());
+                  Navigator.pushNamed(context, loginView.id);
+                  AnimatedSnackBar.material('تم انشاء حساب بنجاح',
+                          type: AnimatedSnackBarType.success)
+                      .show(context);
+                },
+              ),
+            ),
+          );
         }
         if (state is RegisterFaliures) {
           AnimatedSnackBar.material(
@@ -107,15 +128,17 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                     ? const CustomCircular()
                     : ButtonItem(
                         textButton: 'انشاء حساب',
-                        onTap: () async {
+                        onTap: () {
                           if (formKey.currentState!.validate()) {
-                            String deviceId = await getDeviceId();
-                            // ignore: use_build_context_synchronously
-                            BlocProvider.of<RegisterCubit>(context)
-                                .userRegister(
+                            onTap(
+                                context,
+                                phoneController.text,
+                                randomNumber.toString(),
+                                randomNumber.toString());
+                            BlocProvider.of<OtpCubit>(context).featchOtp(
                               phone: phoneController.text,
-                              password: passwordController.text,
-                              deviceId: deviceId,
+                              message:
+                                  'كود التحقق الخاص بكَ\n${randomNumber.toString()}\nلا تطلع أحداً عليه',
                             );
                           }
                         },
@@ -132,5 +155,23 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
         );
       },
     );
+  }
+
+  // دالة التحقق من الكود
+  void onTap(BuildContext context, String phone, String enteredCode,
+      String originalCode) async {
+    if (enteredCode == originalCode) {
+      String deviceId = await getDeviceId();
+      // ignore: use_build_context_synchronously
+      BlocProvider.of<RegisterCubit>(context).userRegister(
+        phone: phoneController.text,
+        password: passwordController.text,
+        deviceId: deviceId,
+      );
+    } else {
+      AnimatedSnackBar.material("الكود غير صحيح",
+              type: AnimatedSnackBarType.error)
+          .show(context);
+    }
   }
 }

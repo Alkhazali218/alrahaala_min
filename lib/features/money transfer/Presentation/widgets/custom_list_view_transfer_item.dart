@@ -20,7 +20,7 @@ class CustomListViewTransferItem extends StatelessWidget {
           // تأكد من تحديث البيانات الأصلية عند نجاح الـ Bloc
           dataList = state.getTransfer;
 
-          // الآن لا تحتاج إلى تحديث filteredData في BlocBuilder
+          // في هذه الحالة، إذا كانت filteredData فارغة، استخدم dataList بالكامل
           return ListView.builder(
             itemCount: filteredData.isNotEmpty ? filteredData.length : dataList.length,
             itemBuilder: (context, index) {
@@ -43,4 +43,5 @@ class CustomListViewTransferItem extends StatelessWidget {
     );
   }
 }
+
 

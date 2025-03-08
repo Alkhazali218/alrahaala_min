@@ -25,7 +25,7 @@ class LoginViewBody extends StatelessWidget {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state is LoginSuccess) {
-          Navigator.restorablePushNamed(context, homeView.id);
+          Navigator.pushReplacementNamed(context, homeView.id);
 
           AnimatedSnackBar.material('تم تسجيل الدخول بنجاح',
                   type: AnimatedSnackBarType.success)
@@ -85,7 +85,6 @@ class LoginViewBody extends StatelessWidget {
                         onTap: () async {
                           if (formKey.currentState!.validate()) {
                             String deviceId = await getDeviceId(); 
-                            print(deviceId);
                             BlocProvider.of<LoginCubit>(context).loginUser(
                               number: phoneController.text,
                               password: passwordController.text,

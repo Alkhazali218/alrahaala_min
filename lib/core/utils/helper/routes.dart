@@ -10,6 +10,7 @@ import 'package:alrahaala/features/money%20transfer/Presentation/widgets/user_mo
 import 'package:alrahaala/features/next%20ex/Presentation/next_ex_view.dart';
 import 'package:alrahaala/features/next/Presentation/next_view.dart';
 import 'package:alrahaala/features/password/Presentation/password_view.dart';
+import 'package:alrahaala/features/password/Presentation/widgets/custom_featch_password_item.dart';
 import 'package:alrahaala/features/register/Presentation/register_view.dart';
 import 'package:alrahaala/features/screen/Presentation/screen_view.dart';
 import 'package:alrahaala/features/splash/Presentation/splash_view.dart';
@@ -41,6 +42,7 @@ Map<String, Widget Function(BuildContext)> routes = {
   CustomTransferUserItem.id: (context) => CustomTransferUserItem(),
   ForeignExchangeView.id: (context) => const ForeignExchangeView(),
   NavigatorForeignItem.id: (context) => const NavigatorForeignItem(),
+  CustomFeatchPasswordItem.id: (context) => const CustomFeatchPasswordItem(),
 };
 
 class MyArguments {

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/core/utils/local%20NetWork/local_netWork.dart';
 import 'package:alrahaala/features/home/Presentation/home_view.dart';
@@ -5,6 +7,8 @@ import 'package:alrahaala/features/login/Presentation/widgets/text_from_filed_it
 import 'package:alrahaala/features/next%20ex/Presentation/widgets/custom_drop_down_item.dart';
 import 'package:alrahaala/features/next%20ex/data/cubits/insert/cubit/insert_cubit.dart';
 import 'package:alrahaala/features/next/Presentation/widgets/check_item.dart';
+import 'package:alrahaala/features/otp/Presentation/otp_view.dart';
+import 'package:alrahaala/features/otp/data/cubit/otp_cubit.dart';
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,6 +60,9 @@ class _NextExViewBodyState extends State<NextExViewBody> {
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
     var width = MediaQuery.sizeOf(context).width;
+    var random = Random();
+    int randomNumber = 10000 + random.nextInt(90000);
+    String phoneRandom = CacheNetWork.getCacheDaTaInfo(key: 'phone');
 
     return Form(
       key: fromKey,
@@ -133,20 +140,27 @@ class _NextExViewBodyState extends State<NextExViewBody> {
                 children: [
                   CheckItem(
                     onTap: () {
-                      print(
-                          '=======================================================================================');
-                      print('name ${nameController.text}');
-                      print('phone ${phoneController.text}');
-                      print('city ${selectedCityId ?? "غير مختار"}');
-                      print(
-                          'delivered ${selectedDeliveredCurrencyId ?? "غير مختار"}');
-                      print('country ${selectedcountryIdTo ?? "غير مختار"}');
-                      print('service ${selectedServiceType ?? "غير مختار"}');
-                      print('amount ${amountController.text}');
-                      print(bankController.text);
-                      print(
-                          '=======================================================================================');
-                      _handleConfirm(context);
+                      Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => OtpView(
+                                phone: phoneRandom,
+                                onCodeChanged: (code) {
+                                  // حفظ الكود المدخل عند تغييره
+                                },
+                                onTap: (enteredCode) {
+                                  // التحقق من الكود عند النقر
+                                  onTap(context, phoneRandom, enteredCode,
+                                      randomNumber.toString());
+                                },
+                              ),
+                            ),
+                          );
+                          BlocProvider.of<OtpCubit>(context).featchOtp(
+                            phone: phoneRandom,
+                            message:
+                                'كود التحقق الخاص بكَ\n${randomNumber.toString()}\nلا تطلع أحداً عليه',
+                          );
                     },
                     textCheckItem: 'تاكيد',
                   ),
@@ -169,7 +183,7 @@ class _NextExViewBodyState extends State<NextExViewBody> {
     if (nameController.text.isEmpty ||
         phoneController.text.isEmpty ||
         amountController.text.isEmpty ||
-        selectedCityId == null ||
+        selectedcountryIdTo == null ||
         selectedServiceType == null) {
       AnimatedSnackBar.material(
         "يرجى اختيار جميع البيانات المطلوبة.",
@@ -187,14 +201,6 @@ class _NextExViewBodyState extends State<NextExViewBody> {
       return;
     }
 
-    // التحقق من أن القيمة المراد إرسالها هي عدد
-    if (double.tryParse(amountController.text) == null) {
-      AnimatedSnackBar.material(
-        "يرجى إدخال قيمة صحيحة.",
-        type: AnimatedSnackBarType.error,
-      ).show(context);
-      return;
-    }
 
     // التحقق من الحد الأقصى للقيمة
     final checkLimitResult = await BlocProvider.of<InsertCubit>(context)
@@ -235,5 +241,16 @@ class _NextExViewBodyState extends State<NextExViewBody> {
 
 
     await CacheNetWork.storeLastTransactionTime();
+  }
+
+   void onTap(BuildContext context, String phone, String enteredCode,
+      String originalCode) {
+    if (enteredCode == originalCode) {
+      _handleConfirm(context); // إجراء عملية التحويل بعد التحقق من الكود
+    } else {
+      AnimatedSnackBar.material("الكود غير صحيح",
+              type: AnimatedSnackBarType.error)
+          .show(context);
+    }
   }
 }

@@ -17,12 +17,12 @@ class _MoneyTransferViewBodyState extends State<MoneyTransferViewBody> {
   List<DataGetTransferModel> filteredData = [];
   List<DataGetTransferModel> dataList = [];
 
-   @override
+  @override
   void initState() {
     super.initState();
     BlocProvider.of<GetTransferCubit>(context).getTransfer();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
@@ -41,9 +41,18 @@ class _MoneyTransferViewBodyState extends State<MoneyTransferViewBody> {
             ),
             SizedBox(height: height * 0.030),
             Expanded(
-              child: CustomListViewTransferItem(
-                dataList: dataList,
-                filteredData: filteredData.isEmpty ? dataList : filteredData,
+              child: BlocBuilder<GetTransferCubit, GetTransferState>(
+                builder: (context, state) {
+                  if (state is GetTransferSuccess) {
+                    dataList = state.getTransfer; // تحديث dataList هنا
+                  } else if (state is GetTransferFaliures) {
+                    return Center(child: Text(state.message));
+                  }
+                  return CustomListViewTransferItem(
+                    dataList: dataList,
+                    filteredData: filteredData.isEmpty ? dataList : filteredData,
+                  );
+                },
               ),
             ),
           ],
@@ -71,3 +80,4 @@ class _MoneyTransferViewBodyState extends State<MoneyTransferViewBody> {
     });
   }
 }
+

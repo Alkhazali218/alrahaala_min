@@ -17,8 +17,8 @@ class CustomCityDropDownItem extends StatefulWidget {
 
 class _CustomCityDropDownItemState extends State<CustomCityDropDownItem> {
   String? selectedCity;
-  String? selectedCityId; // متغير لحفظ id المدينة
-  List<DataCityModel> cityList = []; // سيتم تخزين قائمة المدن هنا
+  String? selectedCityId;
+  List<DataCityModel> cityList = [];
 
   @override
   void initState() {
@@ -36,7 +36,7 @@ class _CustomCityDropDownItemState extends State<CustomCityDropDownItem> {
     return BlocBuilder<CityCubit, CityState>(
       builder: (context, state) {
         if (state is Citysuccess) {
-          cityList = state.cityList; // هنا cityList هو List<DataCityModel>
+          cityList = state.cityList;
           return Container(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
@@ -54,20 +54,18 @@ class _CustomCityDropDownItemState extends State<CustomCityDropDownItem> {
                 onChanged: (String? newValue) {
                   setState(() {
                     selectedCity = newValue;
-                    // العثور على الـ id المرتبط بالمدينة المختارة
                     selectedCityId = cityList
                         .firstWhere((city) => city.cityName == newValue)
                         .id;
                   });
 
-                  // تمرير selectedCityId إلى الـ parent widget (NextViewBody)
                   if (selectedCityId != null) {
                     widget.onCitySelected(selectedCityId!);
                   }
                 },
                 items: cityList.map((DataCityModel city) {
                   return DropdownMenuItem<String>(
-                    value: city.cityName,
+                    value: city.cityName, // تأكد من أن هذا فريد
                     child: Text(city.cityName),
                   );
                 }).toList(),

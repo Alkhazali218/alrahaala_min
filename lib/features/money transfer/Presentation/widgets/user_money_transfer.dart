@@ -51,7 +51,6 @@ class UserMoneyTransfer extends StatelessWidget {
             BlocConsumer<TransferCubit, TransferState>(
               listener: (context, state) {
                 if (state is TransferSucces) {
-                  // الانتقال لصفحة التأكيد مع ارسال رقم الحساب
                   Navigator.pushReplacementNamed(
                       context, CustomTransferUserItem.id,
                       arguments: moneyController.text);
