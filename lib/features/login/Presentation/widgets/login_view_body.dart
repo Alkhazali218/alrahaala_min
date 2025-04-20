@@ -1,3 +1,4 @@
+import 'package:alrahaala/core/Notification/init%20Notifications/init_Notification.dart';
 import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/core/utils/helper/thems.dart';
 import 'package:alrahaala/features/home/Presentation/home_view.dart';
@@ -26,10 +27,6 @@ class LoginViewBody extends StatelessWidget {
       listener: (context, state) {
         if (state is LoginSuccess) {
           Navigator.pushReplacementNamed(context, homeView.id);
-
-          AnimatedSnackBar.material('تم تسجيل الدخول بنجاح',
-                  type: AnimatedSnackBarType.success)
-              .show(context);
         } else if (state is LoginFaliures) {
           AnimatedSnackBar.material(state.message,
                   type: AnimatedSnackBarType.error)
@@ -83,12 +80,13 @@ class LoginViewBody extends StatelessWidget {
                     : ButtonItem(
                         textButton: 'تسجيل الدخول',
                         onTap: () async {
+                          InitNotification.getAccessToken();
                           if (formKey.currentState!.validate()) {
-                            String deviceId = await getDeviceId(); 
+                            // String deviceId = await getDeviceId(); 
                             BlocProvider.of<LoginCubit>(context).loginUser(
                               number: phoneController.text,
                               password: passwordController.text,
-                              deviceId: deviceId,
+                              deviceId: 'UP1A.231005.007',
                               context: context,
                             );
                           }

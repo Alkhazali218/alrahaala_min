@@ -1,6 +1,6 @@
 class TransferModel {
   final String accCode;
-  final List<DataTransferModel> data; // قائمة الدول
+  final List<DataTransferModel> data;
 
   TransferModel({
     required this.accCode,

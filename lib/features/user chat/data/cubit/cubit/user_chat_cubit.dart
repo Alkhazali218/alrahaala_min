@@ -14,39 +14,48 @@ class UserChatCubit extends Cubit<UserChatState> {
   List<UserChatModel> userList = [];
 
   Future<void> addUser({required InfoModel infoLoginModel}) async {
-    try {
-      String? token = await FirebaseMessaging.instance.getToken();
+  try {
+    // الحصول على token من FCM
+    String? token = await FirebaseMessaging.instance.getToken();
 
-      // استخدام رقم الهاتف كمفتاح للمستند
-      DocumentReference userRef = message.doc(infoLoginModel.phone);
+    // استخدام رقم الهاتف كمفتاح للمستند
+    DocumentReference userRef = message.doc(infoLoginModel.phone);
 
-      var userDoc = await userRef.get();
+    var userDoc = await userRef.get();
 
-      if (!userDoc.exists) {
-        String name = infoLoginModel.accName;
+    // إذا لم يكن المستخدم موجودًا، نقوم بإضافته
+    if (!userDoc.exists) {
+      String name = infoLoginModel.accName;
 
-        if (name.startsWith("حساب ")) {
-          name = name.substring(5);
-        }
-
-        await userRef.set(
-          {
-            kNumber: infoLoginModel.phone,
-            kUserName: name,
-            kCreatedAt: DateTime.now(),
-            kFcmToken: token,
-          },
-        );
-        print("تم إضافة المستخدم بنجاح.");
-      } else {
-        print("تم العثور على المستخدم في Firebase.");
+      // إزالة "حساب " إذا كانت الكلمة موجودة في الاسم
+      if (name.startsWith("حساب ")) {
+        name = name.substring(5);
       }
-    } on Exception catch (e) {
-      if (e is FirebaseException) {
-        print('FirebaseException is : $e');
-      }
+
+      // إضافة المستخدم إلى Firebase
+      await userRef.set(
+        {
+          kNumber: infoLoginModel.phone,
+          kUserName: name,
+          kCreatedAt: DateTime.now(),
+          kFcmToken: token,
+        },
+      );
+      print("تم إضافة المستخدم بنجاح.");
+    } else {
+      // إذا كان المستخدم موجودًا بالفعل، نقوم بتحديث الـ FCM token
+      await userRef.update({
+        kFcmToken: token,
+      });
+      print("تم تحديث الـ FCM token للمستخدم بنجاح.");
+    }
+  } on Exception catch (e) {
+    if (e is FirebaseException) {
+      print('FirebaseException is : $e');
     }
   }
+}
+
 
   Future<void> fetchUsers() async {
     try {

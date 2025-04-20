@@ -47,16 +47,20 @@ class InitNotification {
       "https://www.googleapis.com/auth/firebase.messaging",
     ];
 
+    // Using the service account to authenticate and get an access token
     http.Client client = await auth.clientViaServiceAccount(
       auth.ServiceAccountCredentials.fromJson(serviceAccountJson),
       scopes,
     );
+
     var credentials = await auth.obtainAccessCredentialsViaServiceAccount(
       auth.ServiceAccountCredentials.fromJson(serviceAccountJson),
       scopes,
       client,
     );
+
     client.close();
+
     return credentials.accessToken.data;
   }
 }

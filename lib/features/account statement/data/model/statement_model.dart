@@ -20,11 +20,13 @@ class DataStatementModel {
   final String valuesTo;
   final String typeFrom;
   final String insertDate;
+  
 
   DataStatementModel({
     required this.valuesTo,
     required this.typeFrom,
     required this.insertDate,
+
   });
 
   // دالة لتحويل JSON إلى CountryModel

@@ -17,10 +17,7 @@ class CustomListViewTransferItem extends StatelessWidget {
     return BlocBuilder<GetTransferCubit, GetTransferState>(
       builder: (context, state) {
         if (state is GetTransferSuccess) {
-          // تأكد من تحديث البيانات الأصلية عند نجاح الـ Bloc
           dataList = state.getTransfer;
-
-          // في هذه الحالة، إذا كانت filteredData فارغة، استخدم dataList بالكامل
           return ListView.builder(
             itemCount: filteredData.isNotEmpty ? filteredData.length : dataList.length,
             itemBuilder: (context, index) {

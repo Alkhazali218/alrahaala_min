@@ -5,12 +5,17 @@ import 'package:alrahaala/features/foreign%20exchange/Presentation/widgets/navig
 import 'package:alrahaala/features/home/Presentation/home_view.dart';
 import 'package:alrahaala/features/login/Presentation/login_view.dart';
 import 'package:alrahaala/features/money%20transfer/Presentation/money_transfer_view.dart';
+import 'package:alrahaala/features/money%20transfer/Presentation/otp/otp_transfer_view.dart';
+import 'package:alrahaala/features/money%20transfer/Presentation/widgets/custom_notitfaction.dart';
 import 'package:alrahaala/features/money%20transfer/Presentation/widgets/custom_transfer_user_item.dart';
 import 'package:alrahaala/features/money%20transfer/Presentation/widgets/user_money_transfer.dart';
 import 'package:alrahaala/features/next%20ex/Presentation/next_ex_view.dart';
+import 'package:alrahaala/features/next%20ex/Presentation/otp/otp_next_ex_view.dart';
 import 'package:alrahaala/features/next/Presentation/next_view.dart';
+import 'package:alrahaala/features/next/Presentation/otp/otp_next_view.dart';
+import 'package:alrahaala/features/otp/Presentation/otp_view.dart';
 import 'package:alrahaala/features/password/Presentation/password_view.dart';
-import 'package:alrahaala/features/password/Presentation/widgets/custom_featch_password_item.dart';
+import 'package:alrahaala/features/register/Presentation/otp/otp_register_view.dart';
 import 'package:alrahaala/features/register/Presentation/register_view.dart';
 import 'package:alrahaala/features/screen/Presentation/screen_view.dart';
 import 'package:alrahaala/features/splash/Presentation/splash_view.dart';
@@ -42,7 +47,12 @@ Map<String, Widget Function(BuildContext)> routes = {
   CustomTransferUserItem.id: (context) => CustomTransferUserItem(),
   ForeignExchangeView.id: (context) => const ForeignExchangeView(),
   NavigatorForeignItem.id: (context) => const NavigatorForeignItem(),
-  CustomFeatchPasswordItem.id: (context) => const CustomFeatchPasswordItem(),
+  OtpView.id: (context) => const OtpView(),
+  OtpRegisterView.id: (context) => const OtpRegisterView(),
+  OtpNextView.id: (context) => const OtpNextView(),
+  OtpNexteXView.id: (context) => const OtpNexteXView(),
+  OtpTransferView.id: (context) => const OtpTransferView(),
+  CustomNotification.id: (context) => const CustomNotification(),
 };
 
 class MyArguments {

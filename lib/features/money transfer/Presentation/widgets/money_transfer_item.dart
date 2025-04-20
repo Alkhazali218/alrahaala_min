@@ -8,6 +8,7 @@ class moneyTransferItem extends StatelessWidget {
   const moneyTransferItem({super.key, required this.text});
 
   final String text;
+  
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;

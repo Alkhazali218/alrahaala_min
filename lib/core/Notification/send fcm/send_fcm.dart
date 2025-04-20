@@ -1,5 +1,4 @@
 import 'package:alrahaala/core/Notification/init%20Notifications/init_Notification.dart';
-import 'package:alrahaala/core/utils/helper/api.dart';
 import 'package:dio/dio.dart';
 
 class SendFcm {
@@ -9,6 +8,7 @@ class SendFcm {
     required String title,
     required String token,
   }) async {
+    String url = 'https://fcm.googleapis.com/v1/projects/alrahaala-f36e1/messages:send';
     // الحصول على الـ access token
     String? accessToken = await InitNotification.getAccessToken();
 
@@ -28,12 +28,13 @@ class SendFcm {
     };
 
     try {
-      ApiServer apiServer = ApiServer(Dio());
-      var response = await apiServer.post(
-        endPoint:
-            'https://fcm.googleapis.com/v1/projects/alrahaala-f36e1/messages:send',
+      
+      var response = await Dio().post(
+        url,
         data: messageData,
-        headers: headers,
+        options: Options(
+          headers: headers,
+        )
       );
 
       print('Notification Response: $response');

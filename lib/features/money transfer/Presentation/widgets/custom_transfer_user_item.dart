@@ -5,11 +5,10 @@ import 'package:alrahaala/core/utils/helper/thems.dart';
 import 'package:alrahaala/core/utils/local%20NetWork/local_netWork.dart';
 import 'package:alrahaala/features/home/Presentation/home_view.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/text_from_filed_item.dart';
+import 'package:alrahaala/features/money%20transfer/Presentation/otp/otp_transfer_view.dart';
 import 'package:alrahaala/features/money%20transfer/data/cubit/transfer_cubit.dart';
 import 'package:alrahaala/features/money%20transfer/data/cubit/transfer_state.dart';
-import 'package:alrahaala/features/money%20transfer/data/data_transfer/cubit/transfer_account_cubit.dart';
 import 'package:alrahaala/features/next/Presentation/widgets/check_item.dart';
-import 'package:alrahaala/features/otp/Presentation/otp_view.dart';
 import 'package:alrahaala/features/otp/data/cubit/otp_cubit.dart';
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +33,7 @@ class CustomTransferUserItem extends StatelessWidget {
     var height = MediaQuery.sizeOf(context).height;
     var width = MediaQuery.sizeOf(context).width;
     var random = Random();
-    int randomNumber = 10000 + random.nextInt(90000);
+    int randomNumber = 1000 + random.nextInt(9000);
     String phoneRandom = CacheNetWork.getCacheDaTaInfo(key: 'phone');
 
     // جلب رقم الحساب من المعاملات
@@ -142,15 +141,18 @@ class CustomTransferUserItem extends StatelessWidget {
                 },
               ),
               SizedBox(height: height * 0.035),
-              BlocConsumer<TransferAccountCubit, TransferAccountState>(
+              BlocConsumer<OtpCubit, OtpState>(
                 listener: (context, state) {
-                  if (state is TransferAccountSuccess) {
-                    Navigator.pushNamed(context, homeView.id);
-                    AnimatedSnackBar.material(
-                      'تم تحويل بنجاح',
-                      type: AnimatedSnackBarType.success,
-                    ).show(context);
-                  } else if (state is TransferAccountFaliures) {
+                  if (state is OtpSuccess) {
+                    Navigator.pushNamed(context, OtpTransferView.id,
+                    arguments:  {
+                      'amount': amountController.text.toString(),
+                      'accidTo': accIdTo.toString(),
+                      'code': randomNumber.toString(),
+                    },
+                    );
+                    
+                  } else if (state is OtpFaliures) {
                     AnimatedSnackBar.material(
                       state.message,
                       type: AnimatedSnackBarType.error,
@@ -158,7 +160,7 @@ class CustomTransferUserItem extends StatelessWidget {
                   }
                 },
                 builder: (context, state) {
-                  return state is TransferAccountLoading
+                  return state is OtpLoading
                       ? const Center(
                           child: CircularProgressIndicator(color: kpColor))
                       : Row(
@@ -166,25 +168,7 @@ class CustomTransferUserItem extends StatelessWidget {
                             CheckItem(
                               onTap: () {
                                 if (fromKey.currentState!.validate()) {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => OtpView(
-                                        phone: phoneRandom,
-                                        onCodeChanged: (code) {
-                                          // حفظ الكود المدخل عند تغييره
-                                        },
-                                        onTap: (enteredCode) {
-                                          // التحقق من الكود عند النقر
-                                          onTap(
-                                              context,
-                                              phoneRandom,
-                                              enteredCode,
-                                              randomNumber.toString());
-                                        },
-                                      ),
-                                    ),
-                                  );
+                                 
                                   BlocProvider.of<OtpCubit>(context).featchOtp(
                                     phone: phoneRandom,
                                     message:
@@ -209,55 +193,5 @@ class CustomTransferUserItem extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Future<void> _handleConfirm(BuildContext context) async {
-    if (fromKey.currentState!.validate()) {
-      // أولاً، تحقق من الحدود قبل إجراء التحويل
-      final checkLimitResult =
-          await BlocProvider.of<TransferAccountCubit>(context)
-              .checkLimit(amount: amountController.text);
-
-      if (checkLimitResult != null &&
-          checkLimitResult is TransferAccountFaliures) {
-        AnimatedSnackBar.material(
-          checkLimitResult.message,
-          type: AnimatedSnackBarType.error,
-          // ignore: use_build_context_synchronously
-        ).show(context);
-        return;
-      }
-
-      // التحقق من مرور 6 دقائق من آخر تحويل
-      bool canProceed = await CacheNetWork.canProceedWithTransaction();
-
-      if (!canProceed) {
-        AnimatedSnackBar.material(
-          "يجب أن تنتظر 6 دقائق قبل إجراء التحويل التالي.",
-          type: AnimatedSnackBarType.error,
-          // ignore: use_build_context_synchronously
-        ).show(context);
-        return;
-      }
-
-      // بعد التحقق من كل شيء، قم بتنفيذ عملية التحويل
-      // ignore: use_build_context_synchronously
-      await BlocProvider.of<TransferAccountCubit>(context)
-          .transferAccount(accIdTo: accIdTo!, amount: amountController.text);
-
-      // تخزين الوقت الحالي بعد تنفيذ التحويل
-      await CacheNetWork.storeLastTransactionTime();
-    }
-  }
-
-  void onTap(BuildContext context, String phone, String enteredCode,
-      String originalCode) {
-    if (enteredCode == originalCode) {
-      _handleConfirm(context); // إجراء عملية التحويل بعد التحقق من الكود
-    } else {
-      AnimatedSnackBar.material("الكود غير صحيح",
-              type: AnimatedSnackBarType.error)
-          .show(context);
-    }
   }
 }

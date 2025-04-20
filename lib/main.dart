@@ -79,11 +79,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) => CityCubit(getIt.get<CityRepoImplo>())),
         BlocProvider(
-            create: (context) =>
-                ForgienCubit(getIt.get<ForgienRepoImplo>())),
+            create: (context) => ForgienCubit(getIt.get<ForgienRepoImplo>())),
         BlocProvider(
-            create: (context) =>
-                UserCubit(getIt.get<UserRepoImplo>())),
+            create: (context) => UserCubit(getIt.get<UserRepoImplo>())),
         BlocProvider(
             create: (context) => DepositCubit(getIt.get<DepositRepoImplo>())),
 
@@ -99,13 +97,13 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) => TransferCubit(getIt.get<TransferRepoImplo>())),
         BlocProvider(
-            create: (context) => TransferAccountCubit(getIt.get<TransferAccountRepoImplo>())),
+            create: (context) =>
+                TransferAccountCubit(getIt.get<TransferAccountRepoImplo>())),
         BlocProvider(
             create: (context) => PasswordCubit(getIt.get<PasswordRepoImplo>())),
         BlocProvider(
             create: (context) => InsertCubit(getIt.get<InsertRepoImplo>())),
-         BlocProvider(
-            create: (context) => OtpCubit(getIt.get<OtpRepoImplo>())),
+        BlocProvider(create: (context) => OtpCubit(getIt.get<OtpRepoImplo>())),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,

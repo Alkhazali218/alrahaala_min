@@ -66,7 +66,6 @@ class UserMoneyTransfer extends StatelessWidget {
                     : ButtonItem(
                         textButton: 'تحويل',
                         onTap: () {
-                          // ارسال رقم الحساب والمبلغ للحصول على البيانات من الـ API
                           BlocProvider.of<TransferCubit>(context)
                               .featchTransfer(accCode: moneyController.text);
                         },

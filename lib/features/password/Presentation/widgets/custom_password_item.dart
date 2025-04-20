@@ -10,8 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomPasswordItem extends StatelessWidget {
-  CustomPasswordItem({super.key, required this.phone});
-  static String id = 'CustomPasswordItem';
+  CustomPasswordItem({super.key,required this.phone});
   final String phone;
   final passwordController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();

@@ -20,11 +20,18 @@ class DataGetTransferModel {
   final String accCode;
   final String transValue;
   final String transDate;
+  final String accName;
+  final String typeTrns;
+  final String code;
+
 
   DataGetTransferModel({
     required this.accCode,
     required this.transValue,
     required this.transDate,
+    required this.accName,
+    required this.typeTrns,
+    required this.code,
   });
 
   // دالة لتحويل JSON إلى CountryModel
@@ -33,6 +40,9 @@ class DataGetTransferModel {
       accCode: json['AccCode'],
       transValue: json['TransValue'],
       transDate: json['TransDate'],
+      accName: json['AccName'],
+      typeTrns: json['Type_trns'],
+      code: json['Code'],
     );
   }
 }

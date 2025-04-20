@@ -6,22 +6,22 @@ part 'otp_state.dart';
 
 class OtpCubit extends Cubit<OtpState> {
   OtpCubit(this.otpRepo) : super(OtpInitial());
-  OtpRepo otpRepo;
+  final OtpRepo otpRepo;
+
   Future<void> featchOtp(
       {required String phone, required String message}) async {
-        emit(OtpLoading());
-    var reslut = await otpRepo.featchOtp(
+    emit(OtpLoading());
+
+    var result = await otpRepo.featchOtp(
       phone: phone,
       message: message,
       xToken: '055151sdsdsds445sdd45sd',
     );
-    reslut.fold(
-      (faliures) {
-        emit(OtpFaliures(message: faliures.errorMessage));
-      },
-      (success) {
-        emit(OtpSucces());
-      },
-    );
+
+    result.fold((failure) {
+      emit(OtpFaliures(message: failure.errorMessage));
+    }, (success) {
+      emit(OtpSuccess());
+    });
   }
 }

@@ -44,7 +44,7 @@ class _MoneyTransferViewBodyState extends State<MoneyTransferViewBody> {
               child: BlocBuilder<GetTransferCubit, GetTransferState>(
                 builder: (context, state) {
                   if (state is GetTransferSuccess) {
-                    dataList = state.getTransfer; // تحديث dataList هنا
+                    dataList = state.getTransfer;
                   } else if (state is GetTransferFaliures) {
                     return Center(child: Text(state.message));
                   }

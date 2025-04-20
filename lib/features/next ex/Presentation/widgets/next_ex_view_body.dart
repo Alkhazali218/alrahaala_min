@@ -1,13 +1,11 @@
 import 'dart:math';
-
 import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/core/utils/local%20NetWork/local_netWork.dart';
 import 'package:alrahaala/features/home/Presentation/home_view.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/text_from_filed_item.dart';
+import 'package:alrahaala/features/next%20ex/Presentation/otp/otp_next_ex_view.dart';
 import 'package:alrahaala/features/next%20ex/Presentation/widgets/custom_drop_down_item.dart';
-import 'package:alrahaala/features/next%20ex/data/cubits/insert/cubit/insert_cubit.dart';
 import 'package:alrahaala/features/next/Presentation/widgets/check_item.dart';
-import 'package:alrahaala/features/otp/Presentation/otp_view.dart';
 import 'package:alrahaala/features/otp/data/cubit/otp_cubit.dart';
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +59,7 @@ class _NextExViewBodyState extends State<NextExViewBody> {
     var height = MediaQuery.sizeOf(context).height;
     var width = MediaQuery.sizeOf(context).width;
     var random = Random();
-    int randomNumber = 10000 + random.nextInt(90000);
+    int randomNumber = 1000 + random.nextInt(9000);
     String phoneRandom = CacheNetWork.getCacheDaTaInfo(key: 'phone');
 
     return Form(
@@ -115,21 +113,32 @@ class _NextExViewBodyState extends State<NextExViewBody> {
             SizedBox(height: height * 0.035),
 
             // إظهار زر التأكيد والإلغاء بناءً على الحالة
-            BlocConsumer<InsertCubit, InsertState>(listener: (context, state) {
-              if (state is InsertSuccess) {
-                Navigator.pushNamed(context, homeView.id);
-                AnimatedSnackBar.material(
-                  'تم تحويل بنجاح',
-                  type: AnimatedSnackBarType.success,
-                ).show(context);
-              } else if (state is InsertFaliures) {
+            BlocConsumer<OtpCubit, OtpState>(
+              listener: (context, state) {
+              if (state is OtpSuccess) {
+                Navigator.pushNamed(
+                  context,
+                  OtpNexteXView.id,
+                  arguments: {
+                    "name": nameController.text.toString(),
+                    "phone": phoneController.text.toString(),
+                    "amount": amountController.text.toString(),
+                    "bank": bankController.text.toString(),
+                    "selectedCityId": selectedCityId.toString(),
+                    "selectedDeliveredCurrencyId": selectedDeliveredCurrencyId.toString(),
+                    "selectedcountryIdTo": selectedcountryIdTo.toString(),
+                    "selectedServiceType": selectedServiceType.toString(),
+                    'code' : randomNumber.toString(),
+                  },
+                );
+              } else if (state is OtpFaliures) {
                 AnimatedSnackBar.material(
                   state.message,
                   type: AnimatedSnackBarType.error,
                 ).show(context);
               }
             }, builder: (context, state) {
-              if (state is InsertLoading) {
+              if (state is OtpLoading) {
                 return const Center(
                   child: CircularProgressIndicator(
                     color: kpColor,
@@ -140,27 +149,13 @@ class _NextExViewBodyState extends State<NextExViewBody> {
                 children: [
                   CheckItem(
                     onTap: () {
-                      Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => OtpView(
-                                phone: phoneRandom,
-                                onCodeChanged: (code) {
-                                  // حفظ الكود المدخل عند تغييره
-                                },
-                                onTap: (enteredCode) {
-                                  // التحقق من الكود عند النقر
-                                  onTap(context, phoneRandom, enteredCode,
-                                      randomNumber.toString());
-                                },
-                              ),
-                            ),
-                          );
-                          BlocProvider.of<OtpCubit>(context).featchOtp(
-                            phone: phoneRandom,
-                            message:
-                                'كود التحقق الخاص بكَ\n${randomNumber.toString()}\nلا تطلع أحداً عليه',
-                          );
+                       if (fromKey.currentState!.validate()) {
+                      BlocProvider.of<OtpCubit>(context).featchOtp(
+                        phone: phoneRandom,
+                        message:
+                            'كود التحقق الخاص بكَ\n${randomNumber.toString()}\nلا تطلع أحداً عليه',
+                      );
+                    }
                     },
                     textCheckItem: 'تاكيد',
                   ),
@@ -177,80 +172,8 @@ class _NextExViewBodyState extends State<NextExViewBody> {
       ),
     );
   }
-
-  Future<void> _handleConfirm(BuildContext context) async {
-    // التحقق من الحقول المطلوبة
-    if (nameController.text.isEmpty ||
-        phoneController.text.isEmpty ||
-        amountController.text.isEmpty ||
-        selectedcountryIdTo == null ||
-        selectedServiceType == null) {
-      AnimatedSnackBar.material(
-        "يرجى اختيار جميع البيانات المطلوبة.",
-        type: AnimatedSnackBarType.error,
-      ).show(context);
-      return;
-    }
-
-    // التحقق من أن رقم الهاتف يحتوي على أرقام فقط
-    if (!RegExp(r'^[0-9]+$').hasMatch(phoneController.text)) {
-      AnimatedSnackBar.material(
-        "يرجى إدخال رقم هاتف صالح.",
-        type: AnimatedSnackBarType.error,
-      ).show(context);
-      return;
-    }
-
-
-    // التحقق من الحد الأقصى للقيمة
-    final checkLimitResult = await BlocProvider.of<InsertCubit>(context)
-        .checkLimit(amount: amountController.text);
-
-    if (checkLimitResult != null && checkLimitResult is InsertFaliures) {
-      AnimatedSnackBar.material(
-        checkLimitResult.message,
-        type: AnimatedSnackBarType.error,
-      // ignore: use_build_context_synchronously
-      ).show(context);
-      return;
-    }
-
-    // التحقق من أن المستخدم يمكنه المتابعة بعد 6 دقائق
-    bool canProceed = await CacheNetWork.canProceedWithTransaction();
-
-    if (!canProceed) {
-      AnimatedSnackBar.material(
-        "يجب أن تنتظر 6 دقائق قبل إجراء التحويل التالي",
-        type: AnimatedSnackBarType.error,
-      // ignore: use_build_context_synchronously
-      ).show(context);
-      return;
-    }
-
-    // تنفيذ عملية الإضافة
-    await BlocProvider.of<InsertCubit>(context).featchInsert(
-  recievedName: nameController.text,
-  rPhone1: phoneController.text,
-  cityIdTo: selectedCityId ?? '0',
-  deliveredCurrencyId: selectedDeliveredCurrencyId!,
-  countryIdTo: selectedcountryIdTo!,
-  serviceType: selectedServiceType!,
-  currRecievedVal: amountController.text,
-  ownAccNo: bankController.text.isEmpty ? 'Null' : bankController.text,
-);
-
-
-    await CacheNetWork.storeLastTransactionTime();
-  }
-
-   void onTap(BuildContext context, String phone, String enteredCode,
-      String originalCode) {
-    if (enteredCode == originalCode) {
-      _handleConfirm(context); // إجراء عملية التحويل بعد التحقق من الكود
-    } else {
-      AnimatedSnackBar.material("الكود غير صحيح",
-              type: AnimatedSnackBarType.error)
-          .show(context);
-    }
-  }
+  
 }
+
+
+

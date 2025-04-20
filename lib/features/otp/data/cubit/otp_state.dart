@@ -7,7 +7,7 @@ final class OtpInitial extends OtpState {}
 
 final class OtpLoading extends OtpState {}
 
-final class OtpSucces extends OtpState {}
+final class OtpSuccess extends OtpState {}
 
 final class OtpFaliures extends OtpState {
   final String message;
