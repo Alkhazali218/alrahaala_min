@@ -11,6 +11,7 @@ class CustomContainerDataTransfer extends StatelessWidget {
   final DataGetTransferModel data;
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.sizeOf(context).height;
     String curCode = CacheNetWork.getCacheDaTaInfo(key: 'curCode');
     return Column(
       children: [
@@ -21,7 +22,7 @@ class CustomContainerDataTransfer extends StatelessWidget {
             const CustomDataTextTransfer(),
           ],
         ),
-        const SizedBox(height: 30),
+        const SizedBox(height: 20),
         Text(
           'القيمة ${data.transValue} $curCode',
           style: googleFont30.copyWith(
@@ -29,7 +30,7 @@ class CustomContainerDataTransfer extends StatelessWidget {
             fontSize: getRsonsiveFontSize(context, fontSize: 23),
           ),
         ),
-        const SizedBox(height: 20),
+        SizedBox(height: height * 0.025),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -38,17 +39,17 @@ class CustomContainerDataTransfer extends StatelessWidget {
                 fit: BoxFit.scaleDown,
                 child: Image.asset(
                   assets.klogo,
-                  height: 80,
+                  height: height * 0.08,
                 ),
               ),
             ),
-            const SizedBox(width: 30),
+            SizedBox(height: height * 0.025),
             const Flexible(
               child: FittedBox(
                 fit: BoxFit.scaleDown,
                 child: Icon(
                   Icons.check_circle,
-                  size: 50,
+                  size: 45,
                   color: Colors.green,
                 ),
               ),

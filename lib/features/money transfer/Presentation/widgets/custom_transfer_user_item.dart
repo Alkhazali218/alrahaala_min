@@ -15,17 +15,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class CustomTransferUserItem extends StatelessWidget {
-  CustomTransferUserItem({super.key});
-  static String id = 'CustomTransferUserItem';
 
+
+class CustomTransferUserItem extends StatelessWidget {
+    CustomTransferUserItem({super.key});
+  static String id = 'CustomTransferUserItem';
   // فرضنا أن البيانات سيتم تمريرها عبر المعاملات
   final TextEditingController nameController = TextEditingController();
+
   final TextEditingController phoneController = TextEditingController();
+
   final TextEditingController accountController = TextEditingController();
+
   final TextEditingController branchController = TextEditingController();
+
   final TextEditingController amountController = TextEditingController();
+  
+  String? accCode;
   String? accIdTo;
+
   GlobalKey<FormState> fromKey = GlobalKey();
 
   @override
@@ -35,10 +43,7 @@ class CustomTransferUserItem extends StatelessWidget {
     var random = Random();
     int randomNumber = 1000 + random.nextInt(9000);
     String phoneRandom = CacheNetWork.getCacheDaTaInfo(key: 'phone');
-
-    // جلب رقم الحساب من المعاملات
-    final String accCode = ModalRoute.of(context)!.settings.arguments as String;
-
+    var accCode = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -83,7 +88,7 @@ class CustomTransferUserItem extends StatelessWidget {
                           controller: nameController,
                           readOnly: true, // لجعل الحقل غير قابل للتحرير
                         ),
-                        SizedBox(height: height * 0.012),
+                        SizedBox(height: height * 0.020),
                         TextFromFiledItem(
                           hintText: 'رقم الهاتف',
                           prefixIcon: FontAwesomeIcons.hashtag,
@@ -93,7 +98,7 @@ class CustomTransferUserItem extends StatelessWidget {
                           controller: phoneController,
                           readOnly: true, // لجعل الحقل غير قابل للتحرير
                         ),
-                        SizedBox(height: height * 0.012),
+                        SizedBox(height: height * 0.020),
                         TextFromFiledItem(
                           hintText: 'رقم الحساب',
                           prefixIcon: FontAwesomeIcons.hashtag,
@@ -103,7 +108,7 @@ class CustomTransferUserItem extends StatelessWidget {
                           controller: accountController,
                           readOnly: true, // لجعل الحقل غير قابل للتحرير
                         ),
-                        SizedBox(height: height * 0.012),
+                        SizedBox(height: height * 0.020),
                         TextFromFiledItem(
                           hintText: 'الفرع',
                           prefixIcon: FontAwesomeIcons.locationCrosshairs,
@@ -112,16 +117,6 @@ class CustomTransferUserItem extends StatelessWidget {
                           textType: TextInputType.text,
                           controller: branchController,
                           readOnly: true, // لجعل الحقل غير قابل للتحرير
-                        ),
-                        SizedBox(height: height * 0.012),
-                        TextFromFiledItem(
-                          hintText: 'القيمة المراد ارسالها',
-                          prefixIcon: FontAwesomeIcons.moneyBill,
-                          pass: false,
-                          isSecurePassword: false,
-                          textType: TextInputType.text,
-                          controller: amountController,
-                          readOnly: false,
                         ),
                       ],
                     );
@@ -144,14 +139,15 @@ class CustomTransferUserItem extends StatelessWidget {
               BlocConsumer<OtpCubit, OtpState>(
                 listener: (context, state) {
                   if (state is OtpSuccess) {
-                    Navigator.pushNamed(context, OtpTransferView.id,
-                    arguments:  {
-                      'amount': amountController.text.toString(),
-                      'accidTo': accIdTo.toString(),
-                      'code': randomNumber.toString(),
-                    },
+                    Navigator.pushNamed(
+                      context,
+                      OtpTransferView.id,
+                      arguments: {
+                        'amount': amountController.text.toString(),
+                        'accidTo': accIdTo.toString(),
+                        'code': randomNumber.toString(),
+                      },
                     );
-                    
                   } else if (state is OtpFaliures) {
                     AnimatedSnackBar.material(
                       state.message,
@@ -168,7 +164,6 @@ class CustomTransferUserItem extends StatelessWidget {
                             CheckItem(
                               onTap: () {
                                 if (fromKey.currentState!.validate()) {
-                                 
                                   BlocProvider.of<OtpCubit>(context).featchOtp(
                                     phone: phoneRandom,
                                     message:

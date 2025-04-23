@@ -1,5 +1,4 @@
 import 'package:alrahaala/features/money%20transfer/Presentation/widgets/custom_list_view_transfer_item.dart';
-import 'package:alrahaala/features/money%20transfer/Presentation/widgets/money_transfer_item.dart';
 import 'package:alrahaala/features/money%20transfer/data/data%20get%20transfer/cubit/get_transfer_cubit.dart';
 import 'package:alrahaala/features/money%20transfer/data/data%20get%20transfer/models/get_transfer_model.dart';
 import 'package:alrahaala/features/user%20chat/Presentation/widgets/search_text_filed.dart';
@@ -16,6 +15,7 @@ class MoneyTransferViewBody extends StatefulWidget {
 class _MoneyTransferViewBodyState extends State<MoneyTransferViewBody> {
   List<DataGetTransferModel> filteredData = [];
   List<DataGetTransferModel> dataList = [];
+
 
   @override
   void initState() {
@@ -57,16 +57,7 @@ class _MoneyTransferViewBodyState extends State<MoneyTransferViewBody> {
             ),
           ],
         ),
-        const Positioned(
-          bottom: 20,
-          left: 0,
-          right: 0,
-          child: Center(
-            child: moneyTransferItem(
-              text: 'تحويل القيمة',
-            ),
-          ),
-        ),
+        
       ],
     );
   }
@@ -79,5 +70,7 @@ class _MoneyTransferViewBodyState extends State<MoneyTransferViewBody> {
           .toList();
     });
   }
+
+ 
 }
 

@@ -1,19 +1,21 @@
 import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/core/utils/helper/thems.dart';
 import 'package:alrahaala/features/money%20transfer/Presentation/widgets/custom_container_data_transfer.dart';
-import 'package:alrahaala/features/money%20transfer/data/data%20get%20transfer/cubit/get_transfer_cubit.dart';
+import 'package:alrahaala/features/money%20transfer/data/data%20get%20transfer/models/get_transfer_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 
 class CustomNotifiactionBody extends StatelessWidget {
-  const CustomNotifiactionBody({super.key});
+  const CustomNotifiactionBody({super.key,required this.data});
+  final DataGetTransferModel data;
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.sizeOf(context).height;
     return Column(
       children: [
         Container(
           width: double.infinity,
-          height: 100,
+          height: height * 0.12,
           decoration: const BoxDecoration(
             color: kcolor,
             borderRadius: BorderRadius.only(
@@ -23,7 +25,7 @@ class CustomNotifiactionBody extends StatelessWidget {
           ),
           child: Column(
             children: [
-              const SizedBox(height: 50),
+               SizedBox(height: height * 0.05),
               Text(
                 'كشف تحويل الاموال',
                 style: googleFont30.copyWith(
@@ -35,12 +37,12 @@ class CustomNotifiactionBody extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 20),
+         SizedBox(height: height * 0.03),
         Padding(
           padding: const EdgeInsets.all(16),
           child: Container(
             width: double.infinity,
-            height: 520,
+            height: height /1.5,
             decoration: BoxDecoration(
               color: Colors.grey.shade200,
               borderRadius: BorderRadius.circular(16),
@@ -55,7 +57,7 @@ class CustomNotifiactionBody extends StatelessWidget {
             ),
             child: Column(
               children: [
-                const SizedBox(height: 20),
+                 SizedBox(height: height * 0.03),
                 Text(
                   ' ايصال عملية تحويل الاموال',
                   style: googleFont30.copyWith(
@@ -63,32 +65,8 @@ class CustomNotifiactionBody extends StatelessWidget {
                       fontSize: getRsonsiveFontSize(context, fontSize: 20),
                       color: Colors.black),
                 ),
-                const SizedBox(height: 40),
-                BlocBuilder<GetTransferCubit, GetTransferState>(
-                    builder: (context, state) {
-                  if (state is GetTransferSuccess) {
-                    final data = state.getTransfer.isNotEmpty
-                        ? state.getTransfer[0]
-                        : null;
-
-                    if (data == null) {
-                      return const Center(child: Text('لا توجد بيانات'));
-                    }
-                    return CustomContainerDataTransfer(data: data);
-                  } else if (state is GetTransferFaliures) {
-                    return Center(
-                      child: Text(
-                        state.message,
-                        style: googleFont30.copyWith(
-                          fontSize: getRsonsiveFontSize(context, fontSize: 28),
-                        ),
-                      ),
-                    );
-                  } else {
-                    return const Center(
-                        child: CircularProgressIndicator(color: kpColor));
-                  }
-                }),
+                 SizedBox(height: height * 0.03),
+                CustomContainerDataTransfer(data: data),
               ],
             ),
           ),

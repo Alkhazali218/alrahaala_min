@@ -13,7 +13,7 @@ class CustomMoneyTransfer extends StatelessWidget {
     var height = MediaQuery.sizeOf(context).height;
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, CustomNotification.id);
+        Navigator.pushNamed(context, CustomNotification.id,arguments: data);
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),

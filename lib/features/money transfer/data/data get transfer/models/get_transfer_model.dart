@@ -23,6 +23,7 @@ class DataGetTransferModel {
   final String accName;
   final String typeTrns;
   final String code;
+  final String commint;
 
 
   DataGetTransferModel({
@@ -32,6 +33,7 @@ class DataGetTransferModel {
     required this.accName,
     required this.typeTrns,
     required this.code,
+    required this.commint,
   });
 
   // دالة لتحويل JSON إلى CountryModel
@@ -43,6 +45,7 @@ class DataGetTransferModel {
       accName: json['AccName'],
       typeTrns: json['Type_trns'],
       code: json['Code'],
+      commint: json['commint'],
     );
   }
 }

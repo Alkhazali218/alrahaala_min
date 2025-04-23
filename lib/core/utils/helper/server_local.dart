@@ -5,7 +5,10 @@ import 'package:alrahaala/features/foreign%20exchange/data/model/repo/forgien_re
 import 'package:alrahaala/features/login/data/models/repo/login_repo_implo.dart';
 import 'package:alrahaala/features/money%20transfer/data/data%20get%20transfer/models/repo/get_transfer_repo_implo.dart';
 import 'package:alrahaala/features/money%20transfer/data/data_transfer/model/repo/transfer_account_repo_implo.dart';
+import 'package:alrahaala/features/money%20transfer/data/delet%20list/repo/delet_list_repo_implo.dart';
 import 'package:alrahaala/features/money%20transfer/data/models/repo/transfer_repo_implo.dart';
+import 'package:alrahaala/features/money%20transfer/data/transfer%20account%20list/models/repo/transfer_account_list_repo_implo.dart';
+import 'package:alrahaala/features/money%20transfer/data/white/models/repo/white_repo_implo.dart';
 import 'package:alrahaala/features/next%20ex/data/models/country_model/repo/country_repo_implo.dart';
 import 'package:alrahaala/features/next%20ex/data/models/insert/repo/insert_repo_implo.dart';
 import 'package:alrahaala/features/next%20ex/data/models/service_model/repo/service_repo_implo.dart';
@@ -99,6 +102,21 @@ void gettItSetup() {
   );
   getIt.registerSingleton<OtpRepoImplo>(
     OtpRepoImplo(
+      getIt.get<ApiServer>(),
+    ),
+  );
+  getIt.registerSingleton<WhiteRepoImplo>(
+    WhiteRepoImplo(
+      getIt.get<ApiServer>(),
+    ),
+  );
+  getIt.registerSingleton<TransferAccountListRepoImplo>(
+    TransferAccountListRepoImplo(
+      getIt.get<ApiServer>(),
+    ),
+  );
+  getIt.registerSingleton<DeletListRepoImplo>(
+    DeletListRepoImplo(
       getIt.get<ApiServer>(),
     ),
   );

@@ -9,6 +9,7 @@ class CustomDataGetTransfer extends StatelessWidget {
   final DataGetTransferModel data;
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.sizeOf(context).height;
     String accCode = CacheNetWork.getCacheDaTaInfo(key: 'AccCode');
     return Flexible(
       child: FittedBox(
@@ -17,47 +18,55 @@ class CustomDataGetTransfer extends StatelessWidget {
             Text(
               data.transDate,
               style: googleFont30.copyWith(
-                fontSize: getRsonsiveFontSize(context, fontSize: 20),
+                fontSize: getRsonsiveFontSize(context, fontSize: height * 0.025),
                 color: Colors.black,
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: height * 0.025),
             Text(
               data.accCode,
               style: googleFont30.copyWith(
-                fontSize: getRsonsiveFontSize(context, fontSize: 20),
+                fontSize: getRsonsiveFontSize(context, fontSize: height * 0.025),
                 color: Colors.black,
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: height * 0.025),
             Text(
               accCode,
               style: googleFont30.copyWith(
-                fontSize: getRsonsiveFontSize(context, fontSize: 20),
+                fontSize: getRsonsiveFontSize(context, fontSize: height * 0.025),
                 color: Colors.black,
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: height * 0.025),
             Text(
               data.typeTrns,
               style: googleFont30.copyWith(
-                fontSize: getRsonsiveFontSize(context, fontSize: 20),
+                fontSize: getRsonsiveFontSize(context, fontSize: height * 0.025),
                 color: Colors.black,
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: height * 0.025),
             Text(
               'ناجحة',
               style: googleFont30.copyWith(
-                fontSize: getRsonsiveFontSize(context, fontSize: 20),
+                fontSize: getRsonsiveFontSize(context, fontSize: height * 0.025),
                 color: Colors.black,
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: height * 0.025),
             Text(
               data.code,
               style: googleFont30.copyWith(
-                fontSize: getRsonsiveFontSize(context, fontSize: 20),
+                fontSize: getRsonsiveFontSize(context, fontSize: height * 0.025),
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(height: height * 0.025),
+            Text(
+              data.commint,
+              style: googleFont30.copyWith(
+                fontSize: getRsonsiveFontSize(context, fontSize: height * 0.025),
                 color: Colors.black,
               ),
             ),

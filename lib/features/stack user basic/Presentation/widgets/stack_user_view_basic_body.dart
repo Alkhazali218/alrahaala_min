@@ -22,13 +22,13 @@ class StackUserViewBasicBody extends StatelessWidget {
             children: [
               stackItemSupport(
                 onTap: () => Navigator.pushNamed(context, NextExView.id),
-                textSupport: 'حوالة خارجية',
-                iconSupport: FontAwesomeIcons.moneyBillTransfer,
+                textSupport: 'التحويلات الخارجية',
+                iconSupport: Icons.sync_alt,
               ),
               stackItemSupport(
                 onTap: () => Navigator.pushNamed(context, nextView.id),
-                textSupport: 'حوالة داخلية',
-                iconSupport: FontAwesomeIcons.moneyBillTransfer,
+                textSupport: 'التحويلات الداخلية',
+                iconSupport: Icons.sync_alt,
               ),
             ],
           ),

@@ -34,10 +34,10 @@ class stackItemSupport extends StatelessWidget {
               alignment: Alignment.center,
               child: Column(
                 children: [
-                  SizedBox(height: height * 0.030),
+                  SizedBox(height: height * 0.020),
                   Icon(iconSupport,
                       color: kpColor,
-                      size: getRsonsiveFontSize(context, fontSize: 40)),
+                      size: getRsonsiveFontSize(context, fontSize: 50)),
                   SizedBox(height: height * 0.030),
                   Text(
                     textSupport,

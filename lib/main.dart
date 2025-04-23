@@ -18,7 +18,13 @@ import 'package:alrahaala/features/money%20transfer/data/data%20get%20transfer/c
 import 'package:alrahaala/features/money%20transfer/data/data%20get%20transfer/models/repo/get_transfer_repo_implo.dart';
 import 'package:alrahaala/features/money%20transfer/data/data_transfer/cubit/transfer_account_cubit.dart';
 import 'package:alrahaala/features/money%20transfer/data/data_transfer/model/repo/transfer_account_repo_implo.dart';
+import 'package:alrahaala/features/money%20transfer/data/delet%20list/cubit/delet_list_cubit.dart';
+import 'package:alrahaala/features/money%20transfer/data/delet%20list/repo/delet_list_repo_implo.dart';
 import 'package:alrahaala/features/money%20transfer/data/models/repo/transfer_repo_implo.dart';
+import 'package:alrahaala/features/money%20transfer/data/transfer%20account%20list/cubit/transfer_account_list_cubit.dart';
+import 'package:alrahaala/features/money%20transfer/data/transfer%20account%20list/models/repo/transfer_account_list_repo_implo.dart';
+import 'package:alrahaala/features/money%20transfer/data/white/cubit/white_cubit.dart';
+import 'package:alrahaala/features/money%20transfer/data/white/models/repo/white_repo_implo.dart';
 import 'package:alrahaala/features/next%20ex/data/cubits/country/country_cubit.dart';
 import 'package:alrahaala/features/next%20ex/data/cubits/insert/cubit/insert_cubit.dart';
 import 'package:alrahaala/features/next%20ex/data/cubits/service/service_cubit.dart';
@@ -90,8 +96,7 @@ class MyApp extends StatelessWidget {
                 StatementCubit(getIt.get<StatementRepoImplo>())),
         BlocProvider(
             create: (context) =>
-                GetTransferCubit(getIt.get<GetTransferRepoImplo>())
-                  ..getTransfer()),
+                GetTransferCubit(getIt.get<GetTransferRepoImplo>())),
         BlocProvider(
             create: (context) => NextCubit(getIt.get<NextRepoImplo>())),
         BlocProvider(
@@ -104,6 +109,12 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) => InsertCubit(getIt.get<InsertRepoImplo>())),
         BlocProvider(create: (context) => OtpCubit(getIt.get<OtpRepoImplo>())),
+        BlocProvider(
+            create: (context) => WhiteCubit(getIt.get<WhiteRepoImplo>())),
+        BlocProvider(
+            create: (context) => TransferAccountListCubit(
+                getIt.get<TransferAccountListRepoImplo>())),
+        BlocProvider(create: (context) => DeletListCubit(getIt.get<DeletListRepoImplo>())),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,

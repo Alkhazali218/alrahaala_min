@@ -7,54 +7,63 @@ class CustomDataTextTransfer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.sizeOf(context).height;
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           ': تاريخ التحويل',
           style: googleFont30.copyWith(
-            fontSize: getRsonsiveFontSize(context, fontSize: 20),
+            fontSize: getRsonsiveFontSize(context, fontSize: height * 0.025),
             color: Colors.black,
           ),
         ),
-        const SizedBox(height: 20),
+         SizedBox(height: height * 0.025),
         Text(
-          ': رقم  المستفيد',
+          ': رقم المستفيد',
           style: googleFont30.copyWith(
-            fontSize: getRsonsiveFontSize(context, fontSize: 20),
+            fontSize: getRsonsiveFontSize(context, fontSize: height * 0.025),
             color: Colors.black,
           ),
         ),
-        const SizedBox(height: 20),
+        SizedBox(height: height * 0.025),
         Text(
-          ': رقم  الزبون',
+          ': رقم حساب الزبون',
           style: googleFont30.copyWith(
-            fontSize: getRsonsiveFontSize(context, fontSize: 20),
+            fontSize: getRsonsiveFontSize(context, fontSize: height * 0.025),
             color: Colors.black,
           ),
         ),
-        const SizedBox(height: 20),
+        SizedBox(height: height * 0.025),
         Text(
           ': عملية التحويل',
           style: googleFont30.copyWith(
-            fontSize: getRsonsiveFontSize(context, fontSize: 20),
+            fontSize: getRsonsiveFontSize(context, fontSize: height * 0.025),
             color: Colors.black,
           ),
         ),
-        const SizedBox(height: 20),
+        SizedBox(height: height * 0.025),
         Text(
           ': حالة العملية',
           style: googleFont30.copyWith(
-            fontSize: getRsonsiveFontSize(context, fontSize: 20),
+            fontSize: getRsonsiveFontSize(context, fontSize: height * 0.025),
             color: Colors.black,
           ),
         ),
-        const SizedBox(height: 20),
+        SizedBox(height: height * 0.025),
         Text(
           ': رقم العملية',
           style: googleFont30.copyWith(
-            fontSize: getRsonsiveFontSize(context, fontSize: 20),
+            fontSize: getRsonsiveFontSize(context, fontSize: height * 0.025),
+            color: Colors.black,
+          ),
+        ),
+        SizedBox(height: height * 0.025),
+        Text(
+          ': قيمة الخصم',
+          style: googleFont30.copyWith(
+            fontSize: getRsonsiveFontSize(context, fontSize: height * 0.025),
             color: Colors.black,
           ),
         ),

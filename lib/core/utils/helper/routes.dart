@@ -7,7 +7,10 @@ import 'package:alrahaala/features/login/Presentation/login_view.dart';
 import 'package:alrahaala/features/money%20transfer/Presentation/money_transfer_view.dart';
 import 'package:alrahaala/features/money%20transfer/Presentation/otp/otp_transfer_view.dart';
 import 'package:alrahaala/features/money%20transfer/Presentation/widgets/custom_notitfaction.dart';
+import 'package:alrahaala/features/money%20transfer/Presentation/widgets/custom_transfer_accounts_list.dart';
+import 'package:alrahaala/features/money%20transfer/Presentation/widgets/custom_transfer_user_add_white_list_item.dart';
 import 'package:alrahaala/features/money%20transfer/Presentation/widgets/custom_transfer_user_item.dart';
+import 'package:alrahaala/features/money%20transfer/Presentation/widgets/custom_white_list._view.dart';
 import 'package:alrahaala/features/money%20transfer/Presentation/widgets/user_money_transfer.dart';
 import 'package:alrahaala/features/next%20ex/Presentation/next_ex_view.dart';
 import 'package:alrahaala/features/next%20ex/Presentation/otp/otp_next_ex_view.dart';
@@ -53,6 +56,9 @@ Map<String, Widget Function(BuildContext)> routes = {
   OtpNexteXView.id: (context) => const OtpNexteXView(),
   OtpTransferView.id: (context) => const OtpTransferView(),
   CustomNotification.id: (context) => const CustomNotification(),
+  CustomWhiteListView.id: (context) => const CustomWhiteListView(),
+  CustomTransferUserAddWhileListItem.id: (context) => CustomTransferUserAddWhileListItem(),
+  CustomTransferAccountsList.id: (context) => const CustomTransferAccountsList(),
 };
 
 class MyArguments {
