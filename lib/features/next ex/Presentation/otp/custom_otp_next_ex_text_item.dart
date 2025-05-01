@@ -34,6 +34,7 @@ class CustomOtpNextExTextItem extends StatefulWidget {
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _CustomOtpNextExTextItemState createState() =>
       _CustomOtpNextExTextItemState();
 }
@@ -87,6 +88,7 @@ class _CustomOtpNextExTextItemState extends State<CustomOtpNextExTextItem> {
             ),
             const SizedBox(height: 10),
             Text(
+              // ignore: unnecessary_brace_in_string_interps
               'تم ارسال رمز التحقق الى رقم الهاتف التالي ${phone}', // استخدام widget.phone
               textAlign: TextAlign.center,
               style: googleFont18.copyWith(
@@ -154,7 +156,20 @@ class _CustomOtpNextExTextItemState extends State<CustomOtpNextExTextItem> {
                   textButton: 'التحقق',
                   onTap: () async {
                     if (pinController.text == widget.code) {
-                    await _handleConfirm(context);
+                      print('==================================================================');
+                      print('name : ${widget.nameController}');
+                      print('phone : ${widget.phoneController}');
+                      print('amount : ${widget.amountController}');
+                      print('bank : ${widget.bankController}');
+                      print('selectedCityId : ${widget.selectedCityId}');
+                      print(
+                          'selectedDeliveredCurrencyId : ${widget.selectedDeliveredCurrencyId}');
+                      print(
+                          'selectedcountryIdTo : ${widget.selectedcountryIdTo}');
+                      print(
+                          'selectedServiceType : ${widget.selectedServiceType}');
+
+                      await _handleConfirm(context);
                     } else {
                       AnimatedSnackBar.material('الكود غير صحيح',
                               type: AnimatedSnackBarType.error)
@@ -194,12 +209,11 @@ class _CustomOtpNextExTextItemState extends State<CustomOtpNextExTextItem> {
         ).show(context);
         return;
       }
-
       // بعد التحقق من كل شيء، قم بتنفيذ عملية التحويل
       await BlocProvider.of<InsertCubit>(context).featchInsert(
         recievedName: widget.nameController,
         rPhone1: widget.phoneController,
-        cityIdTo: widget.selectedCityId ?? "0",
+        cityIdTo: widget.selectedCityId.isEmpty ? '0' : widget.selectedCityId,
         deliveredCurrencyId: widget.selectedDeliveredCurrencyId,
         countryIdTo: widget.selectedcountryIdTo,
         serviceType: widget.selectedServiceType,

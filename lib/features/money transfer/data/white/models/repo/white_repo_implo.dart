@@ -11,14 +11,15 @@ class WhiteRepoImplo implements WhiteRepo {
   WhiteRepoImplo(this.apiServer);
 
   @override
-  Future<Either<serverFailures, WhiteModels>> featchTransfer({required String accId, required String accIdTo}) async {
-   String? token = CacheNetWork.getCacheDaTaInfo(key: 'token');
+  Future<Either<serverFailures, WhiteModels>> featchTransfer(
+      {required String accId, required String accIdTo}) async {
+    String? token = CacheNetWork.getCacheDaTaInfo(key: 'token');
     try {
       var data = await apiServer.post(
-        endPoint: 'exchange/account',
+        endPoint: "add/user/trans",
         data: {
-          "AccCode": accId,
-          "AccCodeTo": accIdTo,
+          "acc_id": accId,
+          "acc_to": accIdTo,
         },
         headers: {
           'Authorization': 'Bearer $token',
@@ -33,5 +34,4 @@ class WhiteRepoImplo implements WhiteRepo {
       }
     }
   }
-  
 }

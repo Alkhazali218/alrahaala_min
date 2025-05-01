@@ -124,7 +124,7 @@ class _NextExViewBodyState extends State<NextExViewBody> {
                     "phone": phoneController.text.toString(),
                     "amount": amountController.text.toString(),
                     "bank": bankController.text.toString(),
-                    "selectedCityId": selectedCityId.toString(),
+                    'selectedCityId': selectedCityId ?? '0',
                     "selectedDeliveredCurrencyId": selectedDeliveredCurrencyId.toString(),
                     "selectedcountryIdTo": selectedcountryIdTo.toString(),
                     "selectedServiceType": selectedServiceType.toString(),
@@ -172,7 +172,6 @@ class _NextExViewBodyState extends State<NextExViewBody> {
       ),
     );
   }
-  
 }
 
 

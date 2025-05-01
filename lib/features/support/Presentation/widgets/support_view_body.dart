@@ -1,5 +1,5 @@
-import 'package:alrahaala/core/utils/helper/thems.dart';
 import 'package:alrahaala/features/support/Presentation/widgets/stack_item_support.dart';
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -20,7 +20,7 @@ class supportViewBody extends StatelessWidget {
             children: [
               stackItemSupport(
                 onTap: () => _launchWhatsApp(
-                    phoneNumber: '218915511445', context: context),
+                    phoneNumber: '218914200648', context: context),
                 textSupport: ' الدعم الفني',
                 iconSupport: FontAwesomeIcons.whatsapp,
               ),
@@ -30,6 +30,7 @@ class supportViewBody extends StatelessWidget {
                 textSupport: 'موقعنا الالكتروني',
                 iconSupport: FontAwesomeIcons.globe,
               ),
+              
             ],
           ),
         ),
@@ -39,13 +40,16 @@ class supportViewBody extends StatelessWidget {
 
   Future<void> _launchURL(
       {required String url, required BuildContext context}) async {
+    
     // ignore: deprecated_member_use
     if (await canLaunch(url)) {
       // ignore: deprecated_member_use
       await launch(url);
     } else {
-      // ignore: use_build_context_synchronously
-      showSnackBar(context, 'فشل في فتح الرابط', Colors.red);
+      AnimatedSnackBar.material( 'فشل في فتح الموقع',
+                  type: AnimatedSnackBarType.error)
+              // ignore: use_build_context_synchronously
+              .show(context);
     }
   }
 
@@ -55,8 +59,10 @@ class supportViewBody extends StatelessWidget {
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
     } else {
-      // ignore: use_build_context_synchronously
-      showSnackBar(context, 'فشل في فتح الرابط', Colors.red);
+      AnimatedSnackBar.material( 'فشل في فتح الواتس اب',
+                  type: AnimatedSnackBarType.error)
+              // ignore: use_build_context_synchronously
+              .show(context);
     }
   }
 }

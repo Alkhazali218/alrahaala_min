@@ -6,12 +6,17 @@ class UserChatModel {
   final String userName;
   final DateTime createdAt;
   final String fcmToken;
+  final String userType;
+  final String branchID;
 
-  UserChatModel(
-      {required this.number,
-      required this.userName,
-      required this.createdAt,
-      required this.fcmToken});
+  UserChatModel({
+    required this.number,
+    required this.userName,
+    required this.createdAt,
+    required this.fcmToken,
+    required this.userType,
+    required this.branchID,
+  });
 
   factory UserChatModel.fromJson(dataJson) {
     return UserChatModel(
@@ -19,6 +24,8 @@ class UserChatModel {
       userName: dataJson[kUserName] ?? '',
       createdAt: (dataJson[kCreatedAt] as Timestamp).toDate(),
       fcmToken: dataJson[kFcmToken] ?? '',
+      userType: dataJson[kUserType]?.toString() ?? '',
+      branchID: dataJson[kBranchID]?.toString() ?? '',
     );
   }
 }

@@ -1,6 +1,6 @@
-import 'package:alrahaala/core/Notification/init%20Notifications/init_Notification.dart';
 import 'package:alrahaala/core/utils/helper/constant.dart';
 import 'package:alrahaala/core/utils/helper/thems.dart';
+import 'package:alrahaala/core/utils/local%20NetWork/local_netWork.dart';
 import 'package:alrahaala/features/home/Presentation/home_view.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/button_item.dart';
 import 'package:alrahaala/features/login/Presentation/widgets/button_text_item.dart';
@@ -9,6 +9,7 @@ import 'package:alrahaala/features/login/Presentation/widgets/text_from_filed_it
 import 'package:alrahaala/features/login/data/cubit/login_cubit.dart';
 import 'package:alrahaala/features/password/Presentation/password_view.dart';
 import 'package:alrahaala/features/register/Presentation/register_view.dart';
+import 'package:alrahaala/features/user%20chat/Presentation/user_chat.dart';
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,10 +24,19 @@ class LoginViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
+
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state is LoginSuccess) {
-          Navigator.pushReplacementNamed(context, homeView.id);
+          // الآن الكاش تم تحديثه بنجاح
+          final userType = CacheNetWork.getCacheDaTaInfo(key: 'UserType');
+          print('Final userType after login: $userType');
+
+          if (userType == '4') {
+            Navigator.pushReplacementNamed(context, UserChat.id);
+          } else {
+            Navigator.pushReplacementNamed(context, homeView.id);
+          }
         } else if (state is LoginFaliures) {
           AnimatedSnackBar.material(state.message,
                   type: AnimatedSnackBarType.error)
@@ -80,9 +90,9 @@ class LoginViewBody extends StatelessWidget {
                     : ButtonItem(
                         textButton: 'تسجيل الدخول',
                         onTap: () async {
-                          InitNotification.getAccessToken();
                           if (formKey.currentState!.validate()) {
-                            // String deviceId = await getDeviceId(); 
+                          //  String deviceId = await getDeviceId();
+                          
                             BlocProvider.of<LoginCubit>(context).loginUser(
                               number: phoneController.text,
                               password: passwordController.text,

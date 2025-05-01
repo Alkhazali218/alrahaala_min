@@ -144,6 +144,7 @@ class CustomTransferUserAddWhileListItem extends StatelessWidget {
                             CheckItem(
                               onTap: () {
                                 if (fromKey.currentState!.validate()) {
+                                  
                                   BlocProvider.of<WhiteCubit>(context)
                                       .feachWhite(
                                     accId: accId,

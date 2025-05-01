@@ -18,7 +18,7 @@ class CustomBadgeItem extends StatelessWidget {
         Text(
           formattedTime,
           style: googleFont18.copyWith(
-            fontSize: getRsonsiveFontSize(context, fontSize: 15),
+            fontSize: getRsonsiveFontSize(context, fontSize: 12),
           ),
         ),
       ],

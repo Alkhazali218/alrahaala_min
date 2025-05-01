@@ -92,18 +92,15 @@ class MyApp extends StatelessWidget {
             create: (context) => DepositCubit(getIt.get<DepositRepoImplo>())),
 
         BlocProvider(
-            create: (context) =>
-                StatementCubit(getIt.get<StatementRepoImplo>())),
+            create: (context) => StatementCubit(getIt.get<StatementRepoImplo>())),
         BlocProvider(
-            create: (context) =>
-                GetTransferCubit(getIt.get<GetTransferRepoImplo>())),
+            create: (context) => GetTransferCubit(getIt.get<GetTransferRepoImplo>())),
         BlocProvider(
             create: (context) => NextCubit(getIt.get<NextRepoImplo>())),
         BlocProvider(
             create: (context) => TransferCubit(getIt.get<TransferRepoImplo>())),
         BlocProvider(
-            create: (context) =>
-                TransferAccountCubit(getIt.get<TransferAccountRepoImplo>())),
+            create: (context) => TransferAccountCubit(getIt.get<TransferAccountRepoImplo>())),
         BlocProvider(
             create: (context) => PasswordCubit(getIt.get<PasswordRepoImplo>())),
         BlocProvider(
@@ -112,8 +109,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) => WhiteCubit(getIt.get<WhiteRepoImplo>())),
         BlocProvider(
-            create: (context) => TransferAccountListCubit(
-                getIt.get<TransferAccountListRepoImplo>())),
+            create: (context) => TransferAccountListCubit(getIt.get<TransferAccountListRepoImplo>())),
         BlocProvider(create: (context) => DeletListCubit(getIt.get<DeletListRepoImplo>())),
       ],
       child: MaterialApp(

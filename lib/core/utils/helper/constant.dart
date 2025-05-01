@@ -19,6 +19,8 @@ const kIdSender = 'idSender';
 const kIdReceiver = 'idReceiver';
 const kTopic = 'alrahaala';
 const kFcmToken = 'fcmToken';
+const kUserType = 'UserType';
+const kBranchID = 'BranchID';
 
 double getRsonsiveFontSize(BuildContext context, {required double fontSize}) {
   double scaleFactor = getScaleFactor(context);

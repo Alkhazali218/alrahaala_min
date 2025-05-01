@@ -6,37 +6,36 @@ import 'package:flutter/material.dart';
 class CustomTextTransferAccountList extends StatelessWidget {
   const CustomTextTransferAccountList({super.key, required this.data});
   final DataTransferAccountListModels data;
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Flexible(
-          child: FittedBox(
-            child: Text(
-               data.accName.replaceFirst("حساب ", ""),
-              style: googleFont30.copyWith(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-                fontSize: getRsonsiveFontSize(
-                  context,
-                  fontSize: 20,
-                ),
+        // اسم الحساب
+        FittedBox(
+          child: Text(
+            data.accName.replaceFirst("حساب ", ""),
+            style: googleFont30.copyWith(
+              
+              color: Colors.black,
+              fontSize: getRsonsiveFontSize(
+                context,
+                fontSize: 16,
               ),
             ),
           ),
         ),
         SizedBox(height: height * 0.010),
-        Flexible(
-          child: FittedBox(
-            child: Text(
-              data.accCode,
-              style: googleFont30.copyWith(
-                fontWeight: FontWeight.bold,
-                fontSize: getRsonsiveFontSize(
-                  context,
-                  fontSize: 20,
-                ),
+        // كود الحساب
+        FittedBox(
+          child: Text(
+            data.accCode,
+            style: googleFont30.copyWith(
+              fontSize: getRsonsiveFontSize(
+                context,
+                fontSize: 16,
               ),
             ),
           ),

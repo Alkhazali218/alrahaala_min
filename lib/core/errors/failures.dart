@@ -47,7 +47,7 @@ class serverFailures extends Failures {
         stateCode == 403 ) {
       return serverFailures(errorMessage: response['message']);
     } else if (stateCode == 422) {
-      return serverFailures(errorMessage: response['message']);
+      return serverFailures(errorMessage: response['data']);
     } else if (stateCode == 500) {
       return serverFailures(
           errorMessage: '! خطأ في الخادم , يرجى  المحاولة لاحقًا');

@@ -25,7 +25,7 @@ class LoginCubit extends Cubit<LoginState> {
       (failures) {
         emit(LoginFaliures(message: failures.errorMessage));
       },
-      (loginSuccessData) {
+      (loginSuccessData) async {
         var info = loginSuccessData.info;
 
         BlocProvider.of<ChatCubit>(context).setUser(info);
@@ -40,28 +40,26 @@ class LoginCubit extends Cubit<LoginState> {
         CacheNetWork.insterToInfo(key: 'phone', value: info.phone);
         CacheNetWork.insterToInfo(key: 'AccCode', value: info.accCode);
         CacheNetWork.insterToInfo(key: 'Countires_ID', value: info.countiresId);
-        CacheNetWork.insterToInfo(key: 'defualtCurrency', value: info.defualtCurrency);
+        CacheNetWork.insterToInfo(
+            key: 'defualtCurrency', value: info.defualtCurrency);
         CacheNetWork.insterToInfo(key: 'curCode', value: info.curCode);
         CacheNetWork.insterToInfo(key: 'AccID', value: info.accID);
         CacheNetWork.insterToInfo(key: 'Countries', value: info.countries);
-        CacheNetWork.insterToInfo(key: 'phone', value: info.phone);
+        // تأكد من إزالة القيمة القديمة أولاً
+        await CacheNetWork.removeCacheDate(key: 'UserType');
+
+        // ثم خزن القيمة الجديدة باستخدام await
+        await CacheNetWork.insterToInfo(key: 'UserType', value: info.userType);
+
+        // للتأكد أنها خزنت صح (اختياري للطباعة فقط)
+        print('UserType stored in cache: ${info.userType}');
 
         ///token
-        CacheNetWork.insterToInfo(key: 'token', value: loginSuccessData.data.token);
+        CacheNetWork.insterToInfo(
+            key: 'token', value: loginSuccessData.data.token);
 
         emit(LoginSuccess());
       },
     );
   }
 }
-
-//   var user = loginSuccessData.user;
-
-//   // تعيين `numberSender` في `ChatCubit` بعد نجاح تسجيل الدخول
-//     BlocProvider.of<ChatCubit>(context).setUser(user);
-
-//   // يمكنك أيضا تمرير المستخدم إلى `UserChatCubit` إذا لزم الأمر
-//   BlocProvider.of<UserChatCubit>(context).addUser(loginUserModel: user);
-
-//   emit(LoginSuccess());
-// },

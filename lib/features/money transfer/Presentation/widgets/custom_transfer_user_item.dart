@@ -15,10 +15,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-
-
 class CustomTransferUserItem extends StatelessWidget {
-    CustomTransferUserItem({super.key});
+  CustomTransferUserItem({super.key});
   static String id = 'CustomTransferUserItem';
   // فرضنا أن البيانات سيتم تمريرها عبر المعاملات
   final TextEditingController nameController = TextEditingController();
@@ -30,8 +28,6 @@ class CustomTransferUserItem extends StatelessWidget {
   final TextEditingController branchController = TextEditingController();
 
   final TextEditingController amountController = TextEditingController();
-  
-  String? accCode;
   String? accIdTo;
 
   GlobalKey<FormState> fromKey = GlobalKey();
@@ -117,6 +113,16 @@ class CustomTransferUserItem extends StatelessWidget {
                           textType: TextInputType.text,
                           controller: branchController,
                           readOnly: true, // لجعل الحقل غير قابل للتحرير
+                        ),
+                        SizedBox(height: height * 0.020),
+                        TextFromFiledItem(
+                          hintText: 'القيمة',
+                          prefixIcon: FontAwesomeIcons.moneyBill1,
+                          pass: false,
+                          isSecurePassword: false,
+                          textType: TextInputType.number,
+                          controller: amountController,
+                          readOnly: false, // لجعل الحقل غير قابل للتحرير
                         ),
                       ],
                     );
