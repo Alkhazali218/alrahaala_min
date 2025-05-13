@@ -6,6 +6,7 @@ import 'package:alrahaala/features/user/data/cubit/user_cubit.dart';
 import 'package:alrahaala/features/user/data/cubit/user_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 
 class CloumItemUser extends StatelessWidget {
@@ -44,7 +45,7 @@ class CloumItemUser extends StatelessWidget {
             if (state is UserSuccess) {
               return Text(
                 // ignore: unnecessary_brace_in_string_interps
-                '${state.user.firstOrNull ?? '000'} ${curCode}',
+                '${NumberFormat('#,###.###').format(double.tryParse(state.user.firstOrNull!) ?? 0)} ${curCode}',
                 style: googleFont30.copyWith(
                   color: kpColor,
                   fontSize: getRsonsiveFontSize(context, fontSize: 28),

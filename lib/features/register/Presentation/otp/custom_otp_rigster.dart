@@ -119,11 +119,13 @@ class _CustomOtpRegisterTextItemState extends State<CustomOtpRegisterTextItem> {
             BlocConsumer<RegisterCubit, RegisterState>(
               listener: (context, state) {
                 if (state is RegisterSuccess) {
-                  Navigator.pushNamed(context, loginView.id);
+                  
+                  Navigator.pushReplacementNamed(context, loginView.id);
                   AnimatedSnackBar.material('تم انشاء حساب بنجاح',
                           type: AnimatedSnackBarType.success)
                       .show(context);
                 } else if (state is RegisterFaliures) {
+                  
                   AnimatedSnackBar.material(state.message,
                           type: AnimatedSnackBarType.error)
                       .show(context);

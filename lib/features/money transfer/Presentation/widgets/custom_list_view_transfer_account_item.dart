@@ -12,8 +12,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomListViewTransferAccountItem extends StatelessWidget {
   final DataTransferAccountListModels data;
+  bool hasShownMessage = false;
 
-  const CustomListViewTransferAccountItem({super.key, required this.data});
+  CustomListViewTransferAccountItem({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -48,15 +49,17 @@ class CustomListViewTransferAccountItem extends StatelessWidget {
                 // BlocConsumer للتحكم في حالة الحذف
                 BlocConsumer<DeletListCubit, DeletListState>(
                   listener: (context, state) {
-                    if (state is DeletListSuccess) {
+                    if (state is DeletListSuccess && !hasShownMessage) {
+                      hasShownMessage = true; // تأكد من أن الرسالة تظهر مرة واحدة فقط
                       if (context.mounted) {
-                        Navigator.pushNamed(context, homeView.id);
+                        Navigator.pushReplacementNamed(context, homeView.id);
                       }
                       AnimatedSnackBar.material(
                         'تمت عملية الحذف بنجاح',
                         type: AnimatedSnackBarType.success,
                       ).show(context);
-                    } else if (state is DeletListFaliures) {
+                    } else if (state is DeletListFaliures && !hasShownMessage) {
+                      hasShownMessage = true; // تأكد من أن الرسالة تظهر مرة واحدة فقط
                       AnimatedSnackBar.material(
                         state.message,
                         type: AnimatedSnackBarType.error,

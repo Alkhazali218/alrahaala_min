@@ -5,6 +5,7 @@ import 'package:alrahaala/features/money%20transfer/Presentation/widgets/custom_
 import 'package:alrahaala/features/money%20transfer/Presentation/widgets/custom_data_text_transfer.dart';
 import 'package:alrahaala/features/money%20transfer/data/data%20get%20transfer/models/get_transfer_model.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class CustomContainerDataTransfer extends StatelessWidget {
   const CustomContainerDataTransfer({super.key, required this.data});
@@ -24,7 +25,7 @@ class CustomContainerDataTransfer extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         Text(
-          'القيمة ${data.transValue} $curCode',
+          'القيمة ${NumberFormat('#,###.###').format(double.tryParse(data.transValue) ?? 0)} $curCode',
           style: googleFont30.copyWith(
             fontWeight: FontWeight.bold,
             fontSize: getRsonsiveFontSize(context, fontSize: 23),

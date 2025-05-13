@@ -19,7 +19,7 @@
     </queries>
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="alrahaala"
+        android:label="الرحالة لصرافة"
         android:name="${applicationName}"
         android:icon="@mipmap/alrahala">
         <activity

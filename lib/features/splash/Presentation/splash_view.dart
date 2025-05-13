@@ -9,7 +9,7 @@ class splashView extends StatelessWidget {
   final PageController pageController = PageController();
   @override
   Widget build(BuildContext context) {
-    return const plashViewBody();
+    return const PlashViewBody();
   }
 }
 

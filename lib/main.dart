@@ -58,7 +58,7 @@ void main() async {
   InitNotification.requestPermission();
   await CacheNetWork.cacheInitialization();
   bool isFirstLaunch = await CacheNetWork.checkFirstLaunch();
-  gettItSetup();
+    gettItSetup();
 
   runApp(MyApp(isFirstLaunch: isFirstLaunch));
 }
@@ -92,15 +92,18 @@ class MyApp extends StatelessWidget {
             create: (context) => DepositCubit(getIt.get<DepositRepoImplo>())),
 
         BlocProvider(
-            create: (context) => StatementCubit(getIt.get<StatementRepoImplo>())),
+            create: (context) =>
+                StatementCubit(getIt.get<StatementRepoImplo>())),
         BlocProvider(
-            create: (context) => GetTransferCubit(getIt.get<GetTransferRepoImplo>())),
+            create: (context) =>
+                GetTransferCubit(getIt.get<GetTransferRepoImplo>())),
         BlocProvider(
             create: (context) => NextCubit(getIt.get<NextRepoImplo>())),
         BlocProvider(
             create: (context) => TransferCubit(getIt.get<TransferRepoImplo>())),
         BlocProvider(
-            create: (context) => TransferAccountCubit(getIt.get<TransferAccountRepoImplo>())),
+            create: (context) =>
+                TransferAccountCubit(getIt.get<TransferAccountRepoImplo>())),
         BlocProvider(
             create: (context) => PasswordCubit(getIt.get<PasswordRepoImplo>())),
         BlocProvider(
@@ -109,14 +112,18 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) => WhiteCubit(getIt.get<WhiteRepoImplo>())),
         BlocProvider(
-            create: (context) => TransferAccountListCubit(getIt.get<TransferAccountListRepoImplo>())),
-        BlocProvider(create: (context) => DeletListCubit(getIt.get<DeletListRepoImplo>())),
+            create: (context) => TransferAccountListCubit(
+                getIt.get<TransferAccountListRepoImplo>())),
+        BlocProvider(
+            create: (context) =>
+                DeletListCubit(getIt.get<DeletListRepoImplo>())),
       ],
       child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(scaffoldBackgroundColor: kprimaryColor),
-          routes: routes,
-          initialRoute: isFirstLaunch ? splashView.id : loginView.id),
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(scaffoldBackgroundColor: kprimaryColor),
+        routes: routes,
+        initialRoute: isFirstLaunch ? splashView.id : loginView.id,
+      ),
     );
   }
 }

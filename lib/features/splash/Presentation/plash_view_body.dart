@@ -5,16 +5,15 @@ import 'package:alrahaala/features/splash/Presentation/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-// ignore: camel_case_types
-class plashViewBody extends StatefulWidget {
-  const plashViewBody({super.key});
+class PlashViewBody extends StatefulWidget {
+  const PlashViewBody({super.key});
 
   @override
-  State<plashViewBody> createState() => _plashViewBodyState();
+  State<PlashViewBody> createState() => _PlashViewBodyState();
 }
 
 // ignore: camel_case_types
-class _plashViewBodyState extends State<plashViewBody> {
+class _PlashViewBodyState extends State<PlashViewBody> {
   final PageController pageController = PageController();
   int currentIndex = 0;
   @override
@@ -29,13 +28,32 @@ class _plashViewBodyState extends State<plashViewBody> {
               width: MediaQuery.sizeOf(context).width,
             ),
           ),
-          // for lottie animation file
+          Positioned(
+            top: 50,
+            right: 20,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pushReplacementNamed(context, loginView.id);
+              },
+              child: Text(
+                "تخطي",
+                style: TextStyle(
+                  fontSize: getRsonsiveFontSize(context, fontSize: 18),
+                  color: const Color(0xffFAF7F0),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
           Positioned(
             top: 220,
             right: 0,
             left: 0,
-            child: Lottie.network(onboardintItems[currentIndex].lottieURL,
-                width: 500, alignment: Alignment.topCenter),
+            child: Lottie.network(
+              onboardintItems[currentIndex].lottieURL,
+              width: 500,
+              alignment: Alignment.topCenter,
+            ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
@@ -99,21 +117,20 @@ class _plashViewBodyState extends State<plashViewBody> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            pageController.nextPage(
-                duration: const Duration(microseconds: 500),
-                curve: Curves.linear);
-            Navigator.pushNamed(context, loginView.id);
-          },
-          elevation: 0,
-          backgroundColor: const Color(0xffFAF7F0),
-          child: Text(
-            'تخطي',
-            style: TextStyle(
-              color: kcolor,
-              fontSize: getRsonsiveFontSize(context, fontSize: 18),
-            ),
-          )),
+        onPressed: () {
+          pageController.nextPage(
+              duration: const Duration(microseconds: 500),
+              curve: Curves.linear);
+          Navigator.pushReplacementNamed(context, loginView.id);
+        },
+        elevation: 0,
+        backgroundColor: const Color(0xffFAF7F0),
+        child: Icon(
+          Icons.arrow_forward_ios_rounded,
+          color: kcolor,
+          size: getRsonsiveFontSize(context, fontSize: 20),
+        ),
+      ),
     );
   }
 
@@ -125,8 +142,9 @@ class _plashViewBodyState extends State<plashViewBody> {
         height: isSelected ? 8 : 6,
         width: isSelected ? 8 : 6,
         decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: isSelected ? Colors.black : Colors.black26),
+          shape: BoxShape.circle,
+          color: isSelected ? Colors.black : Colors.black26,
+        ),
       ),
     );
   }

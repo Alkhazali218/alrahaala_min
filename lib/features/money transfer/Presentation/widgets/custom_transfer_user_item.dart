@@ -145,7 +145,7 @@ class CustomTransferUserItem extends StatelessWidget {
               BlocConsumer<OtpCubit, OtpState>(
                 listener: (context, state) {
                   if (state is OtpSuccess) {
-                    Navigator.pushNamed(
+                    Navigator.pushReplacementNamed(
                       context,
                       OtpTransferView.id,
                       arguments: {

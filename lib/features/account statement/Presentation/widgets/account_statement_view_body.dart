@@ -16,6 +16,7 @@ class AccountStatementViewBody extends StatelessWidget {
       builder: (context, state) {
         if (state is StatementSuccess) {
           dataList = state.statement;
+          dataList.sort((a, b) => DateTime.parse(b.insertDate).compareTo(DateTime.parse(a.insertDate)));
           return ListView.builder(
             itemCount: dataList.length,
             itemBuilder: (context, index) {

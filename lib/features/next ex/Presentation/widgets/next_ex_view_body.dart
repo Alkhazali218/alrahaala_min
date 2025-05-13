@@ -116,7 +116,7 @@ class _NextExViewBodyState extends State<NextExViewBody> {
             BlocConsumer<OtpCubit, OtpState>(
               listener: (context, state) {
               if (state is OtpSuccess) {
-                Navigator.pushNamed(
+                Navigator.pushReplacementNamed(
                   context,
                   OtpNexteXView.id,
                   arguments: {

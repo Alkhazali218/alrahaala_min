@@ -3,6 +3,7 @@ import 'package:alrahaala/core/utils/helper/thems.dart';
 import 'package:alrahaala/core/utils/local%20NetWork/local_netWork.dart';
 import 'package:alrahaala/features/money%20transfer/data/data%20get%20transfer/models/get_transfer_model.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class CustomDataGetTransfer extends StatelessWidget {
   const CustomDataGetTransfer({super.key,required this.data});
@@ -48,7 +49,7 @@ class CustomDataGetTransfer extends StatelessWidget {
             ),
             SizedBox(height: height * 0.025),
             Text(
-              'ناجحة',
+              data.statesSpinng,
               style: googleFont30.copyWith(
                 fontSize: getRsonsiveFontSize(context, fontSize: height * 0.025),
                 color: Colors.black,
@@ -64,7 +65,7 @@ class CustomDataGetTransfer extends StatelessWidget {
             ),
             SizedBox(height: height * 0.025),
             Text(
-              data.commint,
+              NumberFormat('#,###').format(double.tryParse(data.commint) ?? 0),
               style: googleFont30.copyWith(
                 fontSize: getRsonsiveFontSize(context, fontSize: height * 0.025),
                 color: Colors.black,

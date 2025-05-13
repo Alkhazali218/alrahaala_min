@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomListViewTransferItem extends StatelessWidget {
-  CustomListViewTransferItem({super.key, required this.dataList, required this.filteredData});
+  CustomListViewTransferItem(
+      {super.key, required this.dataList, required this.filteredData});
 
   List<DataGetTransferModel> dataList = [];
   List<DataGetTransferModel> filteredData = [];
@@ -18,10 +19,18 @@ class CustomListViewTransferItem extends StatelessWidget {
       builder: (context, state) {
         if (state is GetTransferSuccess) {
           dataList = state.getTransfer;
+          dataList.sort((a, b) => DateTime.parse(b.transDate)
+              .compareTo(DateTime.parse(a.transDate)));
+          filteredData.sort((a, b) => DateTime.parse(b.transDate)
+              .compareTo(DateTime.parse(a.transDate)));
           return ListView.builder(
-            itemCount: filteredData.isNotEmpty ? filteredData.length : dataList.length,
+            itemCount:
+                filteredData.isNotEmpty ? filteredData.length : dataList.length,
             itemBuilder: (context, index) {
-              return CustomMoneyTransfer(data: filteredData.isNotEmpty ? filteredData[index] : dataList[index]);
+              return CustomMoneyTransfer(
+                  data: filteredData.isNotEmpty
+                      ? filteredData[index]
+                      : dataList[index]);
             },
           );
         } else if (state is GetTransferFaliures) {
@@ -40,5 +49,3 @@ class CustomListViewTransferItem extends StatelessWidget {
     );
   }
 }
-
-

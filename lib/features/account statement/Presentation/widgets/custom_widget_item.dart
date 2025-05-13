@@ -22,7 +22,7 @@ class CustomWidgetItem extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Icon(Icons.account_balance_wallet_outlined,
-                  size: getRsonsiveFontSize(context, fontSize: 40),
+                  size: getRsonsiveFontSize(context, fontSize: 30),
                   color: getIconColorBasedOnType(data.typeFrom)),
             ),
           ),

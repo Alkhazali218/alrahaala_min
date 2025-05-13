@@ -51,9 +51,6 @@ class LoginCubit extends Cubit<LoginState> {
         // ثم خزن القيمة الجديدة باستخدام await
         await CacheNetWork.insterToInfo(key: 'UserType', value: info.userType);
 
-        // للتأكد أنها خزنت صح (اختياري للطباعة فقط)
-        print('UserType stored in cache: ${info.userType}');
-
         ///token
         CacheNetWork.insterToInfo(
             key: 'token', value: loginSuccessData.data.token);

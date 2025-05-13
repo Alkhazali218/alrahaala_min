@@ -45,6 +45,8 @@ class _MoneyTransferViewBodyState extends State<MoneyTransferViewBody> {
                 builder: (context, state) {
                   if (state is GetTransferSuccess) {
                     dataList = state.getTransfer;
+                      dataList.sort((a, b) => DateTime.parse(b.transDate).compareTo(DateTime.parse(a.transDate)));
+                      filteredData.sort((a, b) => DateTime.parse(b.transDate).compareTo(DateTime.parse(a.transDate)));
                   } else if (state is GetTransferFaliures) {
                     return Center(child: Text(state.message));
                   }

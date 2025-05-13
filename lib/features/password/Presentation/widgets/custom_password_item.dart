@@ -48,7 +48,7 @@ class CustomPasswordItem extends StatelessWidget {
             BlocConsumer<PasswordCubit, PasswordState>(
               listener: (context, state) {
                 if (state is PasswordSuccess) {
-                  Navigator.pushNamed(context, loginView.id);
+                  Navigator.pushReplacementNamed(context, loginView.id);
                   AnimatedSnackBar.material(
                     'تم تغيير كلمة السر بنجاح',
                     type: AnimatedSnackBarType.success,

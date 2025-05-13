@@ -32,7 +32,6 @@ class CustomOtpNextTextItem extends StatefulWidget {
 class _CustomOtpNextTextItemState extends State<CustomOtpNextTextItem> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   late TextEditingController pinController; // تغيير إلى late
-
   @override
   void initState() {
     super.initState();
@@ -127,11 +126,13 @@ class _CustomOtpNextTextItemState extends State<CustomOtpNextTextItem> {
             BlocConsumer<NextCubit, NextState>(
               listener: (context, state) {
                 if (state is NextSuccess) {
-                  Navigator.pushNamed(context, homeView.id);
+                  
+                  Navigator.pushReplacementNamed(context, homeView.id);
                   AnimatedSnackBar.material('تم تحويل بنجاح',
                           type: AnimatedSnackBarType.success)
                       .show(context);
                 } else if (state is NextFaliures) {
+                  
                   AnimatedSnackBar.material(state.message,
                           type: AnimatedSnackBarType.error)
                       .show(context);

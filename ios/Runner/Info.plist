@@ -55,6 +55,12 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>نحتاج صلاحية للوصول إلى الصور لحفظ لقطات الشاشة</string>
+    <key>NSCameraUsageDescription</key>
+    <string>نحتاج صلاحية للوصول إلى الكاميرا إذا أردت التقاط صور</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>نحتاج صلاحية للوصول إلى الميكروفون إذا كنت تستخدم الفيديوهات</string>
 </dict>
 </plist>
 

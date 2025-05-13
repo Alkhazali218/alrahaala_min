@@ -122,11 +122,13 @@ class _CustomOtpTransferTextItemState extends State<CustomOtpTransferTextItem> {
             BlocConsumer<TransferAccountCubit, TransferAccountState>(
               listener: (context, state) {
                 if (state is TransferAccountSuccess) {
-                  Navigator.pushNamed(context, homeView.id);
+                   
+                  Navigator.pushReplacementNamed(context, homeView.id);
                   AnimatedSnackBar.material('تم تحويل بنجاح',
                           type: AnimatedSnackBarType.success)
                       .show(context);
                 } else if (state is TransferAccountFaliures) {
+                  
                   AnimatedSnackBar.material(state.message,
                           type: AnimatedSnackBarType.error)
                       .show(context);

@@ -93,7 +93,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
             BlocConsumer<OtpCubit, OtpState>(
               listener: (context, state) {
                 if (state is OtpSuccess) {
-                  Navigator.pushNamed(
+                  Navigator.pushReplacementNamed(
                     context,
                     OtpRegisterView.id,
                     arguments: {

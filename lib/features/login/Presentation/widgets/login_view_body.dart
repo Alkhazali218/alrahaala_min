@@ -28,16 +28,16 @@ class LoginViewBody extends StatelessWidget {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state is LoginSuccess) {
-          // الآن الكاش تم تحديثه بنجاح
+          
           final userType = CacheNetWork.getCacheDaTaInfo(key: 'UserType');
-          print('Final userType after login: $userType');
 
           if (userType == '4') {
             Navigator.pushReplacementNamed(context, UserChat.id);
           } else {
             Navigator.pushReplacementNamed(context, homeView.id);
           }
-        } else if (state is LoginFaliures) {
+        } else if (state is LoginFaliures) { 
+          
           AnimatedSnackBar.material(state.message,
                   type: AnimatedSnackBarType.error)
               .show(context);
@@ -91,12 +91,13 @@ class LoginViewBody extends StatelessWidget {
                         textButton: 'تسجيل الدخول',
                         onTap: () async {
                           if (formKey.currentState!.validate()) {
-                          //  String deviceId = await getDeviceId();
+                            
+                           String deviceId = await getDeviceId();
                           
                             BlocProvider.of<LoginCubit>(context).loginUser(
                               number: phoneController.text,
                               password: passwordController.text,
-                              deviceId: 'UP1A.231005.007',
+                              deviceId: deviceId,
                               context: context,
                             );
                           }

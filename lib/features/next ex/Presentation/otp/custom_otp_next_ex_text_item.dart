@@ -138,11 +138,13 @@ class _CustomOtpNextExTextItemState extends State<CustomOtpNextExTextItem> {
             BlocConsumer<InsertCubit, InsertState>(
               listener: (context, state) {
                 if (state is InsertSuccess) {
-                  Navigator.pushNamed(context, homeView.id);
+                  
+                  Navigator.pushReplacementNamed(context, homeView.id);
                   AnimatedSnackBar.material('تم تحويل بنجاح',
                           type: AnimatedSnackBarType.success)
                       .show(context);
                 } else if (state is InsertFaliures) {
+                  
                   AnimatedSnackBar.material(state.message,
                           type: AnimatedSnackBarType.error)
                       .show(context);
@@ -156,19 +158,7 @@ class _CustomOtpNextExTextItemState extends State<CustomOtpNextExTextItem> {
                   textButton: 'التحقق',
                   onTap: () async {
                     if (pinController.text == widget.code) {
-                      print('==================================================================');
-                      print('name : ${widget.nameController}');
-                      print('phone : ${widget.phoneController}');
-                      print('amount : ${widget.amountController}');
-                      print('bank : ${widget.bankController}');
-                      print('selectedCityId : ${widget.selectedCityId}');
-                      print(
-                          'selectedDeliveredCurrencyId : ${widget.selectedDeliveredCurrencyId}');
-                      print(
-                          'selectedcountryIdTo : ${widget.selectedcountryIdTo}');
-                      print(
-                          'selectedServiceType : ${widget.selectedServiceType}');
-
+                     
                       await _handleConfirm(context);
                     } else {
                       AnimatedSnackBar.material('الكود غير صحيح',

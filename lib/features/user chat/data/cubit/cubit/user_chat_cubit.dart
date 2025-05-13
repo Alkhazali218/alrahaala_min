@@ -61,31 +61,41 @@ class UserChatCubit extends Cubit<UserChatState> {
     try {
       final userType =
           CacheNetWork.getCacheDaTaInfo(key: 'UserType').toString();
-      final branchID =
-          CacheNetWork.getCacheDaTaInfo(key: 'BranchID').toString();
-      final currentUserPhone = 
+      final branchID = 
+      CacheNetWork.getCacheDaTaInfo(key: 'branchID').toString();
+      final currentUserPhone =
           CacheNetWork.getCacheDaTaInfo(key: 'Phone').toString();
 
-      var result = await FirebaseFirestore.instance.collection(kUsersCollections).get();
+      var result =
+          await FirebaseFirestore.instance.collection(kUsersCollections).get();
 
-       List<UserChatModel> allUsers = result.docs
-        .map((doc) => UserChatModel.fromJson(doc.data()))
-        //  استثناء المستخدم الحالي من البداية
-        .where((user) => user.number != currentUserPhone)
-        .toList();
+      List<UserChatModel> allUsers = result.docs
+          .map((doc) => UserChatModel.fromJson(doc.data()))
+          .where((user) => user.number != currentUserPhone)
+          .toList();
 
       if (userType == '4') {
-        // Admin: يرى المستخدمين من نفس الفرع فقط، بشرط أن يكونوا ليسوا Admin
+        // أدمن الفروع: يرى المستخدمين العاديين فقط من نفس الفرع
         userList = allUsers
-            .where((user) => user.userType != '4' && user.branchID == branchID)
+            .where(
+              (user) =>
+                  user.userType != '3' &&
+                  user.userType != '4' &&
+                  user.branchID == branchID,
+            )
             .toList();
       } else if (userType == '3') {
-        // المستخدم العادي: يرى كل الأدمن، بغض النظر عن الفرع
+        // أدمن النظام: يرى جميع أدمن الفروع من جميع الفروع
+        userList = allUsers.where((user) => user.userType == '4').toList();
+      } else if (userType == '5') {
+        // أدمن النظام: يرى جميع أدمن الفروع من جميع الفروع
         userList = allUsers.where((user) => user.userType == '4').toList();
       } else {
-        // أي نوع آخر: يرى الأدمن فقط من نفس الفرع
+        // المستخدم العادي: يرى فقط الأدمن (userType == 4) من نفس الفرع
         userList = allUsers
-            .where((user) => user.userType == '4' && user.branchID == branchID)
+            .where(
+              (user) => user.userType == '4' && user.branchID == branchID,
+            )
             .toList();
       }
 

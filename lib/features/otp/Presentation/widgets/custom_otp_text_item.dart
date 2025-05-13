@@ -120,7 +120,7 @@ class _CustomOtpTextItemState extends State<CustomOtpTextItem> {
                 if (formKey.currentState!.validate()) {
                   
                   if (pinController.text == code) {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) =>

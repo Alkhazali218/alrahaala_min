@@ -24,6 +24,8 @@ class DataGetTransferModel {
   final String typeTrns;
   final String code;
   final String commint;
+  final String statesSpinng;
+  
 
 
   DataGetTransferModel({
@@ -34,6 +36,7 @@ class DataGetTransferModel {
     required this.typeTrns,
     required this.code,
     required this.commint,
+    required this.statesSpinng,
   });
 
   // دالة لتحويل JSON إلى CountryModel
@@ -46,6 +49,7 @@ class DataGetTransferModel {
       typeTrns: json['Type_trns'],
       code: json['Code'],
       commint: json['commint'],
+      statesSpinng: json['STates_spinng'],
     );
   }
 }
